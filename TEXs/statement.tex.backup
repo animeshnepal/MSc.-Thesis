@@ -1,0 +1,29 @@
+\newpage
+\thispagestyle{empty}
+
+\vspace*{\fill}
+%use the English or the German version according to the language used in your thesis.
+
+I hereby certify that I have prepared this thesis independently, and that only
+those sources, aids, and advisors that are duly noted herein have been used
+and/or consulted.
+
+I further agree that this thesis is made accessible for scientific purposes by the 
+library of the Institute for Modelling Hydraulic and Environmental Systems of 
+the University of Stuttgart (Publication according to {\S}6 Abs. 1 UrhG). 
+I agree that contents may be cited according to {\S}52 UrhG.\\[1cm]
+Stuttgart, DATE\\[2cm]
+FirstName LastName
+
+Hiermit erkläre ich, dass die vorliegende Arbeit von mir selbst und ohne fremde Hilfe, 
+lediglich unter Benutzung der hier aufgeführten Literatur, angefertigt worden ist. 
+Diese Arbeit wurde in gleicher oder ähnlicher Form noch keiner anderen Prüfungsbehörde vorgelegt.
+
+Ich stimme außerdem zu, dass die vorliegende Arbeit zu wissenschaftlichen Zwecken in den 
+Bibliotheken des Instituts für Wasser- und Umweltsystemmodellierung der Universität Stuttgart 
+aufgestellt und zugänglich gemacht wird (Veröffentlichung nach {\S}6 Abs. 1 UrhG) und hieraus 
+im Rahmen des {\S}52 UrhG zitiert werden kann.\\[1cm]
+Stuttgart, DATE\\[2cm]
+FirstName LastName
+
+\endinput

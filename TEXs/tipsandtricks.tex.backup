@@ -1,0 +1,91 @@
+\chapter{Tips And Tricks}
+\thispagestyle{empty}
+
+\newcommand{\examplecommand}[1]{\textbackslash\texttt{#1}}
+\newcommand{\examplespace}[1]{\hspace{2cm}}
+
+\section{Bibliography and citing}
+\paragraph*{Bibliography:} For managing your bibliography, we recommend to use programs like:
+\begin{itemize}
+  \item \texttt{jabref}
+  \item Mendeley
+\end{itemize}
+Use \examplecommand{cite}\{BibTexLabel\} when you refer to literature, like \cite{Bear1988,Flemisch2011}.
+\paragraph*{Citing:} Check your given reference thoroughly! This does not only
+mean text references or quotes, but also personal communication, input for
+discussion/hypotheses/conclusions, ... .\\
+Figures should also be emphasized
+here: give references/sources to figures if you have copied or redraw them. Best would
+be to even ask for the authors allowance.
+
+\section{General Tips for Writing}
+\begin{itemize}
+  \item for non-running indices, like w for water are non-italic, use \examplecommand{textrm}\{w\}
+        which produces $S_\textrm{w}$ instead of $S_w$.
+  \item use the \examplecommand{DuMuX} command to get DuMuX written that way: \DuMuX
+  \item for tables and figures use \examplecommand{caption}[ShortText]\{LongText\}
+        then ShortText will appear in the list of figures/tables
+        and LongText will appear directly below the figure/table
+  \item fractions inside text look nicer with the \examplecommand{nicefrac}\{a\}\{b\}
+        command \nicefrac{a}{b}
+\end{itemize}
+
+\section{Tables, Figures, and Equations}
+This section provides some basic examples for tables, figures, and equations.
+Table~\ref{tab:exampleTable} shows an exemplary table.
+
+
+\begin{table}
+% table caption is above the table
+\caption{This is an exemplary caption for your table. Table captions are above the actual table.}
+\label{tab:exampleTable}       % Give a unique label
+\begin{tabular}{lll}
+\hline\noalign{\smallskip}
+first & second & third  \\ % these are the column headers
+\noalign{\smallskip}\hline\noalign{\smallskip}
+number & number & number \\
+number & number & number \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:exampleFigure} is an exemplary figure. Always reference your tables and figures at least once in the text.
+
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{\Pics/Logo_LH2_sw}
+\caption{This is an exemplary caption for your figure. Figure captions are below the actual figure.}
+\label{fig:exampleFigure}       % Give a unique label
+\end{figure}
+
+Equation~\eqref{eq:massBalance} is an example of a mass balance equation including components.
+
+\begin{equation}\label{eq:massBalance} % Give a unique label
+ \sum_{\alpha} \left[\frac{\partial}{\partial t}\left(\phi \rho_\alpha x^\kappa_\alpha S_\alpha \right) 
+ + \nabla\cdotp \left(\rho_\alpha x^\kappa_\alpha \mathbf{v}_\alpha \right) 
+ - \nabla\cdotp \left(\rho_\alpha \mathbf{D}_\mathrm{pm,\alpha} \nabla x^\kappa_\alpha \right) \right]= q^\kappa
+\end{equation}  
+
+Introduce every new variable in the vicinity of its first appearance. Be consistent in the format of the indices, sub- and superscripts and always label equations.
+
+\section{Further Information}
+\begin{enumerate}
+  \item A thesis guideline is available at the homepage of Faculty 2:\\
+        \href{http://www.f02.uni-stuttgart.de/studium/}{www.f02.uni-stuttgart.de/studium/}
+  \item Good answer to many questions regarding LaTeX can be found in the web.
+\end{enumerate}
+
+\section{Additional Packages}
+\subsection{Units}
+This requires the \texttt{units} package. It is helpful to get the right
+format for number, text and spacing. It works in both, math and text mode:\\
+\examplecommand{unit}[1]\{m\} \hfill $\unit[1]{m}$\\
+\examplecommand{unitfrac}[1]\{m\}\{s\} \hfill \unitfrac[1]{m}{s}\\
+
+\subsection{Todonote}
+This requires the \texttt{todonote}
+\todo{With this package nice todos can be created}{package.}\\
+You can even use them inline:
+\todo[inline]{This is an inline todo note}
+
+
+\endinput

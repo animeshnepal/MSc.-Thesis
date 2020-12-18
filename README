@@ -1,0 +1,25 @@
+-------------------------------
+How to use the thesis template?
+-------------------------------
+
+Use of PDFLATEX
+
+a) Compiling the document:
+  pdflatex thesistemplate.tex
+
+b) Changing the output name (creates a file called LASTNAME_YEAR.pdf)
+  pdflatex --jobname=LASTNAME_YEAR thesistemplate.tex
+
+c) An optimal workflow is (this should set all pages and references
+   correctly):
+  pdflatex --jobname=LASTNAME_YEAR thesistemplate.tex
+  bibtex JOBNAME.aux
+  pdflatex --jobname=LASTNAME_YEAR thesistemplate.tex
+  pdflatex --jobname=LASTNAME_YEAR thesistemplate.tex
+
+-------------------------------
+
+Use of BIBTEX
+
+a) To create a file containing your bibliography
+  bibtex JOBNAME.aux

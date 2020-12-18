@@ -1,0 +1,204 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%Title: Logo_UniS-zentriert.ps
+%%Creator: Ghostscript ps2epsi from Logo_UniS-zentriert.ps
+%%CreationDate: Dec 8 13:56
+%%For:projekte projekte
+%%Pages: 1
+%%DocumentFonts:
+%%BoundingBox: 254 113 312 171
+%%BeginPreview: 59 57 1 57
+% 0000021820000000
+% 0000c73c71800000
+% 0001e79cf3c00000
+% 0001c30861c00000
+% 0000804100800000
+% 000018e38c000000
+% 00073cf79e700000
+% 01cf18631cf98000
+% 01e700080073c000
+% 01c2431ce321c000
+% 0018e7bef78c0000
+% 003ce31c639e0000
+% 013c4063011e4000
+% 03991cf79c4ce000
+% 03c3bef7bce1e000
+% 31879c631cf0c600
+% 783b239ce26e0f00
+% 707877fff70f0700
+% 0330f39ce7866000
+% 07876d635b70f000
+% 070f9ef7bcf0f000
+% 72375e673d766700
+% f078ed9cdb8f0780
+% 7070f3ffe7870700
+% 07266ffffb327000
+% 0f8f1effbc78f800
+% 67275dfffd727200
+% f070ebfffb870700
+% f0f9f7ffe78f8780
+% 6276efffdb372300
+% 070f1ef7bc787000
+% 0f0f5dffdd707000
+% 2676ebddeba62200
+% 70f8f3fde78f0700
+% f0726dfbfb270780
+% 63271ef7bc726300
+% 0787aef7b8f0f000
+% 0733716b47647000
+% 3278f39cef8e2600
+% 787973bce70f0f00
+% 7933891848e64f00
+% 33879c631df0e600
+% 07c39ef7bce1e000
+% 03984ce3190ce000
+% 003ce308639e0000
+% 001df79cf79c0000
+% 00c0e7bef3818000
+% 01e2031c6023c000
+% 01e718410c73c000
+% 00cf3ce39e798000
+% 00063cf79e300000
+% 000018e30c000000
+% 0000c20021800000
+% 0001e71c73c00000
+% 0001e7bef3c00000
+% 0000c71c71800000
+% 0000000800000000
+%%EndImage
+%%EndPreview
+save
+countdictstack
+mark
+newpath
+/showpage {} def
+%%EndProlog
+%%Page 1 1
+%%Postscript Orginal Logo der Universitaet Stuttgart
+
+
+/mm { 72 mul 25.4 div} def
+/mm { 72 mul 25.4 div} def
+
+/quadrat
+{/y exch def
+ /x exch def
+ x y translate
+ newpath
+   a 2 div neg mm a 2 div neg mm moveto
+   a mm 0 rlineto
+   0 a mm rlineto
+   a mm neg 0 rlineto
+   0 a mm neg rlineto
+  closepath fill
+} def
+
+/zeile1
+
+{ gsave
+   0 0 quadrat
+   /i 2 def
+   7 {wert i mul a add mm 0 quadrat
+      /i i 1 add def
+      } repeat
+   grestore
+} def
+
+/zeile2
+{ 0 wert 2 mul a add mm translate
+   gsave
+     /i 3 def
+     6 {wert i mul  a add mm wert mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile3
+{ 0 wert 3 mul a add mm translate
+  gsave
+     /i 4 def
+     6 {wert i mul a add mm wert 2 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile4
+{ 0 wert 4 mul a add mm translate
+  gsave
+     /i 5 def
+     5 {wert i mul a add mm wert 3 mul mm quadrat
+         /i i 1 add def
+        } repeat
+   grestore
+} def
+
+/zeile5
+{ 0 wert 5 mul a add mm translate
+  gsave
+     /i 6 def
+     4 {wert i mul a add mm wert 4 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile6
+{ 0 wert 6 mul a add mm translate
+   gsave
+     /i 7 def
+     3 {wert i mul a add mm wert 5 mul  mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile7
+{ 0 wert 7 mul a add mm translate
+   gsave
+     /i 8 def
+     2 {wert i mul a add mm wert 6 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/quadrant
+{ gsave
+     zeile1
+     zeile2
+     zeile3
+     zeile4
+     zeile5
+     zeile6
+     zeile7
+  grestore
+} def
+
+
+/uniz
+{ gsave
+     /h exch def
+     /y exch def
+     /x exch def
+     /a h 5 mul 108 div def
+     /wert 2 sqrt 1 sub 4 div a mul def
+     x mm y mm translate
+     45 rotate
+     4 {quadrant
+         90 rotate
+        } repeat
+  grestore
+} def
+
+%100 200 100 uniz
+%100 100 50 uniz
+100 50 20 uniz
+
+showpage
+
+%%Trailer
+cleartomark
+countdictstack exch sub { end } repeat
+restore
+%%EOF

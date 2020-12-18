@@ -1,0 +1,73 @@
+%% PAGE SETUP
+\thispagestyle{empty} % no page number, header or footer
+
+\vspace*{-2truecm}
+
+\newlength{\HeadWidth}
+\setlength{\HeadWidth}{\textwidth}
+
+\newlength{\LogoWidthL}
+\settowidth{\LogoWidthL}{\includegraphics[height=20mm]{./PICTURES/Logo_UniS-zentriert}}
+\addtolength{\HeadWidth}{-\LogoWidthL}
+\addtolength{\HeadWidth}{-3mm} % for correction
+
+\newlength{\LogoWidthR}
+\settowidth{\LogoWidthR}{\includegraphics[height=23mm]{./PICTURES/Logo_LH2_sw}}
+\addtolength{\HeadWidth}{-\LogoWidthR}
+\addtolength{\HeadWidth}{-3mm} % for correction
+
+\newlength{\BoxBreite}
+\setlength{\BoxBreite}{\textwidth}
+
+\vspace*{-1.5cm}
+{
+  \parbox[b]{\BoxBreite}
+  {                               
+    \includegraphics[height=20mm]{\Pics/Logo_UniS-zentriert}
+    \parbox[b][22mm][c]{\HeadWidth}
+    {                                       
+      \fontsize{10}{11pt}\selectfont \sffamily        
+      \begin{center}          
+        Universit\"at Stuttgart  -  Institut f\"ur Wasser- und Umweltsystemmodellierung\\    
+        {\bfseries 
+          Lehrstuhl f\"ur Hydromechanik und Hydrosystemmodellierung}\\
+        Prof.~Dr.-Ing.~Rainer Helmig    
+      \end{center} 
+      }
+    \includegraphics[height=23mm]{\Pics/Logo_LH2_sw} \\ [-3mm] 
+    }
+  }       
+\vspace{3cm}
+
+%% TEXT PART
+\begin{center}
+   {\large Master's Thesis}\\[0.5cm]
+  {\bfseries {\LARGE Modeling calcite dissolution due to
+density-induced fingering of CO\textsubscript{2}-enriched water\\[0.3cm]}}
+\end{center}
+
+\vspace{7cm}
+
+\begin{center}
+  {\normalsize Submitted by}\\[0.1cm]
+  {\large Animesh Nepal}\\[0.1cm]
+\end{center}
+
+\vspace{3cm}
+
+\begin{center}
+  {\large Stuttgart, \today}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+  {\large 
+  \begin{tabular}{l}
+  \textbf{Examiners:} Holger Class, Bernd Flemisch\\
+  \textbf{Supervisors:} Kilian Weishaupt, Johannes Hommel
+  \end{tabular}
+  }\\[0.1cm]
+\end{center}
+
+\endinput

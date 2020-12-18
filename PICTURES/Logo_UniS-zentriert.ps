@@ -1,0 +1,127 @@
+%!PS-Adobe-2.0
+%%Postscript Orginal Logo der Universitaet Stuttgart
+%%BoundingBox: 251 110 315 174
+%%EndComments
+
+
+/mm { 72 mul 25.4 div} def
+/mm { 72 mul 25.4 div} def
+
+/quadrat
+{/y exch def
+ /x exch def
+ x y translate
+ newpath
+   a 2 div neg mm a 2 div neg mm moveto
+   a mm 0 rlineto
+   0 a mm rlineto
+   a mm neg 0 rlineto
+   0 a mm neg rlineto
+  closepath fill
+} def
+
+/zeile1
+
+{ gsave
+   0 0 quadrat
+   /i 2 def
+   7 {wert i mul a add mm 0 quadrat
+      /i i 1 add def
+      } repeat
+   grestore
+} def
+
+/zeile2
+{ 0 wert 2 mul a add mm translate
+   gsave
+     /i 3 def
+     6 {wert i mul  a add mm wert mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile3
+{ 0 wert 3 mul a add mm translate
+  gsave
+     /i 4 def
+     6 {wert i mul a add mm wert 2 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile4
+{ 0 wert 4 mul a add mm translate
+  gsave
+     /i 5 def
+     5 {wert i mul a add mm wert 3 mul mm quadrat
+         /i i 1 add def
+        } repeat
+   grestore
+} def
+
+/zeile5
+{ 0 wert 5 mul a add mm translate
+  gsave
+     /i 6 def
+     4 {wert i mul a add mm wert 4 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile6
+{ 0 wert 6 mul a add mm translate
+   gsave
+     /i 7 def
+     3 {wert i mul a add mm wert 5 mul  mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/zeile7
+{ 0 wert 7 mul a add mm translate
+   gsave
+     /i 8 def
+     2 {wert i mul a add mm wert 6 mul mm quadrat
+         /i i 1 add def
+        } repeat
+  grestore
+} def
+
+/quadrant
+{ gsave
+     zeile1
+     zeile2
+     zeile3
+     zeile4
+     zeile5
+     zeile6
+     zeile7
+  grestore
+} def
+
+
+/uniz
+{ gsave
+     /h exch def
+     /y exch def
+     /x exch def
+     /a h 5 mul 108 div def
+     /wert 2 sqrt 1 sub 4 div a mul def
+     x mm y mm translate
+     45 rotate
+     4 {quadrant
+         90 rotate
+        } repeat
+  grestore
+} def
+
+%100 200 100 uniz
+%100 100 50 uniz
+100 50 20 uniz
+
+showpage
+
