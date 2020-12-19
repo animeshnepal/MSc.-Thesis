@@ -1,7 +1,12 @@
 \chapter{Scenarios, Results and Discussions} \label{chapter:results}
 \thispagestyle{empty}
 
-We set a few scenarios, as shown in \cref{tab:scenarios}, in \DuMuX to address the research questions presented in chapter \ref{chapter:introduction}. Results we got from \MATLAB were also used in validating the results we got from \DuMuX for the closed system as shown in \cref{tab:scenarios}. For the validation purpose, an identical initial and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were set in both \MATLAB and \DuMuX. \\
+We set a few scenarios, as shown in \cref{tab:scenarios}, in \DuMuX to address the 
+research questions presented in chapter \ref{chapter:introduction}. Results we got 
+from \MATLAB were also used to validate the results we got from \DuMuX for the closed 
+system as shown in \cref{tab:scenarios}. For the validation purpose, identical initial 
+and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were 
+set in both \MATLAB and \DuMuX. \\
 
 \begin{table}[h!]
     \centering
@@ -23,9 +28,17 @@ We set a few scenarios, as shown in \cref{tab:scenarios}, in \DuMuX to address t
 %   \end{center}
 \end{table}
 
-We chose a set of velocities for the protruding fingers by inferring the value from \citet{Class2020}. Although, the prominent value of pH in karst water is 6, we chose 7, 8 and 9 for comparing \DuMuX and \MATLAB results and  understanding its dependency on the rate of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium and TIC). \\
+We chose a set of velocities for the protruding fingers by inferring the value from \citet{Class2020}. 
+Although, the prominent value of pH in karst water is 6, we chose 7, 8 and 9 for comparing \DuMuX and 
+\MATLAB results and  understanding its dependency on the rate of dissolution and steady-state concentrations 
+(hydrogen, carbonate, bicarbonate, calcium and TIC). \\
 
-\paragraph*{Grid grading}\mbox{} Grid grading parameters when set in the input file would refine the grid spacing targeting a certain portion of the domain and axis, but keeping the number of grids constant. The parameters are of special importance when there is a need to highly refine the grids to resolve a part of a bigger domain to closely estimate the variables of interest -- without these parameters, the total number of grids would rise manifold and so does the computational time without much of improvement in performance in the rest of the domain. \cref{fig:gridGrading} compares the effect of grid grading parameter. \\
+\paragraph*{Grid grading}\mbox{} Grid grading parameters when set in the input file would refine the grid 
+spacing targeting a certain portion of the domain and axis, but keeping the number of grids constant. 
+The parameters are of special importance when there is a need to highly refine the grids to resolve a part 
+of a bigger domain to closely estimate the variables of interest -- without these parameters, the total number 
+of grids would rise manifold and so does the computational time without much of improvement in performance in 
+the rest of the domain. \cref{fig:gridGrading} compares the effect of grid grading parameter. \\
 \begin{figure}[!h]
         \centering
     \begin{subfigure}{.3\linewidth}
@@ -83,7 +96,19 @@ Reynolds number for open-channel flow \cite{french1985open}:
     \end{aligned}
 \end{equation}
 
-For the velocities 1mm/min, 0.5mm/min and 5mm/min, maximum wall length($x$) of 15mm, and kinematic viscosity($\nu$) of water at 10$^\circ$C 1.3063e-6[$m^2/s$] \cite{wagner2008iapws} boundary layer thickness was calculated using \cref{eq:BL}. Boundary layer thickness at the end of wall for flow-velocity 1mm/min was calculated approximately equal to 170mm; for flow-velocity 5mm/min, it was 75mm; and for flow-velocity 0.5mm/min, it was 240mm. As discussed in the chapter \ref{chapter:modelconcept}, subsection \ref{ssec:impdum}, we chose small domain because of the local Newton solver we implemented had a restriction in the max time step size to be small which restricted running the simulation for longer times and for bigger domains -- otherwise, CPU time for running the simulation would be too high. The scope of the study was limited to implement chemical kinetics and its coupling with the freeflow navier-stokes model, so it wasn't a matter of paramount importance. In order to run the simulation for longer time -- time for the solution to reach steady state -- we had to shrink the domain size (we chose 5mm $\times$ 15mm). The width of domain in x-direction is just 5mm compared to the boundary layer thicknesses; we were essentially inside the viscous region. Hence, mathematically, we should not see any difference between with and without grid grading near wall, but we would also like to see if the model in \DuMuX is consistent with the mathematical calculation -- which is why we set the grid grading scenarios near the reactive wall as shown in \cref{fig:BL}. \\
+For the velocities 1mm/min, 0.5mm/min and 5mm/min, maximum wall length($x$) of 15mm, and kinematic viscosity($\nu$) of 
+water at 10$^\circ$C 1.3063e-6[$m^2/s$] \cite{wagner2008iapws} boundary layer thickness was calculated using \cref{eq:BL}. 
+Boundary layer thickness at the end of the wall for flow-velocity 1mm/min was calculated approximately equal to 170mm; 
+for flow-velocity 5mm/min, it was 75mm; and for flow-velocity 0.5mm/min, it was 240mm. As discussed in the chapter 
+\ref{chapter:modelconcept}, subsection \ref{ssec:impdum}, we chose small domain because of the local Newton solver we 
+implemented had a restriction in the max time step size to be small which restricted running the simulation for longer times 
+and for bigger domains -- otherwise, CPU time for running the simulation would be too high. The scope of the study was limited to 
+implement chemical kinetics and its coupling with the freeflow Navier-Stokes model, so it wasn't a matter of paramount importance. 
+In order to run the simulation for a longer time -- time for the solution to reach steady-state -- we had to shrink the domain size 
+(we chose 5mm $\times$ 15mm). The width of the domain in x-direction is just 5mm compared to the boundary layer thicknesses; we were essentially 
+inside the viscous region. Hence, mathematically, we should not see any difference between with and without grid grading near the wall, but we 
+would also like to see if the model in \DuMuX is consistent with the mathematical calculation -- which is why we set the grid grading scenarios 
+near the reactive wall as shown in \cref{fig:BL}. \\
 
 \section{\DuMuX Simulation results}
 
@@ -139,13 +164,27 @@ We set the initial pH of the water to 6 and varied the flow velocity, but did no
         \label{fig:vellegend}
     \end{subfigure}%
     \hfill
-     \caption{\DuMuX results that show the change in pH (\cref{fig:velpH}), molality of calcium (\cref{fig:velmCa}), molality of total inorganic carbon (\cref{fig:velmTIC}), molality of carbonate (\cref{fig:velmCO3}) and rate of dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an open system}
+     \caption{\DuMuX results that show the change in pH (\cref{fig:velpH}), molality of calcium (\cref{fig:velmCa}), 
+     molality of total inorganic carbon (\cref{fig:velmTIC}), molality of carbonate (\cref{fig:velmCO3}) and rate of 
+     dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an open system}
      \label{fig:comparisionDiffFlowVelocity}
 \end{figure}
 
-The plots shown in figure \ref{fig:comparisionDiffFlowVelocity} is obtained for a cell at the boundary wall. All of the subplots, i.e., \subref{fig:1mmpermin}, \subref{fig:5mmpermin} and \subref{fig:0.5mmpermin}, show pH rises over time, reaches to its peak, and then descends to a steady-state value. The peak value varies with different initial and boundary conditions setups. 
-The initial concentration of \code{TIC} i.e. 2.5e-7 [mol/mol] in the system is lower than the boundary condition i.e. 9.9956e-4 [mol/mol]. This leads to low buffering capacity of the solution at the beginning, and with the incoming \ce{CO2} having higher concentration, pH rises rapidly. As the time passes, the dissolved calcium-carbonate is transported away from the system and hence pH lowers and reaches a steady-state value.\\
-Considering all the parameters to be constant, with the increase in flow-velocity the maximum pH decreases and system stabilizes faster. The reason is with faster transport of increased TIC, which is due to additional \ce{CO2} transported into the system and dissolved calcium-carbonate because of the reaction at the wall, out of the system due to higher flow velocity. Had there been an initial and boundary conditions, we would not expect this peak to occur. It is because of the inconsistent BCs with the initial conditions that lead to this phenomenon. Since, we are mainly checking for plausibility of the model, we did not consider in defining a consistent BCs and initial conditions. A detail explanation to this phenomena and its dependency on initial and boundary conditions are discussed in subsection \ref{ssec:diffInitialBC}.
+The plots shown in figure \ref{fig:comparisionDiffFlowVelocity} is obtained for a cell at the boundary wall. 
+All of the subplots, i.e., \subref{fig:1mmpermin}, \subref{fig:5mmpermin} and \subref{fig:0.5mmpermin}, 
+show pH rises over time, reaches to its peak, and then descends to a steady-state value. The peak value 
+varies with different initial and boundary conditions setups. 
+The initial concentration of \code{TIC} i.e. 2.5e-7 [mol/mol] in the system is lower than the 
+boundary condition i.e. 9.9956e-4 [mol/mol]. This leads to a low buffering capacity of the solution at the 
+beginning, and with the incoming \ce{CO2} having higher concentration, pH rises rapidly. As time passes, 
+the dissolved calcium-carbonate is transported away from the system and hence pH lowers and reaches a steady-state value.\\
+Considering all the parameters to be constant, with the increase in flow-velocity the maximum pH decreases and system stabilizes faster. 
+The reason is with faster transport of increased TIC, which is due to additional \ce{CO2} transported into the system and 
+dissolved calcium-carbonate because of the reaction at the wall, out of the system due to higher flow velocity. 
+Had there been initial and boundary conditions, we would not expect this peak to occur. It is because of the inconsistent 
+BCs with the initial conditions that lead to this phenomenon. Since, we are mainly checking the plausibility of the model, 
+we did not consider in defining a consistent BCs and initial conditions. A detail explanation to this phenomena and its dependency 
+on initial and boundary conditions are discussed in subsection \ref{ssec:diffInitialBC}.
 
 
 \subsubsection*{Different initial pH} \label{ssec:diffpH}
@@ -194,7 +233,9 @@ We fixed the flow-velocity to 1mm/min, did not include grid grading parameters, 
         \caption{Legend}
         \label{fig:pHlegend}
     \end{subfigure}%
-    \caption{\DuMuX results that show the change in pH (\cref{fig:pHpH}), molality of calcium (\cref{fig:pHmCa}), molality of total inorganic carbon (\cref{fig:pHmTIC}), molality of carbonate (\cref{fig:pHmCO3}) and rate of dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an open system}
+    \caption{\DuMuX results that show the change in pH (\cref{fig:pHpH}), molality of calcium (\cref{fig:pHmCa}), 
+    molality of total inorganic carbon (\cref{fig:pHmTIC}), molality of carbonate (\cref{fig:pHmCO3}) and rate of 
+    dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an open system}
     \label{fig:comparisionDiffInitialpH}
 \end{figure}
 

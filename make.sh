@@ -11,3 +11,4 @@ rm -rf \
  main.lot \
  main.out \
  main.toc 
+rm TEXs/*.aux
