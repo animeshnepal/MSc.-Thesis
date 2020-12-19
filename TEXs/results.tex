@@ -3,8 +3,8 @@
 
 We set a few scenarios, as shown in \cref{tab:scenarios}, in \DuMuX to address the 
 research questions presented in chapter \ref{chapter:introduction}. Results we got 
-from \MATLAB were also used to validate the results we got from \DuMuX for the closed 
-system as shown in \cref{tab:scenarios}. For the validation purpose, identical initial 
+from \MATLAB were also used to validate the results we got from \DuMuX for the closed-system 
+as shown in \cref{tab:scenarios}. For the validation purpose, identical initial 
 and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were 
 set in both \MATLAB and \DuMuX. \\
 
@@ -14,7 +14,7 @@ set in both \MATLAB and \DuMuX. \\
     \caption{Scenarios in \DuMuX}
     \label{tab:scenarios}
     \begin{tabular}{l|l} % <-- Changed to S here.
-      \thead{Open System} & \thead{Closed System}\\
+      \thead{Opened System} & \thead{Closed System}\\
       \hline
       -- Different flow velocities/velocities of \ce{CO2}-fingers & --Different grid grading (1.0, 1.1, 1.2)\\
       (1mm/min, 0.5mm/min, 5mm/min) & \\
@@ -112,7 +112,7 @@ near the reactive wall as shown in \cref{fig:BL}. \\
 
 \section{\DuMuX Simulation results}
 
-\subsection{\DuMuX Simulation results: Open system}
+\subsection{\DuMuX Simulation results: Opened system}
 
 \subsubsection*{Different flow velocities}\label{ssec:diffFlowVel}
 We set the initial pH of the water to 6 and varied the flow velocity, but did not include grid grading parameters in the input file. We set the initial concentration of \ce{CO2} throughout the domain to be 2.5e-7 [mol\_\ce{CO2}/mol\_\ce{H2O}] and the boundary condition at the top of the domain to be 9.9956e-4 [mol/mol].
@@ -166,7 +166,7 @@ We set the initial pH of the water to 6 and varied the flow velocity, but did no
     \hfill
      \caption{\DuMuX results that show the change in pH (\cref{fig:velpH}), molality of calcium (\cref{fig:velmCa}), 
      molality of total inorganic carbon (\cref{fig:velmTIC}), molality of carbonate (\cref{fig:velmCO3}) and rate of 
-     dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an open system}
+     dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an opened-system}
      \label{fig:comparisionDiffFlowVelocity}
 \end{figure}
 
@@ -235,7 +235,7 @@ We fixed the flow-velocity to 1mm/min, did not include grid grading parameters, 
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:pHpH}), molality of calcium (\cref{fig:pHmCa}), 
     molality of total inorganic carbon (\cref{fig:pHmTIC}), molality of carbonate (\cref{fig:pHmCO3}) and rate of 
-    dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an open system}
+    dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an opened-system}
     \label{fig:comparisionDiffInitialpH}
 \end{figure}
 
@@ -288,7 +288,9 @@ We fixed the flow-velocity to 1mm/min, did not include grid grading and initial 
         \caption{Legend}
         \label{fig:CO2legend}
     \end{subfigure}%
-    \caption{\DuMuX results that show the change in pH (\cref{fig:CO2pH}), molality of calcium (\cref{fig:CO2mCa}), molality of total inorganic carbon (\cref{fig:CO2mTIC}), molality of carbonate (\cref{fig:CO2mCO3}) and rate of dissolution of calcite (\cref{fig:CO2rdiss}) in time for different \ce{CO2} concentration at the top of the domain in an open system}
+    \caption{\DuMuX results that show the change in pH (\cref{fig:CO2pH}), molality of calcium (\cref{fig:CO2mCa}), 
+    molality of total inorganic carbon (\cref{fig:CO2mTIC}), molality of carbonate (\cref{fig:CO2mCO3}) and rate of 
+    dissolution of calcite (\cref{fig:CO2rdiss}) in time for different \ce{CO2} concentration at the top of the domain in an opened-system}
     \label{fig:diffCO2}
 \end{figure}
 
@@ -343,7 +345,9 @@ We decreased the spacing of the grids near the wall in x-direction. We ran the s
         \caption{Legend}
         \label{fig:gridlegend}
     \end{subfigure}%
-    \caption{\DuMuX results that show the change in pH (\cref{fig:gridpH}), molality of calcium (\cref{fig:gridmCa}), molality of total inorganic carbon (\cref{fig:gridmTIC}), molality of carbonate (\cref{fig:gridmCO3}) and rate of dissolution of calcite (\cref{fig:gridrdiss}) in time for different grid grading parameter in an open system}
+    \caption{\DuMuX results that show the change in pH (\cref{fig:gridpH}), molality of calcium (\cref{fig:gridmCa}), 
+    molality of total inorganic carbon (\cref{fig:gridmTIC}), molality of carbonate (\cref{fig:gridmCO3}) 
+    and rate of dissolution of calcite (\cref{fig:gridrdiss}) in time for different grid grading parameter in an opened-system}
     \label{fig:diffGrid}
 \end{figure}
 
@@ -377,7 +381,7 @@ We fixed pH of the water to 6 and did not include grid grading parameters in the
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:pHSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of pH at the steady-state in an open system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of pH at the steady-state in an opened-system}
      \label{fig:contourpH}
 \end{figure}
 
@@ -409,7 +413,7 @@ Figure \ref{fig:contourpH} shows contour plots for pH at the steady-state in var
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:CO3Steady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of carbonate at the steady-state in an open system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of carbonate at the steady-state in an opened-system}
      \label{fig:contourCO3}
 \end{figure}
 
@@ -440,7 +444,7 @@ Figure \ref{fig:contourCO3} shows contour plots for the concentration of \ce{CO3
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:TICSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of total inorganic carbon at the steady-state in an open system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of total inorganic carbon at the steady-state in an opened-system}
      \label{fig:contourTIC}
 \end{figure}
 
@@ -472,7 +476,7 @@ Figure \ref{fig:contourTIC} shows contour plots for concentration of Total Inorg
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:CaSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of calcium at the steady-state in an open system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of calcium at the steady-state in an opened-system}
      \label{fig:contourCa}
 \end{figure}
 
@@ -526,7 +530,9 @@ The purpose of the simulation runs without flow-velocity was for the validation 
         \caption{Legend}
         \label{fig:withoutpHlegend}
     \end{subfigure}%
-    \caption{\DuMuX results that show the change in pH (\cref{fig:withoutpHpH}), molality of calcium (\cref{fig:withoutpHmCa}), molality of total inorganic carbon (\cref{fig:withoutpHmTIC}), molality of carbonate (\cref{fig:withoutpHmCO3}) and rate of dissolution of calcite (\cref{fig:withoutpHrdiss}) in time for different initial pH in a closed system}
+    \caption{\DuMuX results that show the change in pH (\cref{fig:withoutpHpH}), molality of calcium (\cref{fig:withoutpHmCa}), 
+    molality of total inorganic carbon (\cref{fig:withoutpHmTIC}), molality of carbonate (\cref{fig:withoutpHmCO3}) 
+    and rate of dissolution of calcite (\cref{fig:withoutpHrdiss}) in time for different initial pH in a closed-system}
     
     \label{fig:comparisionWithoutDiffInitialpH}
 \end{figure}
@@ -580,14 +586,16 @@ We fixed the initial pH in the karst water to 6.0 and the initial concentration 
         \caption{Legend}
         \label{fig:withoutgridlegend}
     \end{subfigure}%
-    \caption{\DuMuX results that show the change in pH (\cref{fig:withoutgridpH}), molality of calcium (\cref{fig:withoutgridmCa}), molality of total inorganic carbon (\cref{fig:withoutgridmTIC}), molality of carbonate (\cref{fig:withoutgridmCO3}) and rate of dissolution of calcite (\cref{fig:withoutgridrdiss}) in time for different grid grading parameter in a closed system} 
+    \caption{\DuMuX results that show the change in pH (\cref{fig:withoutgridpH}), molality of calcium (\cref{fig:withoutgridmCa}), 
+    molality of total inorganic carbon (\cref{fig:withoutgridmTIC}), molality of carbonate (\cref{fig:withoutgridmCO3}) 
+    and rate of dissolution of calcite (\cref{fig:withoutgridrdiss}) in time for different grid grading parameter in a closed-system} 
     \label{fig:comparisionWithoutDiffgrid}
 \end{figure}
 
 The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the figure \ref{ssec:diffGridnoflow} did not show any differences. The reason is the same as explained in subsection \ref{ssec:diffGrid}.
 
 \section{\MATLAB Simulation results}
-\MATLAB Simulation results for a closed system. 
+\MATLAB Simulation results for a closed-system. 
 
 \begin{figure}[!h]
         \centering
@@ -634,7 +642,9 @@ The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the
         \caption{Legend}
         \label{fig:withoutvellegend}
     \end{subfigure}%
-     \caption{\MATLAB results that show the change in pH (\cref{fig:withoutvelpH}), molality of calcium (\cref{fig:withoutvelmCa}), molality of total inorganic carbon (\cref{fig:withoutvelmTIC}), molality of carbonate (\cref{fig:withoutvelmCO3}) and rate of dissolution of calcite (\cref{fig:withoutvelrdiss}) in time for different initial pH in a closed system of 2D volume [15mm $\times$ 5mm]}
+     \caption{\MATLAB results that show the change in pH (\cref{fig:withoutvelpH}), molality of calcium (\cref{fig:withoutvelmCa}), 
+     molality of total inorganic carbon (\cref{fig:withoutvelmTIC}), molality of carbonate (\cref{fig:withoutvelmCO3}) 
+     and rate of dissolution of calcite (\cref{fig:withoutvelrdiss}) in time for different initial pH in a closed-system of 2D volume [15mm $\times$ 5mm]}
      \label{fig:MATLABcomparisionDiffInitialpH}
 \end{figure}
 
@@ -644,7 +654,9 @@ A comparision between \MATLAB and \DuMuX is presented in this section.
 \begin{table}[ht]
 \small\addtolength{\tabcolsep}{-12pt}
 \centering
-\caption{\DuMuX and \MATLAB comparison table that lists steady-state time, pH, molality of calcium (mCa), molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 15mm$\times$5mm with varying initial pH, reactive area and batch volume}
+\caption{\DuMuX and \MATLAB comparison table that lists steady-state time, pH, molality of calcium (mCa), 
+molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed-system of size 
+15mm$\times$5mm with varying initial pH, reactive area and batch volume}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \thead{Initial \\pH} & \thead{Reactive \\area} & \thead{Batch \\Volume} & \multicolumn{5}{c|}{\thead{Steady-state \MATLAB}} & \multicolumn{5}{c|}{\thead{Steady-state \DuMuX}} \\
@@ -719,7 +731,10 @@ A comparision between \MATLAB and \DuMuX is presented in this section.
         \caption{Legend}
         \label{fig:dvmpH6legend}
     \end{subfigure}%
-    \caption{Comparison: \DuMuX and \MATLAB results that show the change in pH (\cref{fig:dvmpH6pH}), molality of calcium (\cref{fig:dvmpH6mCa}), molality of total inorganic carbon (\cref{fig:dvmpH6mTIC}), molality of carbonate (\cref{fig:dvmpH6mCO3}) and rate of dissolution of calcite (\cref{fig:dvmpH6rdiss}) in time for initial pH 6.0 in a closed system of 2D volume [15mm $\times$ 5mm]} 
+    \caption{Comparison: \DuMuX and \MATLAB results that show the change in pH (\cref{fig:dvmpH6pH}), 
+    molality of calcium (\cref{fig:dvmpH6mCa}), molality of total inorganic carbon (\cref{fig:dvmpH6mTIC}), 
+    molality of carbonate (\cref{fig:dvmpH6mCO3}) and rate of dissolution of calcite (\cref{fig:dvmpH6rdiss}) 
+    in time for initial pH 6.0 in a closed-system of 2D volume [15mm $\times$ 5mm]} 
     \label{fig:comparisionDumuxMatlab_pH6.0}
 \end{figure}
 
