@@ -1,17 +1,17 @@
-\chapter{Conceptual and Mathematical Model}
+\chapter{Conceptual and Mathematical Model}\label{chapter:conceptualmodel}
 \thispagestyle{empty}
 
-The chapter deals with the terms' definition and governing equations used in the model that was 
-implemented in the numerical simulator \DuMuX and \MATLAB. It also explains the mathematical model 
-in implementing reactive source and sink terms. The conservation of mass and momentum equations, 
+This chapter deals with the terms' definition and governing equations used in the model that was 
+implemented in the numerical simulator \DuMuX. It also explains the mathematical model 
+in implementing reactive source and sink terms in \DuMuX and \MATLAB. The conservation of mass and momentum equations, 
 and the governing chemical kinetics in the implemented numerical method, together with the boundary 
-conditions and initial conditions that are necessary to solve the differential equations are explained. 
+and initial conditions that are necessary to solve the differential equations are explained in this chapter. 
 
 \section{Introduction}
 Mass transport occurs between a liquid phase i.e., CO\textsubscript{2}-enriched water and a solid phase 
 i.e., calcite surfaces in caves as the dissolution advances where ionic species from the solid surface are 
 released into the solution, and as precipitation where solid crystals are formed. The scope of our study 
-is limited modeling of calcite dissolution in the cave surfaces. The conservation of a 
+is limited to modeling calcite dissolution in the cave surfaces. The conservation of a 
 fluid quantity is the net effect of the transport of fluid across control volume boundaries by convection, 
 diffusion, and sources/sinks within the control volume.
  
@@ -40,13 +40,13 @@ where:
 The term comes from the chemical reaction on the surface of the wall. It is defined and described in section \ref{sec:reactivesource}.
 
 \end{itemize}
-The density of water increases slightly with the dissolution of \ce{CO2}\cite{garcia2001density} and calcium-carbonate 
+The density of water increases slightly with the dissolution of \ce{CO2} \cite{garcia2001density} and calcite 
 \cite{zhao2015solubility}. Although the pressure we are interested in is fairly low (1 atm) compared to the pressures 
-in \cref{fig:DensityH2OCO2}, we can imply that the \ce{H2O-CO2} density will increase as more \ce{CO2} is added into the karst water. \\
-For the modeling purpose, we employ a limitation in the model as we did not consider the density change due to the addition 
-of \ce{CO2} and calcium into the aqueous solution, making it less computationally expensive. We are interested in developing a 
-2D model of size 5mm $\times$ 15mm that implements calcite dissolution as a source/sink term, so the employed limitations will 
-have negligible influence, if any, in altering the predicted time scale for the rate of dissolution. \\
+in \cref{fig:DensityH2OCO2}, we can imply that the density of \ce{H2O-CO2} system will increase as more \ce{CO2} is added into the karst water. \\
+For the modeling purpose, we set the density of water to be the density of \ce{H2O-CO2-calcium} system as we did not consider 
+the density change due to the addition of \ce{CO2} and calcium into the aqueous solution, making it less sophisticated and comparable 
+with the \MATLAB results. We are interested in developing a 2D model of size 5mm $\times$ 15mm that implements calcite dissolution as a source/sink term, 
+so the employed limitations will have negligible influence, if any, in altering the rate of dissolution and steady-state concentrations. \\
 
 \begin{figure}
 \centering
@@ -97,7 +97,7 @@ The initial conditions of the primary variables must be specified throughout the
 \end{equation}
 
 Boundary conditions must also be specified around the computational domain, \textit{S}\textsubscript{B}, throughout 
-the simulation time. Based on the nature of the boundary value, boundary conditions are categorized into two types: 
+the simulation time. Based on the nature of the boundary value, boundary conditions are categorized as follows: 
 \begin{itemize}
     \item \textbf{Dirichlet} boundary condition \quad The value of the dependent variables on the portion of the 
     boundary,$\textit{S}^{\textrm{D}}_{\textrm{B}}$ is known.
@@ -106,7 +106,7 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
         \phi(\textbf{r}_B,t) = f(t), \quad \textbf{r}_B \in \textit{S}^{\textrm{D}}_{\textrm{B}}.
     \end{equation}
     
-    On solid walls, Dirichlet conditions are imposed to the velocity (no-slip condition).
+    On solid walls, Dirichlet condition for velocities is imposed (no-slip condition).
     
     \item \textbf{Neumann} boundary condition \quad The gradient of the dependent variables on the portion of the 
     boundary, $\textit{S}^{\textrm{N}}_{\textrm{B}}$, is known.
@@ -123,25 +123,24 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
     where, $\phi$ is a variable (e.g. mass fraction of \ce{CO2}: X\textsuperscript{$\wedge$}\ce{CO2}), n is a unit vector 
     normal to the boundary and \ce{p_{ext}} is the external pressure/pressure at the boundary.\\
     
-    \item \textbf{Symmetric} property \quad It is useful to take advantage of symmetries in the flow field, when the model 
+    \item \textbf{Symmetric} property \quad It is useful to take advantage of symmetries in the flow field when the model 
     is symmetric with respect to its orientation and boundary conditions. 
-    We can impose the following symmetric properties along the center of the domain and only solve half of it:
+    We can impose the following symmetric properties along the center of the domain and only solve half of it.
     \begin{equation}\label{eq:symmetric}
         \nabla p\cdot \mathbf{n} = 0, \quad \nabla v_t \cdot \mathbf{n} = 0, \quad v_n = 0,
     \end{equation}
     where $v_t$, $v_n$ are the tangential and normal components of the velocity.
     
 \end{itemize}
-The implementation of boundary conditions in this study is presented in the upcoming chapter \ref{chapter:modelconcept}.
+The implementation of boundary conditions is presented in \cref{chapter:modelconcept}.
 
-\section{Reactive source and sink terms}\label{sec:reactivesource} The source and sink terms account for the dissolution of 
-calcite and consumption of CO\textsubscript{2}. There could be several other minerals found in caves, but our scope of 
-the study is limited to calcite. \\
-For the purpose of our study, we assumed abundant calcite in our model -- and for an open system (see \cref{chapter:modelconcept}) 
-the base flow is further carrying the dissolved calcite out of the domain -- so that the aqueous phase is always under-saturated with 
-calcium in both open (with a base-flow) and closed (without a base-flow) systems. Therefore, we neglect the precipitation rate. 
-The rate of calcite dissolution determines the source terms calcium ($\ce{q^{Ca}}$), and total inorganic carbon (\ce{q^{TIC}}). 
-Calcite dissolution occurs until the liquid phase saturates or all of the calcite is consumed.
+\section{Reactive source and sink terms}\label{sec:reactivesource} The source and sink terms account for total inorganic carbon 
+(\ce{CO2}, \ce{H2CO3}, \ce{CO3^{2-}}, and \ce{HCO3^{-}}) and calcium. 
+There could be several other cave minerals, but the scope of this thesis is limited to calcite. \\
+We assumed abundant calcite in our model -- and for an opened system (see \cref{chapter:modelconcept}) 
+the base-flow is further carrying the dissolved calcite out of the domain -- so that the aqueous phase is always under-saturated with 
+calcium in both opened (with a base-flow) and closed (without a base-flow) systems. Therefore, we neglect the precipitation rate. 
+The rate of calcite dissolution determines the source terms calcium ($\ce{q^{Ca}}$), and total inorganic carbon (\ce{q^{TIC}}).
 
 \begin{equation}\label{CalciumDiss}
 \ce{q^{Ca}} = \ce{r_{diss}},
@@ -189,13 +188,16 @@ and carbonate [\ce{mol_{\ce{CO3^{2-}}}}/\ce{kg_{\ce{H2O}}}] respectively. \\
 
 
 \paragraph*{Dissociation reaction and change in pH}\mbox{}\\ \\
-Dissolution of calcite produces \ce{Ca^{2+}}, \ce{CO_3^{2-}}, \ce{HCO_3^{-}}, \ce{H^+}, and \ce{OH^-} ions in the solution. 
+Dissolution of calcite produces \ce{Ca^{2+}}, \ce{CO_3^{2-}}, \ce{HCO_3^{-}}, \ce{H^+}, and \ce{OH^-} in the solution. 
 The rate of dissolution of calcite depends on molality of hydrogen ion (\ce{m^{H+}})/pH, calcium (\ce{m^{\ce{Ca^{2+}}}}) and 
 carbonate (\ce{m^{\ce{CO3^{2-}}}}) see \cref{eq:rDiss,eq:omega}, but carbonate depends on total inorganic carbon (TIC) and 
-molality of hydrogen ion, see figure \ref{fig:dissKinetics}. At the beginning, when there is no calcium in the solution, 
-rate of dissolution is the highest. As the time passes, calcium concentration in the solution increases, thereby decreasing 
-the rate of dissolution, and finally system reaches steady-state. Time to reach equilibrium depends on several factors such as 
-velocity of fingers, initial pH of the solution, initial TIC and amount of \ce{CO2} at the top of the domain, which will be 
+molality of hydrogen ion, \cref{fig:dissKinetics}. At the beginning, when there is no calcium in the solution, the rate of dissolution is at the highest. 
+Carbonic-acid is the fuel for calcite dissolution, and it's being used up during dissolution. 
+If the used-up carbonic-acid is not replenished, calcite dissolution comes to naught after carbonic-acid ceases to exist in the solution. 
+Such is the case with closed-systems where the initial dissolution potential is never replenished. In an opened-system, though, replenishment of 
+carbonic-acid occurs as the fingers of \ce{CO2} protruding into the karst water enriches the water with carbonic-acid. Hence, there is a constant 
+rate of dissolution at the steady-state in an opened-system. Steady-state depends on several factors such as flow-velocity -- if it's an opened 
+system -- initial pH and TIC of the solution, and amount of \ce{CO2} above the epiphreatic karst water table -- if it's an opened system -- which will be 
 discussed in  the subsequent chapters. \\
 
 \begin{figure}
@@ -211,7 +213,7 @@ The law of mass action for the dissociation of water is used to calculate the ac
 \end{equation}
 
 where: \ce{K_w} = $10^{-14}$ is the dissociation constant and [\ce{H^+}] and [\ce{OH^-}] are the activities of \ce{H^+} and \ce{OH^-} 
-respectively. The charge balance states that:
+respectively. The charge balance states:
 \begin{equation}
 \sum\limits_{i=1}^{\textrm{charged components}} \ce{z^i}\ce{m^i} = 0,
 \end{equation}
@@ -272,8 +274,8 @@ aqueous phase to the mass of pure water in aqueous phase.
 
 Molalities are used in the chemical calculations because density effects at higher solute concentrations prohibit the use 
 of concentrations, which depend on the volume. Likewise, the mole fractions of an inert component might change significantly 
-during reactions, see \cref{eq:moleFrac}. \cite{hommel2016modeling} The mass of solvent, on the other hand, is more or less 
-constant, and consequently $m^\kappa$ also has less fluctuations. So, we used molality while solving charge balance equation 
+during reactions, see \cref{eq:moleFrac} \cite{hommel2016modeling}. The mass of solvent on the other hand is more or less 
+constant and consequently, $m^\kappa$ also has minor fluctuations, so we used molality while solving charge balance equation 
 \ref{eq:chargebalfinal} to model calcite dissolution.
 
 % \paragraph*{Henry's Law} Henry's Law is used to calculate amount of dissolved gas in a liquid based on the partial pressure of the gas above the liquid by assuming equilibrium between fluid phases. \\
