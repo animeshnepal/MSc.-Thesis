@@ -1,13 +1,29 @@
 \chapter{Literature Review}\label{chapter:LiteratureReview}
 \thispagestyle{empty}
 
-Density-driven dissolution of \ce{CO2} is not unknown and is widely described in research articles as a geological sequestration, e.g.\cite{lindeberg1997reservoir, bachu2007co2} and is denoted as solubility trapping \cite{metz2005carbon}. However, it is seldom considered as a mechanism for speleogenesis. We are aiming at developing a free-flow Navier-Stokes model with a reactive source/sink term and pointing out the limiting factors for the rate of dissolution of calcium-carbonate. This literature review gives a brief overview of the well-established findings, and highlights the gap in the literature.
-
+Density-driven dissolution of \ce{CO2} is not unknown and is widely described in research articles as 
+geological sequestration, e.g.\cite{lindeberg1997reservoir, bachu2007co2} and is denoted as solubility 
+trapping \cite{metz2005carbon}. However, it is seldom considered as a mechanism for speleogenesis. 
+We are aiming at developing a free-flow Navier-Stokes model with a reactive source/sink term and pointing 
+out the limiting factors for the rate of dissolution of calcite. This literature review gives a 
+brief overview of the well-established findings and highlights gaps in literatures.
 
 \section{Dreybrodt model}\label{sec:dreybrodt}
-\citet{Dreybrodt2012}, in his book, describes the process karstification, where he states circulation of water controls the development of karst. According to \citet{Dreybrodt2012}, once a suitable pathways exist for the surface water to penetrate into the micro-millimeters sized (in the order of several 10$\mu$) fissures, surface water starts to dissolve the limestone by carbonic-acid containing water along its way enlarging the primary fissures and increasing the amount of water transported through the limestone. This creates a cascading effect which leads to progressive enlargement of fissures and creation of new pathways in aquifer. His study was for stagnant water and does not account for system having background flow.\\
+\citet{Dreybrodt2012}, in his book, describes the process karstification, where he states a circulation of water 
+controls the development of karst. According to \citet{Dreybrodt2012}, once suitable pathways exist for the 
+surface water to penetrate the micro-millimeters sized (in the order of several 10$\mu$) fissures, surface 
+water starts to dissolve the limestone by carbonic-acid containing water along its way enlarging the primary fissures 
+and increasing the amount of water transported through the limestone. This creates a cascading effect which leads 
+to progressive enlargement of fissures and creation of new pathways in an aquifer. His study was for stagnant water 
+and does not account for a system having background-flow.\\
 
-In his model \cite{Dreybrodt2012}, he assumed a boundary layer of thickness $\delta$ immediate with the rock surface where, due to dissolution, exchange of flux of \ce{Ca^{2+}}, \ce{CO3^{2-}}, and \ce{HCO3^{-}} ions between the solid surface and the bulk occurs. \ce{CO2} diffuses into the bulk from the atmosphere forming \ce{CO2}-rich water with a higher density than water triggers a protruding fingers into the bulk \cite{Class2020}. \citet{Plummer1978} determined the rate of dissolution using an equation, also known as, Plummer-Wigley-Parkhurst (PWP) Equation which could be coupled with Continuity equation \ref{eq:contiEq} in an attempt to solve for the fluxes formed due to dissolution of calcium-carbonate.
+In his model \cite{Dreybrodt2012}, he assumed a boundary layer of thickness $\delta$ immediate with the rock surface 
+where, due to dissolution, exchange of flux of \ce{Ca^{2+}}, \ce{CO3^{2-}}, and \ce{HCO3^{-}} ions between the solid 
+surface and the bulk occurs. \ce{CO2} diffuses into the bulk from the atmosphere forming \ce{CO2}-rich water with a 
+higher density than water triggers protruding fingers into the bulk \cite{Class2020}. \citet{Plummer1978} determined 
+the rate of dissolution using an equation, also known as, Plummer-Wigley-Parkhurst (PWP) Equation which could be coupled 
+with Continuity equation \ref{eq:contiEq} in an attempt to solve for the fluxes formed due to the dissolution of calcite.
+
 \newpage
 \paragraph*{Plummer-Wigley-Parkhurst Equation (PWP)}\mbox{}\\
 
@@ -19,7 +35,9 @@ The net rate of dissolution (rdiss) is given by an equation \cite{Plummer1978}:
  \ce{rdiss} = k_1a_{H^+} + k_2a_{\ce{H2CO3}}^* + k_3a_{\ce{H2O}} - k_4a_{\ce{Ca^{2+}}}a_{\ce{HCO3^-}}
 \end{equation}  
 
-The rate constants: \ce{k1, k2, k3, and k4} are the first order rate constants which depends on temperature -- except for \ce{k1} which depends on temperature and partial pressure of \ce{CO2} ($P_{\ce{CO2}}$ -- and can be predicted as per \cite{Plummer1978}. By using these rate constants and the fluxes, rate of dissolution can be calculated. \\
+The rate constants: \ce{k1, k2, k3, and k4} are the first order rate constants which depends on temperature -- except for \ce{k1} 
+which depends on temperature and partial pressure of \ce{CO2} ($P_{\ce{CO2}}$ -- and can be predicted as per \cite{Plummer1978}. 
+By using these rate constants and the fluxes, rate of dissolution can be calculated. \\
 \citet{Plummer1978} defines these rate constants as: (where T in K and $k_x$ in cm/sec)
 
 \begin{flalign}\label{eq:k1}
@@ -43,30 +61,64 @@ At temperature more than $25^\circ$C:
 \begin{equation}\label{eq:k4} % Give a unique label
 k_4 = \frac{K_2}{K_e} \left\{ {k^{'}}_1 + \frac{1}{a_{{{H^{+}}}_{(s)}}}\left[k_2a_{{\ce{H2CO3}^{*}}_{(s)}} + k_3a_{{\ce{H2O}}_{(s)}}\right] \right\}
 \end{equation}
-where $K_2$ and $K_e$ are the equilibrium constants for the second dissociation of carbonic acid and calcite, respectively, ${k^{'}}_{1}$ is the forward rate constant for reaction \ref{eq:CaCO3diss} (${k^{'}}_{1}$ is 10-20 times larger than $k_1$), and the subscript "s" stands for adsorption surface values. 
+where $K_2$ and $K_e$ are the equilibrium constants for the second dissociation of carbonic acid and calcite, 
+respectively, ${k^{'}}_{1}$ is the forward rate constant for reaction \ref{eq:CaCO3diss} (${k^{'}}_{1}$ is 10-20 
+times larger than $k_1$), and the subscript "s" stands for adsorption surface values. 
 \begin{equation}\label{eq:CaCO3diss}
     \ch{\ce{CaCO3} + H^+ <=> Ca^{2+} + \ce{HCO3}^-}
 \end{equation}
 
 \section{Summary}\label{sec:summary}
-\paragraph*{Dreybrodt and Gabrov{\v{s}}ek's work} \citet{gabrovvsek2000role} discusses two cave forming mechanisms: Mixing Corrosion, explained by \citet{bogli1980physical}, in combination with the linear dissolution kinetics; and non-linear dissolution kinetics generating extended karst conduits. \citet{gabrovvsek2000role} combines both these approaches to study evolution of karst aquifers. \citet{Dreybrodt1996} estimates the dissolution rates for a system of \ce{H2O-CO2-CaCO3}.
+\paragraph*{Dreybrodt and Gabrov{\v{s}}ek's work} \citet{gabrovvsek2000role} discusses two cave forming mechanisms: 
+Mixing Corrosion, explained by \citet{bogli1980physical}, in combination with the linear dissolution kinetics; 
+and non-linear dissolution kinetics generating extended karst conduits. \citet{gabrovvsek2000role} combines both 
+these approaches to study evolution of karst aquifers. \citet{Dreybrodt1996} estimates the dissolution rates for 
+a system of \ce{H2O-CO2-CaCO3}.
 \[
 F(c) = k_n(1-c/c_{eq})^n
 \]
-where $k_n$ is a constant [$mol/cm^2s$], $c$ is the actual concentration of dissolved calcium, and $c_{eq}$ is its equilibrium concentration [$mol/cm^3$].\\
-For linear dissolution rate $n = 1$, development of karst channel takes geologically unrealistic times as the law breaks down as the penetrating water goes into deep rock; with increase in distance, the dissolution rates drop exponentially \cite{Dreybrodt1996}. Hence, the law only accounts for entrance widening. \citet{dreybrodt2004dissolution}, \citet{gabrovvsek2000role} suggest the concept of mixing corrosion proposed by \citet{bogli1980physical} together with non-linear rate-laws with $n$ varying between 3 to 6 for $c > c_{eq}$, which helps in understanding cave evolution in deep rocks. Mixing corrosion alone could not explain cave formation developed along the bedding planes without intersecting by joints \cite{ford1978development}; thus, \citet{gabrovvsek2000role} propose a non-linear rate law to bridge the gap. \citet{gabrovvsek2000role} makes it evident in a model, where they assume \ce{CO2} could not be replenished in deep, micro-millimeter sized fissures once it's being consumed during dissolution. As $c$ approaches $c_{eq}$, the reaction kinetics are inhibited as per non-linear kinetics, which in turn saves its remaining dissolution power and takes it deeper into the rock. \citet{gabrovvsek2000role} further argue that mixing corrosion is not a prerequisite for the evolution of caves, but together with non-linear dissolution rates law, it could contribute in karst evolution. Mixing corrosion \cite{bogli1980physical} is crucial in early karst development, but it has little importance in mature karst. \\
+where $k_n$ is a constant [$mol/cm^2s$], $c$ is the actual concentration of dissolved calcium, and $c_{eq}$ is its 
+equilibrium concentration [$mol/cm^3$].\\
+For linear dissolution rate $n = 1$, development of karst channel takes geologically unrealistic times as the law 
+breaks down as the penetrating water goes into a deep rock; with an increase in distance, the dissolution rate drops 
+exponentially \cite{Dreybrodt1996}. Hence, the law only accounts for entrance widening. 
+\citet{dreybrodt2004dissolution}, \citet{gabrovvsek2000role} suggest the concept of mixing corrosion 
+proposed by \citet{bogli1980physical} together with non-linear rate-laws with $n$ varying between 3 to 6 for $c > c_{eq}$, 
+which helps in understanding cave evolution in deep rocks. Mixing corrosion alone could not explain cave formation developed 
+along the bedding planes without intersecting by joints \cite{ford1978development}; thus, \citet{gabrovvsek2000role} propose 
+a non-linear rate law to bridge the gap. \citet{gabrovvsek2000role} makes it evident in a model, where they assume \ce{CO2} 
+could not be replenished in deep, micro-millimeters sized fissures once it's being consumed during dissolution. As $c$ 
+approaches $c_{eq}$, the reaction kinetics are inhibited as per non-linear kinetics, which in turn saves its remaining 
+dissolution power and takes it deeper into the rock. \citet{gabrovvsek2000role} further argue that mixing corrosion is not 
+a prerequisite for the evolution of caves, but together with non-linear dissolution rates law, it could contribute to karst 
+evolution. Mixing corrosion \cite{bogli1980physical} is crucial in early karst development, but it has little importance in 
+mature karst. \\
 
 
 
-\citet{bonacci2001analysis} states the karst systems has complex drainage systems and karstification is enhanced by biologically active soil layers enriched with \ce{CO2}. His study still does not account for the system with no background flow/small where \ce{CO2} is replenished. \\
+\citet{bonacci2001analysis} states the karst systems has complex drainage systems and karstification is enhanced by biologically 
+active soil layers enriched with \ce{CO2}. His study still does not account for the system with no background flow/small 
+where \ce{CO2} is replenished. \\
 
-\citet{bakalowicz2005karst} describes climate is enhancing karstification. Groundwater flow carries the produced \ce{CO2} by geological activity in soil or at a depth by geological processes. Pipe flow condition prevails under pressure or at the atmospheric condition which also transports the produced products away. Karstification can be very rapid in terms of geological times, a few thousands years is sufficient to build integrated karst network.\\
+\citet{bakalowicz2005karst} describes climate is enhancing karstification. Groundwater flow carries the produced \ce{CO2} by 
+geological activity in soil or at a depth by geological processes. Pipe flow condition prevails under pressure or at the 
+atmospheric condition which also transports the produced products away. Karstification can be very rapid in terms of geological 
+times, a few thousand years is sufficient to build an integrated karst network.\\
 
-\citet{mangin1975contribution} defines the concept of Potential for Karst Development (PKD) which determines the flux of solvent through the rock and is driven by the amount of precipitation, the soil partial pressure of \ce{CO2} -- thus, the biological activity and weather conditions play a role -- and the hydraulic gradient between karst recharge area and karst spring level. \\
+\citet{mangin1975contribution} defines the concept of Potential for Karst Development (PKD) which determines the flux of solvent 
+through the rock and is driven by the amount of precipitation, the soil partial pressure of \ce{CO2} -- thus, the biological activity 
+and weather conditions play a role -- and the hydraulic gradient between the karst recharge area and karst spring level. \\
 
-\citet{mohammadi2007method}, also refer to PKD concept of \citet{mangin1975contribution}, state the dissolution potential results from the carbonic-acid containing water, but they do not mention about how it was dissolved in the first place. \\
+\citet{mohammadi2007method}, also refer to PKD concept of \citet{mangin1975contribution}, state the dissolution potential results from 
+the carbonic-acid containing water, but they do not mention how it was dissolved in the first place. \\
 
-A relevant case study with respect to our study carried out by \citet{atkinson1977carbon} emphasizes on the importance of the system being closed and open to atmosphere in karstic developments. In the open system, gaseous \ce{CO2} is exposed to the water which leads to replenishment of used-up \ce{CO2} as carbonic-acid during the dissolution of calcium-carbonate until the equilibrium is reached, whereas in the closed system, dissolved \ce{CO2} causes the dissolution until the system exhaust carbonic-acid, hence system comes to internal equilibrium -- unlike in open-system, no replenishment occur in closed-system. Seasonal fluctuations and mean value of \ce{CO2} concentrations in different soils are presented in table \ref{tab:CO2fluctuations}, which could play a role while modeling a real-world scenario. \\
+A relevant case study with respect to ours carried out by \citet{atkinson1977carbon} emphasizes the importance of a 
+system being closed and open to atmosphere in karstic developments. In an open system, gaseous \ce{CO2} is dissolved into the water 
+forming carbonic-acid which leads to replenishment of dissolution potential until the steady-state 
+is reached, whereas in the closed system, dissolved \ce{CO2} in karst water provokes the dissolution until all the carbonic-acid is depleted, 
+hence system comes to internal equilibrium -- unlike in an open-system, replenishment does not occur in a closed-system. 
+Seasonal fluctuations and mean value of \ce{CO2} concentrations in different soils are presented in table \ref{tab:CO2fluctuations}, 
+which could play a role while modeling a geological system. \\
 
 \begin{table}[ht]
 \small\addtolength{\tabcolsep}{-5pt}
@@ -105,10 +157,21 @@ A relevant case study with respect to our study carried out by \citet{atkinson19
 \label{tab:CO2fluctuations}
 \end{table}
 
-\citet{garcia2011numerical} modelled coastal aquifer karst process with a Darcy model, which states that once the mixing zone occurs for sea and fresh water, fresh water which is under saturated with calcite, in addition to the continuous inflow of rain water, drives the carbonate dissolution mechanism longer and prevents the system in reaching equilibrium with respect to calcite. This process might last to decades until the system comes to "pseudo" steady-state.\\
+\citet{garcia2011numerical} modeled coastal aquifer karst process with a Darcy model and stated that once the mixing 
+zone occurs for sea and freshwater is established; freshwater, which is under saturated with calcite, and with the continuous inflow 
+of rainwater drives the carbonate dissolution mechanism longer and prevents the system in reaching steady-state. 
+This process might last decades until the system comes to "pseudo" steady-state.\\
 
-\citet{gulley2014vadose} states the driving force for the dissolution of calcite is the fluctuations in $p_{\ce{CO2}}$ which is the same as we would want in our model, but they did not explain the mechanism of density-driven dissolution. They assume flow takes place because of pressure difference in \ce{CO2}, which adds \ce{CO2} in the karst water and thereby increases the dissolution potential.
+\citet{gulley2014vadose} states the driving force for the dissolution of calcite is the fluctuations in $p_{\ce{CO2}}$ which is the 
+same as we would want in our model, but they did not explain the mechanism of density-driven dissolution. They assume flow 
+takes place because of pressure difference in \ce{CO2}, which adds \ce{CO2} in the karst water and thereby increases the dissolution potential.
 
 \section{Conclusion}\label{sec:conclusionLiterature}
-As relevant as their (\citet{Dreybrodt1996}, \citet{gabrovvsek2000role}, \citet{dreybrodt2004dissolution}, \citet{Dreybrodt2012}) research among others, there is a considerable gap in considering density-driven dissolution as a mechanism for speleogenesis. Together with the \citet{gabrovvsek2000role} and \citet{bogli1980physical} mechanisms in transport and mechanism of karstification, we would like to propose a third explanation on how the dissolution potential could reach below the epiphreatic karst water table and deeper into the rock. We adhere to the idea that solving chemical kinetics for calcite dissolution interacting with density induced fingering regime could potentially be the first step in substantiating the concept, which could then be coupled with the model developed by \citet{Class2020}.
+As relevant as their (\citet{Dreybrodt1996}, \citet{gabrovvsek2000role}, \citet{dreybrodt2004dissolution}, \citet{Dreybrodt2012}) 
+research among others, there is a considerable gap in considering density-driven dissolution as a mechanism for speleogenesis. 
+Together with the \citet{gabrovvsek2000role} and \citet{bogli1980physical} mechanisms in transport and karstification, 
+we would like to propose a third explanation on how the dissolution potential could reach below the epiphreatic karst water table 
+and deeper into the rock. We adhere to the idea that solving chemical kinetics for calcite dissolution interacting with density 
+induced fingering regime could potentially be the first step in substantiating the concept which could then be coupled with the 
+model developed by \citet{Class2020}.
 \endinput

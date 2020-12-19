@@ -1,10 +1,25 @@
 \chapter*{Abstract}
 % \pdfbookmark[1]{Abstract}{Abstract}
 \thispagestyle{empty}
-Density-induced fingering due to dissolution of \ce{CO2} in water is considered a mechanism for speleogenesis. \citet{Scherzer2017} stated this process as "Nerochytic Speleogenesis" (NERO). Despite having similar effects to density-driven fingering of \ce{CO2} in geological sequestration of green-house gases, it is so far not discussed as a mechanism for speleogenesis. Understanding the process could help in understanding karst formation, also known as karstification.\\
+Density-induced fingering due to dissolution of \ce{CO2} in water is considered a mechanism for 
+speleogenesis. \citet{Scherzer2017} stated this process as "Nerochytic Speleogenesis" (NERO). 
+Despite having similar effects to density-driven fingering of \ce{CO2} in geological sequestration 
+of green-house gases, it is so far not discussed as a mechanism for speleogenesis. Understanding the 
+process could help in understanding karst formation, also known as karstification.\\
 
-We developed a model in \DuMuX, also validated with \MATLAB, which considered the dissolution of calcium-carbonate as a source/sink term in the Navier-Stokes model. We found pH of the karst water, concentration of \ce{CO2} at the top of the cave and flow-velocity influence the rate of calcite dissolution. We ran simulations for different scenarios and compared the results to see the effects on rate of dissolution on the 2D-domain of  size 15mm$\times$5mm. Numerical comparison between \DuMuX and \MATLAB showed a good consistency in predicting rate of dissolution. We were not able to model for real-world karstification scenario with bigger domain; therefore, we could not predict the time scale for dissolution of calcite for such scenario, although the model concept and numerical implementation are transferable to the bigger domain. We imposed limitations in our model by switching-off the gravity; fixing the concentration of \ce{CO2} at the top of the cave, which would vary throughout the year; and setting a constant density throughout the domain and simulation run, ignoring the impact of density change of karst water due to addition of \ce{CO2} and calcium ions.\\
+We developed a model in \DuMuX, also validated with \MATLAB, which considered the dissolution of calcium-carbonate 
+as a source/sink term in the Navier-Stokes model. We found pH of the karst water, concentration of \ce{CO2} at the 
+top of the cave and flow-velocity influence the rate of calcite dissolution. We ran simulations for different 
+scenarios and compared the results to see the effects on the rate of dissolution on the 2D-domain of  size 15mm$\times$5mm. 
+The numerical comparison between \DuMuX and \MATLAB showed good consistency in predicting the rate of dissolution. 
+We were not able to model for a real-world karstification scenario with a bigger domain; therefore, we could not 
+predict the time scale for dissolution of calcite for such a scenario, although the model concept and numerical 
+implementation are transferable to the bigger domain. We imposed limitations in our model by switching-off the 
+gravity; fixing the concentration of \ce{CO2} at the top of the cave for a simulation run, which would vary throughout the year; and 
+setting a constant density throughout the domain and simulation run, ignoring the impact of density change of karst 
+water due to addition of \ce{CO2} and calcium.\\
 
-Expanding the model to account for the aforementioned limitations would be the next step in exploring density-induced fingering of \ce{CO2}-enriched water as a mechanism for speleogenesis.
+Expanding the model to account for the aforementioned limitations would be the next step in exploring density-induced 
+fingering of \ce{CO2}-enriched water as a mechanism for speleogenesis.
 
 \endinput
