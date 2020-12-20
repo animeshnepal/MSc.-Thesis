@@ -1,9 +1,9 @@
 \chapter{Scenarios, Results and Discussions} \label{chapter:results}
 \thispagestyle{empty}
 
-We set a few scenarios, as shown in \cref{tab:scenarios}, in \DuMuX to address the 
+A few scenarios were set, as shown in \cref{tab:scenarios}, in \DuMuX to address the 
 research questions presented in chapter \ref{chapter:introduction}. Results we got 
-from \MATLAB were also used to validate the results we got from \DuMuX for the closed-system 
+from \MATLAB were also used to validate the results we got from \DuMuX for the closed system 
 as shown in \cref{tab:scenarios}. For the validation purpose, identical initial 
 and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were 
 set in both \MATLAB and \DuMuX. \\
@@ -14,7 +14,7 @@ set in both \MATLAB and \DuMuX. \\
     \caption{Scenarios in \DuMuX}
     \label{tab:scenarios}
     \begin{tabular}{l|l} % <-- Changed to S here.
-      \thead{Opened System} & \thead{Closed System}\\
+      \thead{Open System} & \thead{Closed System}\\
       \hline
       -- Different flow velocities/velocities of \ce{CO2}-fingers & --Different grid grading (1.0, 1.1, 1.2)\\
       (1mm/min, 0.5mm/min, 5mm/min) & \\
@@ -22,16 +22,20 @@ set in both \MATLAB and \DuMuX. \\
       & (used for comparison with \MATLAB\\ 
       & results, see \cref{sec:dvm})\\
       -- Different initial pH (6,7,8,9) & \\
-      -- Different initial and boundary \ce{CO2} concentrations & \\
+      -- Different boundary \ce{CO2} concentrations & \\
       \hline
     \end{tabular}
 %   \end{center}
 \end{table}
 
+To set the scenarios, a few initial and boundary condition values -- such as flow-velocity, initial pH, boundary \ce{CO2} concentration -- were assumed. 
+The primary goal of this thesis is to develop a model that implements reactive source and sink terms and understand 
+the factors that affect the rate of calcite dissolution, so the veracity of assumed values are not of paramount importance in achieving the goal.\\
+
 We chose a set of velocities for the protruding fingers by inferring the value from \citet{Class2020}. 
 Although, the prominent value of pH in karst water is 6, we chose 7, 8 and 9 for comparing \DuMuX and 
-\MATLAB results and  understanding its dependency on the rate of dissolution and steady-state concentrations 
-(hydrogen, carbonate, bicarbonate, calcium and TIC). \\
+\MATLAB results and understanding its dependency on the rate of dissolution and steady-state concentrations 
+(hydrogen, carbonate, bicarbonate, calcium, and TIC). \\
 
 \paragraph*{Grid grading}\mbox{} Grid grading parameters when set in the input file would refine the grid 
 spacing targeting a certain portion of the domain and axis, but keeping the number of grids constant. 
@@ -44,7 +48,7 @@ the rest of the domain. \cref{fig:gridGrading} compares the effect of grid gradi
     \begin{subfigure}{.3\linewidth}
         \centering
         \includegraphics[trim=350 20 350 20, clip, width=\textwidth]{PICTURES/noGridGrading.eps}
-        \caption{without grid grading/grid grading 1.0}
+        \caption{grid grading 1.0}
         \label{fig:nogg}       % Give a unique label
     \end{subfigure}%
         \hfill
@@ -64,7 +68,9 @@ the rest of the domain. \cref{fig:gridGrading} compares the effect of grid gradi
         \label{fig:gg1.2}       % Give a unique label
     \end{subfigure}%
         \hfill
-     \caption{Effects of grid grading}
+     \caption{Effects of grid grading to a domain of size [5mm $\times$ 15mm] with the number of grid in x-direction is 
+     10 and y-direction is 20. \cref{fig:nogg} shows grid spacing when there is no grid-grading/grid grading is set to 1.0, 
+     \cref{fig:gg1.1} shows grid spacing when the grid grading is set to 1.1, and \cref{fig:gg1.2} shows grid spacing when the grid grading is set to 1.2}
      \label{fig:gridGrading}
 \end{figure}
 
@@ -100,24 +106,29 @@ For the velocities 1mm/min, 0.5mm/min and 5mm/min, maximum wall length($x$) of 1
 water at 10$^\circ$C 1.3063e-6[$m^2/s$] \cite{wagner2008iapws} boundary layer thickness was calculated using \cref{eq:BL}. 
 Boundary layer thickness at the end of the wall for flow-velocity 1mm/min was calculated approximately equal to 170mm; 
 for flow-velocity 5mm/min, it was 75mm; and for flow-velocity 0.5mm/min, it was 240mm. As discussed in the chapter 
-\ref{chapter:modelconcept}, subsection \ref{ssec:impdum}, we chose small domain because of the local Newton solver we 
-implemented had a restriction in the max time step size to be small which restricted running the simulation for longer times 
-and for bigger domains -- otherwise, CPU time for running the simulation would be too high. The scope of the study was limited to 
-implement chemical kinetics and its coupling with the freeflow Navier-Stokes model, so it wasn't a matter of paramount importance. 
-In order to run the simulation for a longer time -- time for the solution to reach steady-state -- we had to shrink the domain size 
-(we chose 5mm $\times$ 15mm). The width of the domain in x-direction is just 5mm compared to the boundary layer thicknesses; we were essentially 
-inside the viscous region. Hence, mathematically, we should not see any difference between with and without grid grading near the wall, but we 
-would also like to see if the model in \DuMuX is consistent with the mathematical calculation -- which is why we set the grid grading scenarios 
-near the reactive wall as shown in \cref{fig:BL}. \\
+\ref{chapter:numericalmodel}, subsection \ref{ssec:impdum}, we chose small domain as the primary goal of this thesis was to 
+implement chemical kinetics of calcite dissolution and its coupling with the freeflow Navier-Stokes model. 
+The width of the domain in x-direction is just 5mm compared to the calculated boundary layer thickness, we were essentially 
+inside the viscous region. Hence, we can expect nothing to very small differences in calculating the rate of calcite dissolution and concentration 
+of primary variables when varying grid grading near the wall. To verify the model in \DuMuX is 
+consistent with the mathematical calculation, we set the grid grading scenarios near the reactive wall as shown in \cref{fig:BL}. \\
 
 \section{\DuMuX Simulation results}
 
-\subsection{\DuMuX Simulation results: Opened system}
+\subsection{\DuMuX Simulation results: Open system}
+For an open system in \DuMuX, the model domain of size [5mm $\times$ 15mm] was divided into ten segments along the x-axis and twenty segments along the y-axis.
+A cell at the center of the reactive wall was selected to visualize the variation of a few variables (pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, 
+$\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$) in time. The calculation of source/sink terms in \DuMuX was invoked only at the reactive wall and for the rest of 
+the domain, the governing equations without the source/sink term were solved. Therefore, we chose a cell at the reactive wall to better understand the dissolution
+and its dependency with the other variables. It could have been any cell at the wall, the values could also have been averaged over the cells at the wall, but we 
+chose a center cell at the reactive wall, which was an arbitrary decision. The decision does not alter the derived conclusions from the plots below; the focus is on 
+understanding the dependency rather than calculating a precise value for these variables (pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, 
+$\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$).
 
 \subsubsection*{Different flow velocities}\label{ssec:diffFlowVel}
-We set the initial pH of the water to 6 and varied the flow velocity, but did not include grid grading parameters in the input file. We set the initial concentration of \ce{CO2} throughout the domain to be 2.5e-7 [mol\_\ce{CO2}/mol\_\ce{H2O}] and the boundary condition at the top of the domain to be 9.9956e-4 [mol/mol].
-%% cite the source to use these concentrations
-
+We set the initial pH of the water to 6 and varied the flow velocity, but did not include grid grading parameters in the input file. 
+We set the initial concentration of TIC throughout the domain to be 2.5e-7 [mol\_\ce{CO2}/mol\_\ce{H2O}], an assumed value, and the boundary condition at the 
+top of the domain to be 9.9956e-4 [mol/mol], a measured value at 8$^{\circ}$C and 1.0 atm pressure for a cave \cite{Class2020}. \\
 
 \begin{figure}[!h]
         \centering
@@ -166,12 +177,11 @@ We set the initial pH of the water to 6 and varied the flow velocity, but did no
     \hfill
      \caption{\DuMuX results that show the change in pH (\cref{fig:velpH}), molality of calcium (\cref{fig:velmCa}), 
      molality of total inorganic carbon (\cref{fig:velmTIC}), molality of carbonate (\cref{fig:velmCO3}) and rate of 
-     dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an opened-system}
+     dissolution of calcite (\cref{fig:velrdiss}) in time for different flow velocities in an open system}
      \label{fig:comparisionDiffFlowVelocity}
 \end{figure}
 
-The plots shown in figure \ref{fig:comparisionDiffFlowVelocity} is obtained for a cell at the boundary wall. 
-All of the subplots, i.e., \subref{fig:1mmpermin}, \subref{fig:5mmpermin} and \subref{fig:0.5mmpermin}, 
+\cref{fig:comparisionDiffFlowVelocity} All of the subplots, i.e., \subref{fig:1mmpermin}, \subref{fig:5mmpermin} and \subref{fig:0.5mmpermin}, 
 show pH rises over time, reaches to its peak, and then descends to a steady-state value. The peak value 
 varies with different initial and boundary conditions setups. 
 The initial concentration of \code{TIC} i.e. 2.5e-7 [mol/mol] in the system is lower than the 
@@ -188,7 +198,8 @@ on initial and boundary conditions are discussed in subsection \ref{ssec:diffIni
 
 
 \subsubsection*{Different initial pH} \label{ssec:diffpH}
-We fixed the flow-velocity to 1mm/min, did not include grid grading parameters, initial \ce{CO2} concentration was fixed to 2.5e-7[mol/mol] and boundary concentration at the top was set to 9.9956e-4[mol/mol]; just the initial pH at the start of the simulation were varied.
+We fixed the flow-velocity to 1mm/min, did not include grid grading parameters, initial \ce{CO2} concentration was fixed to 
+2.5e-7[mol/mol] and boundary concentration at the top was set to 9.9956e-4[mol/mol]; just the initial pH at the start of the simulation were varied.
 
 \begin{figure}[!h]
         \centering
@@ -235,15 +246,20 @@ We fixed the flow-velocity to 1mm/min, did not include grid grading parameters, 
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:pHpH}), molality of calcium (\cref{fig:pHmCa}), 
     molality of total inorganic carbon (\cref{fig:pHmTIC}), molality of carbonate (\cref{fig:pHmCO3}) and rate of 
-    dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an opened-system}
+    dissolution of calcite (\cref{fig:pHrdiss}) in time for different initial pH in an open system}
     \label{fig:comparisionDiffInitialpH}
 \end{figure}
 
 
-The figure \ref{fig:comparisionDiffInitialpH} shows pH rises over time, reaches to its peak, and then descends to a steady-state value, as seen on figure \ref{fig:comparisionDiffFlowVelocity}. The explanation for such phenomena holds true here as well. Increasing the initial pH also increases the steady-state pH. The time for system to be in steady-state is fairly same for all the cases, as expected. Since, this depends on the flow-velocity and initial and boundary concentration of \ce{CO2}, which is constant for all the cases. 
+The figure \ref{fig:comparisionDiffInitialpH} shows pH rises over time, reaches to its peak, and then descends to a steady-state value, 
+as seen on figure \ref{fig:comparisionDiffFlowVelocity}. The explanation for such phenomena holds true here as well. Increasing the initial pH 
+also increases the steady-state pH. The time for system to be in steady-state is fairly same for all the cases, as expected. Since, this 
+depends on the flow-velocity and initial and boundary concentration of \ce{CO2}, which is constant for all the cases. 
 
 \subsubsection*{Different initial and boundary \ce{CO2} concentrations} \label{ssec:diffInitialBC}
-We fixed the flow-velocity to 1mm/min, did not include grid grading and initial pH was set to 6.0; just the boundary condition at the top of the domain was varied to analyse the buffering effect in the pH growth of the water, keeping a constant initial concentration of \ce{CO2} inside the domain to be 2.5e-7 [mol/mol].
+We fixed the flow-velocity to 1mm/min, did not include grid grading and initial pH was set to 6.0; just the boundary condition at the top 
+of the domain was varied to analyse the buffering effect in the pH growth of the water, keeping a constant initial concentration of \ce{CO2} 
+inside the domain to be 2.5e-7 [mol/mol].
 
 \begin{figure}[!h]
         \centering
@@ -290,16 +306,28 @@ We fixed the flow-velocity to 1mm/min, did not include grid grading and initial 
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:CO2pH}), molality of calcium (\cref{fig:CO2mCa}), 
     molality of total inorganic carbon (\cref{fig:CO2mTIC}), molality of carbonate (\cref{fig:CO2mCO3}) and rate of 
-    dissolution of calcite (\cref{fig:CO2rdiss}) in time for different \ce{CO2} concentration at the top of the domain in an opened-system}
+    dissolution of calcite (\cref{fig:CO2rdiss}) in time for different \ce{CO2} concentration at the top of the domain in an open system}
     \label{fig:diffCO2}
 \end{figure}
 
-The figure \ref{fig:diffCO2} shows the same rise in pH, with same pattern, over time. The difference now is the maximum pH and the steady-state pH value; the steady-state time is once again similar for all the subplots in fig. \ref{fig:CO2}. Decreasing the \ce{CO2} concentration at the top, but it still has a higher \ce{CO2} concentration than what's inside, as shown in fig. \subref{fig:CO2low}, shows the system is more or less consistent with the inside and incoming \ce{CO2}-enriched water. The pH rises steadily and reaches a peak, and without descending, stabilizes around same steady-state value. The dissolution capacity of water has not changed much throughout the simulation.\\
-On the other hand, figure \subref{fig:CO2high} shows the same pattern as in figure \ref{fig:CO2} with a different peak and steady-state pH. The incoming water has higher \ce{CO2} concentration which mixes/replaces the lower \ce{CO2}-enriched water. Because of \ce{CO2}, reaction advances and hence pH rises, but as the simulation proceeds, the lower \ce{CO2}-enriched water with low buffering capacity is being replaced by water with high buffering capacity. Hence, the rise in pH is subdued and the pH falls until it reaches steady-state. 
+The figure \ref{fig:diffCO2} shows the same rise in pH, with same pattern, over time. The difference now is the maximum pH 
+and the steady-state pH value; the steady-state time is once again similar for all the subplots in fig. \ref{fig:CO2}. 
+Decreasing the \ce{CO2} concentration at the top, but it still has a higher \ce{CO2} concentration than what's inside, as 
+shown in fig. \subref{fig:CO2low}, shows the system is more or less consistent with the inside and incoming \ce{CO2}-enriched water. 
+The pH rises steadily and reaches a peak, and without descending, stabilizes around same steady-state value. The dissolution capacity of 
+water has not changed much throughout the simulation.\\
+On the other hand, figure \subref{fig:CO2high} shows the same pattern as in figure \ref{fig:CO2} with a different peak and steady-state pH. 
+The incoming water has higher \ce{CO2} concentration which mixes/replaces the lower \ce{CO2}-enriched water. Because of \ce{CO2}, reaction 
+
+advances and hence pH rises, but as the simulation proceeds, the lower \ce{CO2}-enriched water with low buffering capacity is being replaced 
+by water with high buffering capacity. Hence, the rise in pH is subdued and the pH falls until it reaches steady-state. 
 
 
 \subsubsection*{Different Grid grading parameter} \label{ssec:diffGrid}
-We fixed the initial pH to 6.0, flow-velocity to 1mm/min, initial \ce{CO2} was fixed to 2.5e-7[mol/mol] and at the boundary it was 9.9956e-4[mol/mol]; just the grid grading parameter was varied to properly resolve the boundary layer formation on the wall. We expect a boundary layer formation on the reactive wall in a cave scenario, but given the size of the domain we have, we were not able to see any difference in output values with and without grid-grading parameters. \\
+We fixed the initial pH to 6.0, flow-velocity to 1mm/min, initial \ce{CO2} was fixed to 2.5e-7[mol/mol] and at the boundary it was 
+9.9956e-4[mol/mol]; just the grid grading parameter was varied to properly resolve the boundary layer formation on the wall. 
+We expect a boundary layer formation on the reactive wall in a cave scenario, but given the size of the domain we have, we were 
+not able to see any difference in output values with and without grid-grading parameters. \\
 We decreased the spacing of the grids near the wall in x-direction. We ran the simulation for grid-grading values 1.1 and 1.2.
 
 \begin{figure}[!h]
@@ -347,14 +375,17 @@ We decreased the spacing of the grids near the wall in x-direction. We ran the s
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:gridpH}), molality of calcium (\cref{fig:gridmCa}), 
     molality of total inorganic carbon (\cref{fig:gridmTIC}), molality of carbonate (\cref{fig:gridmCO3}) 
-    and rate of dissolution of calcite (\cref{fig:gridrdiss}) in time for different grid grading parameter in an opened-system}
+    and rate of dissolution of calcite (\cref{fig:gridrdiss}) in time for different grid grading parameter in an open system}
     \label{fig:diffGrid}
 \end{figure}
 
-The reason we chose grid grading near the wall is to resolve the boundary layer developed on the wall. Since the model we chose was too small, we were inside the boundary layer and that was the reason why we did not see any differences in the subplots in the figure \ref{fig:diffGrid}.
+The reason we chose grid grading near the wall is to resolve the boundary layer developed on the wall. Since the model we chose was 
+too small, we were inside the boundary layer and that was the reason why we did not see any differences in the subplots in the figure \ref{fig:diffGrid}.
 
 \subsubsection*{Contour plots} \label{ssec:contour}
-We fixed pH of the water to 6 and did not include grid grading parameters in the input file -- just the flow velocity was varied. We set the initial concentration of \ce{CO2} throughout the domain to be 2.5e-7 [mol\_\ce{CO2}/mol\_\ce{H2O}] and the boundary condition at the top of the domain to be 9.9956e-4 [mol/mol].
+We fixed pH of the water to 6 and did not include grid grading parameters in the input file -- just the flow velocity was varied. 
+We set the initial concentration of \ce{CO2} throughout the domain to be 2.5e-7 [mol\_\ce{CO2}/mol\_\ce{H2O}] and the boundary condition 
+at the top of the domain to be 9.9956e-4 [mol/mol].
 
 
 \paragraph*{pH contour plots} \mbox{}\\
@@ -381,11 +412,14 @@ We fixed pH of the water to 6 and did not include grid grading parameters in the
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:pHSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of pH at the steady-state in an opened-system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of pH at the steady-state in an open system}
      \label{fig:contourpH}
 \end{figure}
 
-Figure \ref{fig:contourpH} shows contour plots for pH at the steady-state in varying flow-velocities. All the subplots \ref{fig:pHSteady-state}, \ref{fig:pHSteady-state5mm}, \ref{fig:pHSteady-state0.5mm} show higher pH value near the reactive wall, and the pH decreases as we go away from the wall. The dissolved calcium-carbonate is diffused along the x-axis which causes the rise in pH adjacent to the reactive wall which fades out as we go away from the wall.
+Figure \ref{fig:contourpH} shows contour plots for pH at the steady-state in varying flow-velocities. 
+All the subplots \ref{fig:pHSteady-state}, \ref{fig:pHSteady-state5mm}, \ref{fig:pHSteady-state0.5mm} show higher pH value near 
+the reactive wall, and the pH decreases as we go away from the wall. The dissolved calcium-carbonate is diffused along the x-axis 
+which causes the rise in pH adjacent to the reactive wall which fades out as we go away from the wall.
 
 
 \paragraph*{mCO3 contour plots} \mbox{}\\
@@ -413,12 +447,17 @@ Figure \ref{fig:contourpH} shows contour plots for pH at the steady-state in var
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:CO3Steady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of carbonate at the steady-state in an opened-system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of carbonate at the steady-state in an open system}
      \label{fig:contourCO3}
 \end{figure}
 
 
-Figure \ref{fig:contourCO3} shows contour plots for the concentration of \ce{CO3}\textsuperscript{2-} at the steady-state in varying flow-velocities. All the subplots \ref{fig:CO3Steady-state}, \ref{fig:CO3Steady-state5mm}, \ref{fig:CO3Steady-state0.5mm} show a similar pattern: higher concentration near the reactive wall, where dissolution of calcium-carbonate is adding \ce{CO3}\textsuperscript{2-} into the karst water. As we go away from the wall, concentration of \ce{CO3}\textsuperscript{2-} starts to decrease -- the dissolved calcium-carbonate is diffused along the x-axis which causes a formation of concentration gradient along x-axis -- and reaches as far as the diffusion takes it. Had the simulation ran for longer times than for 6000s (the time we ran for this case), the contour would have migrated further to the right. 
+Figure \ref{fig:contourCO3} shows contour plots for the concentration of \ce{CO3}\textsuperscript{2-} at the steady-state in varying 
+flow-velocities. All the subplots \ref{fig:CO3Steady-state}, \ref{fig:CO3Steady-state5mm}, \ref{fig:CO3Steady-state0.5mm} show a similar 
+pattern: higher concentration near the reactive wall, where dissolution of calcium-carbonate is adding \ce{CO3}\textsuperscript{2-} into 
+the karst water. As we go away from the wall, concentration of \ce{CO3}\textsuperscript{2-} starts to decrease -- the dissolved calcium-carbonate 
+is diffused along the x-axis which causes a formation of concentration gradient along x-axis -- and reaches as far as the diffusion takes it. 
+Had the simulation ran for longer times than for 6000s (the time we ran for this case), the contour would have migrated further to the right. 
 
 \paragraph*{mTIC contour plots} \mbox{}\\
 % steady state TIC
@@ -444,11 +483,14 @@ Figure \ref{fig:contourCO3} shows contour plots for the concentration of \ce{CO3
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:TICSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of total inorganic carbon at the steady-state in an opened-system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of total inorganic carbon at the steady-state in an open system}
      \label{fig:contourTIC}
 \end{figure}
 
-Figure \ref{fig:contourTIC} shows contour plots for concentration of Total Inorganic Carbon (TIC) at the steady-state in varying flow-velocities. All the subplots \ref{fig:TICSteady-state}, \ref{fig:TICSteady-state5mm}, \ref{fig:TICSteady-state0.5mm} show the system has more or less come to a steady-state. \ce{CO2} is carried into the system with the flow, which also gets diffused and gets mixed within the system as the time progresses, which causes the concentration to be fairly constant throughout the system. 
+Figure \ref{fig:contourTIC} shows contour plots for concentration of Total Inorganic Carbon (TIC) at the steady-state in varying flow-velocities. 
+All the subplots \ref{fig:TICSteady-state}, \ref{fig:TICSteady-state5mm}, \ref{fig:TICSteady-state0.5mm} show the system has more or less come to 
+a steady-state. \ce{CO2} is carried into the system with the flow, which also gets diffused and gets mixed within the system as the time 
+progresses, which causes the concentration to be fairly constant throughout the system. 
 
 
 \paragraph*{mCa contour plots} \mbox{}\\
@@ -476,16 +518,21 @@ Figure \ref{fig:contourTIC} shows contour plots for concentration of Total Inorg
         \caption{Flow Velocity = 0.5mm/min}
         \label{fig:CaSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
-    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of calcium at the steady-state in an opened-system}
+    \caption{\DuMuX Contour plots: Numerical results that show the distribution of molality of calcium at the steady-state in an open system}
      \label{fig:contourCa}
 \end{figure}
 
-Figure \ref{fig:contourCa} shows contour plots for concentration of Ca\textsuperscript{2+} at the steady-state in varying flow-velocities. All the subplots \ref{fig:CaSteady-state}, \ref{fig:CaSteady-state5mm}, \ref{fig:CaSteady-state0.5mm} show higher concentration near the reactive wall, and the concentration decreases as we go away from the wall. The dissolved calcium-carbonate is diffused along the x-axis which causes the rise in concentration of Ca\textsuperscript{2+} adjacent to the reactive wall which fades out as we go away from the wall.
+Figure \ref{fig:contourCa} shows contour plots for concentration of Ca\textsuperscript{2+} at the steady-state in varying flow-velocities. 
+All the subplots \ref{fig:CaSteady-state}, \ref{fig:CaSteady-state5mm}, \ref{fig:CaSteady-state0.5mm} show higher concentration near the 
+reactive wall, and the concentration decreases as we go away from the wall. The dissolved calcium-carbonate is diffused along the x-axis 
+which causes the rise in concentration of Ca\textsuperscript{2+} adjacent to the reactive wall which fades out as we go away from the wall.
 
 
 \subsection{\DuMuX Simulation results: Closed system}
 \subsubsection*{Different initial pH} \label{ssec:diffinitialpHnoflow}
-The purpose of the simulation runs without flow-velocity was for the validation purpose with \MATLAB results. The initial concentration of \ce{CO2} in the karst water was set to 2.5e-7 [mol/mol]. We did not include grid grading parameters; the initial pH at the start of the simulation were varied.
+The purpose of the simulation runs without flow-velocity was for the validation purpose with \MATLAB results. The initial concentration 
+of \ce{CO2} in the karst water was set to 2.5e-7 [mol/mol]. We did not include grid grading parameters; the initial pH at the start of 
+the simulation were varied.
 
 \begin{figure}[!h]
         \centering
@@ -532,16 +579,21 @@ The purpose of the simulation runs without flow-velocity was for the validation 
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:withoutpHpH}), molality of calcium (\cref{fig:withoutpHmCa}), 
     molality of total inorganic carbon (\cref{fig:withoutpHmTIC}), molality of carbonate (\cref{fig:withoutpHmCO3}) 
-    and rate of dissolution of calcite (\cref{fig:withoutpHrdiss}) in time for different initial pH in a closed-system}
+    and rate of dissolution of calcite (\cref{fig:withoutpHrdiss}) in time for different initial pH in a closed system}
     
     \label{fig:comparisionWithoutDiffInitialpH}
 \end{figure}
 
-The figure \ref{fig:diffInitialpHNoFlow}, for all the sub-plots, shows pH increases as the dissolution advances and after some time it reaches steady-state condition. Unlike a similar scenario with flow-velocity, as shown in figure \ref{fig:comparisionDiffInitialpH}, there is no descend curve. The reasons are: there is no flow-velocity to transport the dissolved calcium-carbonate out of the system, and the karst water is not in contact with the outer environment, hence there is no transport of TIC into the karst water, which means there is no rapid increase in pH and no descend curve, rather pH increases constructively and stabilizes to a steady-state value.
+The figure \ref{fig:diffInitialpHNoFlow}, for all the sub-plots, shows pH increases as the dissolution advances and after some time 
+it reaches steady-state condition. Unlike a similar scenario with flow-velocity, as shown in figure \ref{fig:comparisionDiffInitialpH}, there is no 
+descend curve. The reasons are: there is no flow-velocity to transport the dissolved calcium-carbonate out of the system, and the karst 
+water is not in contact with the outer environment, hence there is no transport of TIC into the karst water, which means there is no rapid 
+increase in pH and no descend curve, rather pH increases constructively and stabilizes to a steady-state value.
 
 
 \subsubsection*{Different Grid grading parameter} \label{ssec:diffGridnoflow}
-We fixed the initial pH in the karst water to 6.0 and the initial concentration of \ce{CO2}  was set to 2.5e-7 [mol/mol]. We decreased the spacing of the grids near the wall in x-direction. We ran the simulation for grid-grading values 1.1 and 1.2. 
+We fixed the initial pH in the karst water to 6.0 and the initial concentration of \ce{CO2}  was set to 2.5e-7 [mol/mol]. We decreased the 
+spacing of the grids near the wall in x-direction. We ran the simulation for grid-grading values 1.1 and 1.2. 
 
 \begin{figure}[!h]
         \centering
@@ -588,14 +640,15 @@ We fixed the initial pH in the karst water to 6.0 and the initial concentration 
     \end{subfigure}%
     \caption{\DuMuX results that show the change in pH (\cref{fig:withoutgridpH}), molality of calcium (\cref{fig:withoutgridmCa}), 
     molality of total inorganic carbon (\cref{fig:withoutgridmTIC}), molality of carbonate (\cref{fig:withoutgridmCO3}) 
-    and rate of dissolution of calcite (\cref{fig:withoutgridrdiss}) in time for different grid grading parameter in a closed-system} 
+    and rate of dissolution of calcite (\cref{fig:withoutgridrdiss}) in time for different grid grading parameter in a closed system} 
     \label{fig:comparisionWithoutDiffgrid}
 \end{figure}
 
-The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the figure \ref{ssec:diffGridnoflow} did not show any differences. The reason is the same as explained in subsection \ref{ssec:diffGrid}.
+The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the figure \ref{ssec:diffGridnoflow} did not show any differences. 
+The reason is the same as explained in subsection \ref{ssec:diffGrid}.
 
 \section{\MATLAB Simulation results}
-\MATLAB Simulation results for a closed-system. 
+\MATLAB Simulation results for a closed system. 
 
 \begin{figure}[!h]
         \centering
@@ -644,7 +697,7 @@ The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the
     \end{subfigure}%
      \caption{\MATLAB results that show the change in pH (\cref{fig:withoutvelpH}), molality of calcium (\cref{fig:withoutvelmCa}), 
      molality of total inorganic carbon (\cref{fig:withoutvelmTIC}), molality of carbonate (\cref{fig:withoutvelmCO3}) 
-     and rate of dissolution of calcite (\cref{fig:withoutvelrdiss}) in time for different initial pH in a closed-system of 2D volume [15mm $\times$ 5mm]}
+     and rate of dissolution of calcite (\cref{fig:withoutvelrdiss}) in time for different initial pH in a closed system of 2D volume [15mm $\times$ 5mm]}
      \label{fig:MATLABcomparisionDiffInitialpH}
 \end{figure}
 
@@ -655,13 +708,15 @@ A comparision between \MATLAB and \DuMuX is presented in this section.
 \small\addtolength{\tabcolsep}{-12pt}
 \centering
 \caption{\DuMuX and \MATLAB comparison table that lists steady-state time, pH, molality of calcium (mCa), 
-molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed-system of size 
+molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 
 15mm$\times$5mm with varying initial pH, reactive area and batch volume}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
-    \thead{Initial \\pH} & \thead{Reactive \\area} & \thead{Batch \\Volume} & \multicolumn{5}{c|}{\thead{Steady-state \MATLAB}} & \multicolumn{5}{c|}{\thead{Steady-state \DuMuX}} \\
+    \thead{Initial \\pH} & \thead{Reactive \\area} & \thead{Batch \\Volume} & \multicolumn{5}{c|}{\thead{Steady-state \MATLAB}} & 
+    \multicolumn{5}{c|}{\thead{Steady-state \DuMuX}} \\
     \cline{4-13}
-    & & & \thead{time} & \thead{pH} & \thead{mCa}      & \thead{mTIC}     & \thead{mCO3}     & \thead{time} & \thead{pH} & \thead{mCa}      & \thead{mTIC}     & \thead{mCO3}\\
+    & & & \thead{time} & \thead{pH} & \thead{mCa}      & \thead{mTIC}     & \thead{mCO3}     & \thead{time} & \thead{pH} & \thead{mCa}      
+    & \thead{mTIC}     & \thead{mCO3}\\
     & mm & \ce{mm^2} &  [s]  & [-] & [mol/kg] & [mol/kg] & [mol/kg] & [s] & [-]   & [mol/kg] & [mol/kg] & [mol/kg]\\
     \hline
     % initial pH   Reactive area Batch Volume time pH mCa mTIC mCO3 time pH mCa mTIC mCO3
@@ -734,7 +789,7 @@ molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a
     \caption{Comparison: \DuMuX and \MATLAB results that show the change in pH (\cref{fig:dvmpH6pH}), 
     molality of calcium (\cref{fig:dvmpH6mCa}), molality of total inorganic carbon (\cref{fig:dvmpH6mTIC}), 
     molality of carbonate (\cref{fig:dvmpH6mCO3}) and rate of dissolution of calcite (\cref{fig:dvmpH6rdiss}) 
-    in time for initial pH 6.0 in a closed-system of 2D volume [15mm $\times$ 5mm]} 
+    in time for initial pH 6.0 in a closed system of 2D volume [15mm $\times$ 5mm]} 
     \label{fig:comparisionDumuxMatlab_pH6.0}
 \end{figure}
 

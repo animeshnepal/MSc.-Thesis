@@ -21,7 +21,7 @@ These phases may comprise several chemical components or just one chemical compo
 The model discussed in this thesis has one phase i.e., the liquid phase, and three components i.e., \ce{H2O, CO2} and calcium.
 
 \section{Continuity equation}
-For each component i.e., $\kappa$ $\in$ \{ \ce{H2O, CO2}, calcium\}, the continuity equation/mass balance equation is defined as:
+For each component i.e., $\kappa$ $\in$ \{ \ce{H2O}, TIC, calcium\}, the continuity equation/mass balance equation is defined as:
 \begin{equation}\label{eq:contiEq} % Give a unique label
  \frac{\partial (\rho \mathrm{X}\textsuperscript{$\kappa$})}{\partial t} 
  + \nabla\cdot(\rho\textbf{v}\mathrm{X}\textsuperscript{$\kappa$} - \mathrm{D}\textsuperscript{$\kappa$}\rho\nabla 
@@ -29,22 +29,22 @@ For each component i.e., $\kappa$ $\in$ \{ \ce{H2O, CO2}, calcium\}, the continu
 \end{equation}
 where:
 \begin{itemize}
-\item $\rho$, density of the fluid dependent on concentration of CO\textsubscript{2} and calcium, and other cave minerals [kg/m\textsuperscript{3}]
-\item X\textsuperscript{$\kappa$}, mass fraction of each component i.e.,\{ \ce{H2O, CO2}, calcium\} [-]
+\item $\rho$, density of the fluid dependent on concentration of TIC and calcium, and other cave minerals [kg/m\textsuperscript{3}]
+\item X\textsuperscript{$\kappa$}, mass fraction of each component i.e.,\{ \ce{H2O}, TIC, calcium\} [-]
 
 \item \textbf{v} = [u, v, w]\textsuperscript{T}, the velocity vector [m/s]
 
 \item D, binary diffusion coefficient [\ce{m^2}/s]
 
-\item Q, source/sink term, which accounts for \ce{CO2} and calcium [kg/m\textsuperscript{3}s]\\
+\item Q, source/sink term, which accounts for TIC and calcium [kg/m\textsuperscript{3}s]\\
 The term comes from the chemical reaction on the surface of the wall. It is defined and described in section \ref{sec:reactivesource}.
 
 \end{itemize}
 The density of water increases slightly with the dissolution of \ce{CO2} \cite{garcia2001density} and calcite 
 \cite{zhao2015solubility}. Although the pressure we are interested in is fairly low (1 atm) compared to the pressures 
 in \cref{fig:DensityH2OCO2}, we can imply that the density of \ce{H2O-CO2} system will increase as more \ce{CO2} is added into the karst water. \\
-For the modeling purpose, we set the density of water to be the density of \ce{H2O-CO2-calcium} system as we did not consider 
-the density change due to the addition of \ce{CO2} and calcium into the aqueous solution, making it less sophisticated and comparable 
+For the modeling purpose, we set the density of \ce{H2O-TIC-calcium} system to be the density of water as we did not consider 
+the density change due to the addition of TIC and calcium into the aqueous solution due to dissolution of calcite, making it less sophisticated and comparable 
 with the \MATLAB results. We are interested in developing a 2D model of size 5mm $\times$ 15mm that implements calcite dissolution as a source/sink term, 
 so the employed limitations will have negligible influence, if any, in altering the rate of dissolution and steady-state concentrations. \\
 
@@ -132,14 +132,14 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
     where $v_t$, $v_n$ are the tangential and normal components of the velocity.
     
 \end{itemize}
-The implementation of boundary conditions is presented in \cref{chapter:modelconcept}.
+The implementation of boundary conditions is presented in \cref{chapter:numericalmodel}.
 
 \section{Reactive source and sink terms}\label{sec:reactivesource} The source and sink terms account for total inorganic carbon 
 (\ce{CO2}, \ce{H2CO3}, \ce{CO3^{2-}}, and \ce{HCO3^{-}}) and calcium. 
 There could be several other cave minerals, but the scope of this thesis is limited to calcite. \\
-We assumed abundant calcite in our model -- and for an opened system, \cref{chapter:numericalmodel}, 
+We assumed abundant calcite in our model -- and for an open system, \cref{chapter:numericalmodel}, 
 the base-flow is further carrying the dissolved calcite out of the domain -- so that the aqueous phase is always under-saturated with 
-calcium in both opened (with a base-flow) and closed (without a base-flow) systems. Therefore, we neglect the precipitation rate. 
+calcium in both open (with a base-flow) and closed (without a base-flow) systems. Therefore, we neglect the precipitation rate. 
 The rate of calcite dissolution determines the source terms calcium ($\ce{q^{Ca}}$), and total inorganic carbon (\ce{q^{TIC}}).
 
 \begin{equation}\label{CalciumDiss}
@@ -194,10 +194,10 @@ carbonate (\ce{m^{\ce{CO3^{2-}}}}) see \cref{eq:rDiss,eq:omega}, but carbonate d
 molality of hydrogen ion, \cref{fig:dissKinetics}. At the beginning, when there is no calcium in the solution, the rate of dissolution is at the highest. 
 Carbonic-acid is the fuel for calcite dissolution, and it's being used up during dissolution. 
 If the used-up carbonic-acid is not replenished, calcite dissolution comes to naught after carbonic-acid ceases to exist in the solution. 
-Such is the case with closed-systems where the initial dissolution potential is never replenished. In an opened-system, though, replenishment of 
+Such is the case with closed systems where the initial dissolution potential is never replenished. In an open system, though, replenishment of 
 carbonic-acid occurs as the fingers of \ce{CO2} protruding into the karst water enriches the water with carbonic-acid. Hence, there is a constant 
-rate of dissolution at the steady-state in an opened-system. Steady-state depends on several factors such as flow-velocity -- if it's an opened 
-system -- initial pH and TIC of the solution, and amount of \ce{CO2} above the epiphreatic karst water table -- if it's an opened system -- which will be 
+rate of dissolution at the steady-state in an open system. Steady-state depends on several factors such as flow-velocity -- if it's an open 
+system -- initial pH and TIC of the solution, and amount of \ce{CO2} above the epiphreatic karst water table -- if it's an open system -- which will be 
 discussed in  the subsequent chapters. \\
 
 \begin{figure}

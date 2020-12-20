@@ -18,7 +18,7 @@ calcite dissolution model we envisaged without the overhead of \DuMuX.
 to calculate the rate of calcite dissolution; and the steady-state concentration of hydrogen (pH), carbonate and bicarbonate, 
 calcium, and total inorganic carbon. we considered batch volume approach having only one cell of size [5mm$\times$15mm], 
 the same model size as in \DuMuX , which would make the dissolved products instantly mix throughout the domain as 
-the dissolution proceeds. In \MATLAB we solved for a closed-system without outflow or inflow of calcium, \ce{CO2} and water. 
+the dissolution proceeds. In \MATLAB we solved for a closed system without outflow or inflow of calcium, \ce{CO2} and water. 
 We set an initial concentration of total inorganic carbon throughout the domain and started the simulation with an initial pH. 
 We varied the initial pH, as mentioned in \cref{tab:scenarios}, to understand its dependency on the rate of dissolution and 
 steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC). The results that we got from \MATLAB were 
@@ -27,8 +27,8 @@ one cell of size [5mm$\times$15mm] in \DuMuX to mimic the batch volume approach 
 to be identical from the \MATLAB and \DuMuX models with these setups. \\
 
 \paragraph*{\DuMuX} In \DuMuX, continuity equation \ref{eq:contiEq} was solved together with the source and sink terms accounting for 
-TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed-system; 
-flow-velocity, if it's an opened-system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an opened-system; and grid grading 
+TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed system; 
+flow-velocity, if it's an open system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an open system; and grid grading 
 parameter (\ref{chapter:results}) -- were set up in \DuMuX as illustrated in \cref{tab:scenarios}. 
 \begin{enumerate}
     \item Closed System: To make a plausible comparison with the \MATLAB results, the top and bottom boundary 
@@ -37,7 +37,7 @@ parameter (\ref{chapter:results}) -- were set up in \DuMuX as illustrated in \cr
     were varied to understand its dependency on the rate of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC).\\
     Grid grading parameter was also varied, a different setup which was not considered in comparing the results with 
     \MATLAB (\MATLAB only has one cell), but the system was still closed having 10 grids in x-direction and 20-grids in y-direction. 
-    \item Opened system: Neumann no-flow boundary conditions were lifted, the number of grids is 10 in x-direction and 20 in y-direction, 
+    \item Open system: Neumann no-flow boundary conditions were lifted, the number of grids is 10 in x-direction and 20 in y-direction, 
     and  protruding \ce{CO2} fingers into the karst water were set to model cave scenario. Initial pH, flow-velocity/velocity of fingers, \ce{CO2} 
     concentration above the epiphreatic karst water table and grid grading parameter were varied to understand its dependency on the rate 
     of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium and TIC).
@@ -174,9 +174,11 @@ $\mathrm{m^{Ca^{2+}}} = \mathrm{m^{Ca^{2+}}} + \frac{\Delta\mathrm{m^{Ca^{2+}}}}
 \section{Implementation in \DuMuX}\label{ssec:impdum}
 The numerical simulator \DuMuX helps us to solve complex differential equations as we encounter in free/porous medium flow. 
 We use the \textit{freeflow Navier-Stokes model} in \DuMuX and employ \textit{h2oco2calcium} fluid system. 
-The fluid-system had one phase (liquid phase) and three components (\ce{H2O, CO2, calcium}). We only considered the density 
+The fluid-system had one phase (liquid phase) and three components (\ce{H2O, TIC, calcium}). We only considered the density 
 of water in calculating the density of the fluid. We also switched-off the gravity and we assumed a constant hydro-static pressure 
-throughout the domain. Although for modeling bigger geological systems, gravity cannot be switched off as there 
+throughout the domain of size [5mm $\times$ 15mm]. Given the size of the domain, assuming a constant hydro-static pressure was 
+a reasonable assumption, as this made the model less sophisticated to implement the reactive source and sink terms, which was our 
+primary goal. Nevertheless, for modeling bigger geological systems, gravity cannot be switched off as there 
 will be a significant rise in the pressure as the depth increases.\\
 We used a staggered-grid, finite volume method for solving primary variables in every control volume. 
 All equations are solved implicitly using Newton solver. The Newton solver adapts 
@@ -189,10 +191,10 @@ terms of mole fraction, as well as, the velocity vector were selected as primary
 
 \subsection*{Boundary conditions} 
 The velocity vector ($\mathbf{v}$), pressure (p) and the concentrations of TIC and calcium are set to Dirichlet values; 
-and \ce{H2O}, TIC and calcium fluxes are set to Neumann values in the NS-model. We had two setups in \DuMuX i.e., opened 
-and closed-systems, and boundary conditions were different for these two setups.
+and \ce{H2O}, TIC and calcium fluxes are set to Neumann values in the NS-model. We had two setups in \DuMuX i.e., open 
+and closed systems, and boundary conditions were different for these two setups.
 
-\paragraph*{Opened system} \mbox{} \\
+\paragraph*{Open system} \mbox{} \\
 
 As shown in \cref{fig:OpenedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y directions 
 and concentration of TIC and calcium. For the left boundary, we assumed no-slip condition as we set Dirichlet condition for 
@@ -202,8 +204,8 @@ at the right boundary instead of assigning identical boundary conditions as to t
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\textwidth]{PICTURES/open_system.jpg}
-    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in an opened-system}
+    \includegraphics[width=0.75\textwidth]{PICTURES/opened_system.jpg}
+    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in an open system}
     \label{fig:OpenedSystem}       % Give a unique label
 \end{figure}
 
@@ -211,25 +213,25 @@ at the right boundary instead of assigning identical boundary conditions as to t
 \paragraph*{Closed system} \mbox{} \\
 As shown in \cref{fig:ClosedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y direction and 
 Neumann no-flow for TIC and calcium fluxes. For the left boundary, we assumed no-slip condition -- similar 
-to the opened-system -- as we set Dirichlet condition for velocities and Neumann condition for TIC and calcium fluxes. On the 
+to the open system -- as we set Dirichlet condition for velocities and Neumann condition for TIC and calcium fluxes. On the 
 bottom boundary, we set Dirichlet condition for pressure and Neumann no-flow for TIC and calcium fluxes. 
-We also set symmetric property at the right boundary -- again, similar to the opened-system. Hence, the only difference between 
+We also set symmetric property at the right boundary -- again, similar to the open system. Hence, the only difference between 
 these two setups was the top and bottom boundary conditions. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\textwidth]{PICTURES/closed_system.jpg}
-    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in a closed-system}
+    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in a closed system}
     \label{fig:ClosedSystem}       % Give a unique label
 \end{figure}
  
 
 \subsection*{Source/Sink term} A function, \code{reactionSource()}, was implemented which calculates the added concentration of 
-TIC and calcium into the solution because of the dissolution of calcite. On the one hand addition of \ce{CO2} in karst water in an opened-system 
-will reduce the pH, on the other hand addition of carbonic acid replenishes the dissolution potential of the karst water used up  
-during dissolution, thereby sustaining dissolution of calcite forming carbonates and bicarbonates which will increase the pH. 
+TIC and calcium into the solution because of the dissolution of calcite. On the one hand addition of \ce{CO2} in karst water in an open system 
+reduces the pH, on the other hand addition of carbonic acid replenishes the dissolution potential of the karst water used up  
+during dissolution, thereby sustaining dissolution of calcite forming carbonates and bicarbonates which increases the pH. 
 Therefore, steady-state is expected to be dependent on the flow-velocity with which \ce{CO2} is being carried into the karst water 
-and adjusted to new acidity and consequence alkalinity. Unlike an opened-system, carbonic acid in a closed-system does not get 
+and adjusted to new acidity and consequence alkalinity. Unlike an open system, carbonic acid in a closed system does not get 
 replenished; hence, the rate of dissolution would come to naught at the steady-state. 
 
 
@@ -254,18 +256,18 @@ shows further implementations in \DuMuX.
 
 \node (func1) [predefinedprocess] {\code{reactionSource} function};
 
-\node (pro1) [process, below of=func1, yshift=-0.0cm] {extract pH stored in its vector and calculate \[\mathrm{m^{H^+} = 10^{-pH}}\]};
+\node (pro1) [process, below of=func1, yshift=-0.0cm] {Extract pH stored in its vector and calculate \[\mathrm{m^{H^+} = 10^{-pH}}\]};
 
-\node (pro2) [process, below of=pro1, yshift=-0.5cm] {retrieve the values $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ from volume variables};
+\node (pro2) [process, below of=pro1, yshift=-0.5cm] {Retrieve the values $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ from volume variables};
 
-\node (pro3) [process, below of=pro2, yshift=-0.5cm] {calculate Calculate $\mathrm{m^{CO_3^{2-}}}$ = $\frac{\ce{m^{TIC}}}
+\node (pro3) [process, below of=pro2, yshift=-0.5cm] {Calculate $\mathrm{m^{CO_3^{2-}}}$ = $\frac{\ce{m^{TIC}}}
 {\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,2}}}}$};
 
 \node (pro4) [process, below of=pro3, yshift=-0.8cm] {Calculate Omega = $\mathrm{m^{Ca^{2+}}}$ * $\mathrm{m^{CO_3^{2-}}}$/$\mathrm{K_{sp}}$.};
 
-\node (pro5) [process, below of=pro4, yshift=-0.3cm] {initialize \ce{r_{diss}} = 0};
+\node (pro5) [process, below of=pro4, yshift=-0.3cm] {Initialize \ce{r_{diss}} = 0};
 
-\node (dec1) [decision, below of=pro5, yshift=-1cm] {if Omega $<$ 1.0};
+\node (dec1) [decision, below of=pro5, yshift=-1cm] {If Omega $<$ 1.0};
 
 \node (pro6) [process, right of=dec1, xshift=5cm] {$\mathrm{r_{diss}}$ = $\mathrm{k_{diss,1} * m^{H^+} * k_{diss,2} * (1 - Omega)}$.};
 
@@ -292,8 +294,8 @@ shows further implementations in \DuMuX.
 
 \node (conn2) [connector, right of=conn1, xshift=5cm] {B};
 
-\node (pro2) [process, below of=conn1, yshift=-1.0cm] {calculate the concentrations of H\textsubscript{2}O, CO\textsubscript{2}, and calcium 
-\[\code{q[conti0EqIdx] += 0}\] \[\code{q[transportCO2EqIdx]} -= \ce{r_{diss}}\] \[\code{q[transportCalciumEqIdx]} -= \ce{r_{diss}}.\]};
+\node (pro2) [process, below of=conn1, yshift=-1.0cm] {Calculate the source terms for TIC and calcium.
+\[\ce{q^{TIC}} \code{ += } \ce{r_{diss}},\] \[\ce{q^{\ce{Ca}}} \code{ += } \ce{r_{diss}}.\]};
  
 % lines
 \path [line] (conn1) -- (pro2);
