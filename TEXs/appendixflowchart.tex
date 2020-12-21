@@ -2,7 +2,7 @@
 \thispagestyle{empty}
 
 
-\section{Flow chart that shows the main program flow}
+\section{Flowchart that shows the main program flow in \DuMuX}
 \centering
 \begin{tikzpicture}[node distance=1.7cm]
 
@@ -14,19 +14,16 @@
 
 \node (in1)[io, below of=pro12] {Import time loop parameters: tEnd, maxDt and dt};
 
-\node (pro1)[process, below of=in1,yshift=-0.5cm] {Add fields such as \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} for the output in the vtk file};
+\node (pro1)[process, below of=in1,yshift=-0.5cm] {Add fields in the output file for pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, 
+$\mathrm{r_{diss}}$, and Omega to visualize later in Paraview};
 
-\node (pro2)[process, below of=pro1,yshift=-1.0cm] {Initialize two csv file streams (\code{fout} and \code{fnormout}) for normalized and actual simulation time having above mentioned variables as their columns};
+\node (pro2)[process, below of=pro1,yshift=-1.0cm] {Initialize a file stream to save the above values to get a time series plot};
 
-\node (pro3)[process, below of=pro2,yshift=-1.0cm] {Initialize \code{time} variable that keeps track of the total time elapsed in the simulation};
-
-\node (pro4)[process, below of=pro3,yshift=-0.7cm] {Initialize \code{normTimeFlag} to \code{true} which checks for normalized pH value, which in this case set to 7.0 };
-
-\node (func1) [predefinedprocess, below of=pro4, yshift=-1.0cm] {call \code{setValues} function which calculates and sets \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} throughout the domain in a given time step};
-
-
+\node (func1) [predefinedprocess, below of=pro2, yshift=-1.0cm] {call \code{setValues} function which calculates and saves pH, 
+$\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$, and Omega in their respective vectors};
 
 \node (conn1)[connector, below of=func1, yshift=-1.0cm] {A};
+
 \node (conn2)[connector, right of=conn1, xshift=5cm] {B};
  
 % lines
@@ -35,93 +32,59 @@
 \path [line] (pro12) -- (in1);
 \path [line] (in1) -- (pro1);
 \path [line] (pro1) -- (pro2);
-\path [line] (pro2) -- (pro3);
-\path [line] (pro3) -- (pro4);
-\path [line] (pro4) -- (func1);
+\path [line] (pro2) -- (func1);
 \path [line] (func1) -- (conn1);
-\path [line] (conn2) |- (0,-16.3);
+\path [line] (conn2) |- (func1);
 \end{tikzpicture}
 
 
 \begin{tikzpicture}[node distance=2cm]
+
 \node (conn2)[connector] {A};
-\node (func4) [predefinedprocess, below of=conn2, yshift=-1.0cm] {Solve the continuity equation \[\frac{\partial (X\textsuperscript{$\kappa$})}{\partial t} 
- + \nabla\cdot(\textbf{v}X\textsuperscript{$\kappa$} - D\textsuperscript{$\kappa$}\nabla X\textsuperscript{$\kappa$}) = q\]; call \code{reactionSource} function to add source and sink terms};
-\node (conn3)[connector, right of=conn2, xshift=7cm] {B};
-\node (func2) [predefinedprocess, below of=func4, yshift=-1.0cm] {retrieve the value of pH Vector by calling \code{getpH} function};
 
-\node (dec1) [decision, below of=func2, yshift=-1.5cm]{If \code{pH} $>$ 7.0 \&\& \code{normTimeFlag}};
+\node (func4) [predefinedprocess, below of=conn2, yshift=-1.0cm] {Solve the governing equations; call \code{reactionSource} 
+function to add source/sink terms (only for the cells at the boundary)};
 
-\node (pro5)[process, right of=dec1,xshift=4cm, text width=4cm] { set \code{normTimeFlag} to \code{false} and note the \code{time}};
+\node (conn3)[connector, right of=conn2, xshift=5cm] {B};
 
-\node (pro6)[process, below of=dec1, yshift=-1.7cm] {retrieve values of \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} by calling respective getter function};
+\node (pro6)[process, below of=func4, yshift=-1.7cm] {get values of pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, 
+$\mathrm{r_{diss}}$, and Omega by calling their respective getter function};
 
-\node (pro7)[process, below of=pro6] { write the output values to a vtk file};
+\node (pro7)[process, below of=pro6] { write the output values to a file};
 
-\node(pro8) [process, below of=pro7] {update the \code{time} variable};
+\node(dec2) [decision, below of=pro7, yshift=-2.0cm, text width= 4.2cm] {check for the end of simulation};
 
-\node (conn4)[connector, below of=pro8] {C};
+\node(pro9) [process, below of=dec2, yshift=-2.0cm] {close the file stream};
 
-\node (conn4a)[connector, right of=conn4, xshift=7cm] {B};
+\node(end)[startstop, below of=pro9] {End};
 
 \path [line] (conn2) -- (func4);
-\path [line] (func4) -- (func2);
-\path [line] (func2) -- (dec1);
-\path [line] (dec1) -- node[anchor=south]{yes} (pro5);
-\path [line] (dec1) -- node[anchor=east]{no} (pro6);
-\path [line] (pro5.south) |- (0,-11.9);
+\path [line] (func4) -- (pro6);
 \path [line] (pro6) -- (pro7);
-\path [line] (pro7) -- (pro8);
-\path [line] (pro8) -- (conn4);
-\path [line] (conn4a) -- (conn3);
+\path [line] (pro7) -- (dec2);
+\path [line] (dec2) -- (pro9);
+\path [line] (pro9) -- (end);
+\path [line] (dec2) -| node[xshift=-0.5cm, yshift=0.3cm]{no} (conn3);
 \end{tikzpicture}
 
 
-
-\centering
-\begin{tikzpicture}[node distance=2cm]
-\node (conn5)[connector] {C};
-\node (conn5a)[connector, right of=conn5, xshift=5cm] {B};
-\node(dec2) [decision, below of=conn5, yshift=-2.0cm, text width= 4.2cm] {check for \code{timeLoop->finished()}?};
-
-\node(pro9) [process, below of=dec2, yshift=-2.0cm] {close filestream \code{fout}};
-\node(pro10) [process, below of=pro9] {open the filled table \code{tableDUMUX.csv} which has \code{Time}, \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} as its column entries};
-
-\node(pro11) [process, below of=pro10, yshift=-1.2cm] {Divide the time entries in the column \code{Time} by the value \code{normTime} to get the normalized time and assign the values back to filestream \code{fnormout} which will save the values in \code{normTableDUMUX.csv}};
-
-\node (process) [process, below of=pro11, yshift=-1cm] {close filestream \code{fnormout}};
-
-\node(end)[startstop, below of=process] {End};
-
-% lines
-
-\path [line] (conn5) -- (dec2);
-\path [line] (dec2) -| node[xshift=-0.5cm, yshift=0.3cm]{no} (conn5a);
-\path [line] (dec2) -- node[anchor=east]{yes} (pro9);
-\path [line] (pro9) -- (pro10);
-\path [line] (pro10) -- (pro11);
-\path [line] (pro11) -- (process);
-\path [line] (process) -- (end);
-
-\end{tikzpicture}
-
-\section{Flow chart for Initial and Boundary conditions}
+\section{Flowchart for Initial and Boundary conditions in \DuMuX}
 \begin{tikzpicture}[node distance=2cm]
 \node (func1) [predefinedprocess] {Initial and Boundary conditions};
 
 \node (dec1) [decision, below of=func1, yshift=-1.5cm, text width= 2.6cm] {if \code{onTopBoundary}?};
 \node (pro1) [description, right of=dec1, xshift=5cm] {set Dirichlet conditions for velocities};
-\node (dec2) [decision, below of=pro1, yshift=-0.8cm, text width = 2cm] {if \code{!NOFLOW}?};
-\node (pro2) [description, below of=dec2, yshift=-0.8cm] {set Dirichlet conditions for Calcium and C0\textsubscript{2} concentrations};
-\node (pro3) [description, right of=dec2, xshift=2.0cm, text width= 3.0cm] {set Neumann no flow for Calcium and C0\textsubscript{2} fluxes};
+\node (dec2) [decision, below of=pro1, yshift=-0.8cm, text width = 2cm] {if Open system?};
+\node (pro2) [description, below of=dec2, yshift=-0.8cm] {set Dirichlet conditions for calcium and TIC concentrations};
+\node (pro3) [description, right of=dec2, xshift=2.0cm, text width= 3.0cm] {set Neumann no flow for calcium and TIC fluxes};
 \node (return1) [description, below of=pro2,text width= 3.0cm] {return \code{values}};
 
 
 \node (dec3) [decision, below of=dec1, yshift=-8cm, text width= 3.2cm] {if \code{onBottomBoundary}?};
 \node (pro4) [description, right of=dec3, xshift=5cm] {set Dirichlet conditions for pressure};
-\node (dec4) [decision, below of=pro4, yshift=-0.8cm, text width = 2cm] {if \code{!NOFLOW}?};
-\node (pro5) [description, below of=dec4, yshift=-0.8cm] {set Outflow for Calcium and C0\textsubscript{2} fluxes};
-\node (pro6) [description, right of=dec4, xshift=2.0cm, text width= 3.0cm] {set Neumann no flow for Calcium and C0\textsubscript{2} fluxes};
+\node (dec4) [decision, below of=pro4, yshift=-0.8cm, text width = 2cm] {if Open system?};
+\node (pro5) [description, below of=dec4, yshift=-0.8cm] {set Outflow for calcium and TIC fluxes};
+\node (pro6) [description, right of=dec4, xshift=2.0cm, text width= 3.0cm] {set Neumann no flow for calcium and TIC fluxes};
 \node (return2) [description, below of=pro5, text width= 3.0cm] {return \code{values}};
 
 \node (conn1) [connector, below of=dec3, yshift=-6cm] {A};
@@ -151,7 +114,8 @@
 \node (conn1) [connector] {A};
 \node (dec1) [decision, below of=conn1, text width= 2.8cm, yshift=-1.0cm] {if \code{onLeftBoundary}?};
 \node (pro1) [description, right of=dec1, xshift=6cm] {set Dirichlet conditions for velocities};
-\node (func1) [predefinedprocess, below of=pro1, text width=5cm, yshift=-0.5cm] {set Neumann conditions for Calcium and C0\textsubscript{2} fluxes by calling \code{reactionSource} function};
+\node (func1) [predefinedprocess, below of=pro1, text width=5cm, yshift=-0.5cm] {set Neumann conditions for calcium and TIC 
+fluxes by calling \code{reactionSource} function};
 \node (return1) [description, below of=func1, text width= 3.0cm, yshift=-0.5cm] {return \code{values}};
 
 \node (dec2) [decision, below of=dec1, yshift=-5.0cm, text width= 3.0cm] {if \code{onRightBoundary}?};
@@ -174,38 +138,44 @@
 \end{tikzpicture}
 
 \clearpage
-\section{Flow chart for {\fontfamily{pcr}\selectfont \textbf{setValues}} \& {\fontfamily{pcr}\selectfont\textbf{calculateValues\_}} functions}
+\section{Flowchart for setValues \& calculateValues\_ functions in \DuMuX}
 % \caption {Flow chart for \code{setValues} and \code{calculateValues\_} functions}
 \begin{tikzpicture}[node distance = 2cm, auto]
     % Place nodes
     \node [cloud] (init) {\code{setValues} function};
     
-    \node [block, below of=init, yshift=-0.5cm] (identify) {Loop over all the \code{scv}};
+    \node [block, below of=init, yshift=-0.5cm] (identify) {Loop over all control volumes};
     
-    \node [cloud, below of=identify, yshift=-1.2cm] (evaluate) {call \code{calculateValues\_} function, which calculates \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} in a given time for the \code{scv}};
+    \node [cloud, below of=identify, yshift=-1.2cm] (evaluate) {call \code{calculateValues\_} function that calculates 
+    pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, 
+    $\mathrm{r_{diss}}$, and Omega , store in a vector and return it};
     
     \node [cloud, right of=evaluate, xshift=6cm, yshift = 5.8cm] (expert) {\code{calculateValues\_()} function};
-    \node [block, below of=expert] (pro1) {initialize \code{mCa} by extracting values from \code{pHValues\_} vector using index \code{scv.dofIndex()}};
+    \node [block, below of=expert] (pro1) {Extract pH stored in its vector and calculate \[\mathrm{m^{H^+} = 10^{-pH}}\]};
     
-    \node [block, below of=pro1, yshift=-0.8cm](pro2) {retrieve the values \code{mCa, mTIC} from \code{volVars} using \code{molefraction} member function and convert the value to molality by calling \code{moleFracToMolality\_} function};
+    \node [block, below of=pro1, yshift=-0.8cm](pro2) {Get the values $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ 
+    from \code{volVars} and convert it to molality};
     
-    \node[block, below of=pro2, yshift=-1cm] (pro3) {call \code{localNewton\_} function to solve for \code{mH} from a non-linear equation in \code{mH}. The new value of \code{mH} would be the value for the current time step};
+    \node[block, below of=pro2, yshift=-1cm] (pro3) {call \code{brentAlgorithm\_} function to solve charge balance 
+    equation (\ref{eq:chargebalfinal}) for $\mathrm{m^{H^+}}$};
     
-    \node[block, below of=pro3, yshift=-0.5cm] (pro4) {calculate \code{mCO3}\[  = \frac{mTIC}{\frac{mH^2}{k1*k2} + \frac{mH}{k2} + 1}\]};
+    \node[block, below of=pro3, yshift=-0.5cm] (pro4) {Calculate $\mathrm{m^{CO_3^{2-}}}$ = $\frac{\ce{m^{TIC}}}
+    {\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,2}}}}$};
     
-    \node[block, below of=pro4, yshift=-0.5cm] (pro5) {calculate \code{Omega} = \[\frac{mCa * mCO3}{Ksp}\]};
+    \node[block, below of=pro4, yshift=-0.5cm] (pro5) {Calculate Omega = $\mathrm{m^{Ca^{2+}}}$ * $\mathrm{m^{CO_3^{2-}}}$/$\mathrm{K_{sp}}$.};
     
-    \node[block, below of=pro5, yshift=0cm] (pro6){initialize \code{rdiss} = 0};
+    \node[block, below of=pro5, yshift=0cm] (pro6){Initialize \ce{r_{diss}} = 0};
     
-    \node[decision, below of=pro6, yshift=-1cm] (dec1) {if \code{Omega} $<$ 1.0};
+    \node[decision, below of=pro6, yshift=-1cm] (dec1) {If Omega $<$ 1.0};
     
-    \node[block, left of=dec1, xshift=-7cm] (pro7) {\code{rdiss} = (\code{kdiss1 * mH + kdiss2) * (1-Omega)}};
+    \node[block, left of=dec1, xshift=-7cm] (pro7) {$\mathrm{r_{diss}}$ = $\mathrm{k_{diss,1} * m^{H^+} + k_{diss,2} * (1 - Omega)}$.};
     
-    \node[block, below of=dec1, yshift=-2.0cm] (pro8){initialize and resize \code{returnVector} to 6};
+    \node [block, below of=pro7, yshift=-1.5cm] (pro9) {return pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, 
+    $\mathrm{r_{diss}}$, and Omega};
     
-    \node [block, left of=pro8, xshift=-7cm] (pro9) {assign the calculated values \code{pH}, \code{mCa}, \code{mTIC}, \code{mCO2}, \code{rdiss} and \code{Omega} to the \code{returnVector} and return the the vector};
-    
-    \node [block, below of=evaluate, node distance=3.5cm] (decide) {extract the values from the \code{returnVector} and save it in its respective index inside vectors using \code{dofIndex()} member function};
+    \node [block, below of=evaluate, node distance=3.5cm] (decide) {extract the values from the returned vector and save it in 
+    their respective vectors};
+
     % path edges
     \path [line] (init) -- (identify);
     \path [line] (identify) -- (evaluate);
@@ -218,10 +188,9 @@
     \path [line] (pro4) -- (pro5);
     \path [line] (pro5) -- (pro6);
     \path [line] (pro6) -- (dec1);
-    \path [line] (dec1) -- node[anchor=west] {no} (pro8);
-    \path [line] (pro8) -- (pro9);
+    \path [line] (dec1) |- node[anchor=west] {no} (pro9);
+    \path [line] (pro7) -- (pro9);
     \path [line] (dec1) -- node[anchor=south]{yes} (pro7);
-    \path [line] (pro7.south)  |-  (8cm,-20cm);
 \end{tikzpicture}
 
 

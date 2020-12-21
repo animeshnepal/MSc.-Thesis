@@ -4,7 +4,7 @@
 This chapter deals with the terms' definition and governing equations used in the model that was 
 implemented in the numerical simulator \DuMuX. It also explains the mathematical model 
 in implementing reactive source and sink terms in \DuMuX and \MATLAB. The conservation of mass and momentum equations, 
-and the governing chemical kinetics in the implemented numerical method, together with the boundary 
+and the governing chemical kinetics in the implemented numerical method together with the boundary 
 and initial conditions that are necessary to solve the differential equations are explained in this chapter. 
 
 \section{Introduction}
@@ -18,7 +18,7 @@ diffusion, and sources/sinks within the control volume.
 \section{Phases and components}
 A phase is defined as the continuous region in space where the fluid properties such as density, viscosity, etc., are uniform. 
 These phases may comprise several chemical components or just one chemical component mixing and forming a homogeneous region. 
-The model discussed in this thesis has one phase i.e., the liquid phase, and three components i.e., \ce{H2O, CO2} and calcium.
+The model discussed in this thesis has one phase i.e., the liquid phase, and three components i.e., \ce{H2O, TIC} and calcium.
 
 \section{Continuity equation}
 For each component i.e., $\kappa$ $\in$ \{ \ce{H2O}, TIC, calcium\}, the continuity equation/mass balance equation is defined as:
