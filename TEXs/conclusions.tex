@@ -1,44 +1,36 @@
 \chapter{Conclusions} \label{chapter:conclusions}
 \thispagestyle{empty}
-We were able to develop a numerical model in \DuMuX that accounts for calcite dissolution 
-in cave surfaces as a source/sink term in the Navier-Stokes model. \\
+We developed a numerical model in \DuMuX, also validated successfully with \MATLAB, that accounts for calcite dissolution 
+in cave surfaces as a source/sink term in the Navier-Stokes model. The numerical 
+comparison between \DuMuX and \MATLAB shows very good consistency.\\
 
+We saw in chapter \ref{chapter:results} that the rate of calcite dissolution, pH and the 
+concentration of $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$ strongly depends on 
+flow-velocity and the concentration gradient between the region above and below the epiphreatic karst water table that 
+acts as the limiting factors for karstification. \\
 
-Numerical comparison between \DuMuX and \MATLAB shows a satisfactory consistency, especially
-during initial few time steps. The numerical solvers used to solve the non-linear equation was
-different: we used \code{vpasolve} function in \MATLAB and Newton-Raphson algorithm in \DuMuX. 
-Not only that but also the concept to consider the domain size was different. We used a batch 
-volume in \MATLAB where the mixing would happen instantly as the dissolution proceeds -- we only 
-had a single cell, whereas in \DuMuX it is influenced by the diffusion of dissolved calcium-carbonate. 
-We could not avoid these differences in the model in these platforms; however, we did make sure the 
-domain size and the boundary and initial conditions were the same and that the process would be comparable 
-during first few initial time steps where the local truncation error would not have a considerable impact on 
-the global error in estimating the primary variables between these two numerical models.\\
+The developed model did not consider some scenarios prevalent in a bigger geological system. It did not consider the gravity 
+as we set a constant hydrostatic pressure throughout the domain, the change in density due to the addition of total inorganic carbon 
+and calcium into the karst water, and a seasonal fluctuation of the concentration of \ce{CO2} above the epiphreatic karst water table. 
+The concentration of \ce{CO2} varies throughout the year with highest during summers and lowest during 
+winters (\cref{tab:CO2fluctuations}), which will have a significant impact on the process. 
+We saw grid grading did not matter in our model but in a bigger geological system, this could play a role in resolving the boundary layer 
+developed near the reactive wall. The \DuMuX model only had reactive source/sink terms at the cells on the wall. 
+To closely model a cave scenario, the reactive source/sink terms should also be solved throughout the domain. \\
 
-We saw in the chapter \ref{chapter:results} that the steady-state time and the primary variables would 
-change with changing scenarios. Initial pH, concentration of \ce{CO2} at the top of the cave, initial 
-concentration of \ce{CO2} in the karst water, flow velocity are the limiting factors that influences the 
-time-scale for the karstification mechanism.\\
+With gravity and compositional, compressible systems, a problem may arise if pressure is set at the boundary as a boundary condition, 
+which we did in our model, instead of setting the actual hydrostatic pressure calculated considering the density of the fluid and its composition. 
+The pressure profile developed due to the change in density and composition of the fluid might not match with the 
+user-defined profile that causes unphysical spurious in/out-flows. 
+In our \DuMuX model, we set a constant pressure of 1e5 Pa throughout the domain. So if the gravity was turned on, this would lead to a different 
+pressure profile in the fluid inside the domain, which would then cause undesirable in/out-flows depending on the pressure 
+difference. \\
 
-We were not able to predict the time scale for the real–world scenario which requires bigger domain, gravity 
-cannot be switched off, concentration of calcium ions should be considered for the calculation of density, 
-seasonal variation of \ce{CO2} at the top should be considered. Grid grading matters in particular near the 
-reactive wall to resolve the developed boundary layer. The problem with gravity and compositional, compressible 
-systems may arise if a pressure boundary is set on a boundary face, where "true" hydrostatic pressure should be set. 
-"True" hydrostatic pressure depends on the density of the fluid which in turn depends on the composition of it. 
-So, if a fixed pressure value or profile is set, considering a change in density and composition of the fluid, 
-spurious in- or out-flows due to non-matching pressure distribution might occur. In our \DuMuX model, we set a 
-constant pressure of 1e5 Pa throughout the domain. So, when the gravity is turned on, this will lead to a different 
-pressure profile in the fluid inside the domain, which causes an undesirable in/out-flows depending on the pressure 
-difference. Further, we fixed the top boundary concentration of \ce{CO2} throughout the simulation, which in-fact is 
-seldom true in real-world scenario. The \ce{CO2} varies throughout the year with highest during summers and lowest 
-during winters, which will have a significant impact in the process. A proper model that accounts for the density 
-change due dissolution of calcium-carbonate is desirable to closely estimate the density of the karst water.\\
-
-Expanding the model to account for these limitations would be the next step in exploring density-induced fingering 
-of \ce{CO2}-enriched water. This would be challenging, especially with the numerical overhead that comes with solving 
-the chemical equations that would significantly increase the computational time. A through literature review would be 
-essential to consider the density change due to calcite dissolution in karst water. \\
+Expanding the model to account for the aforementioned limitations would be the next step in exploring density-induced fingering 
+of \ce{CO2}-enriched water as a mechanism for speleogenesis. This would be challenging especially with the numerical overhead 
+that comes with solving Navier-Stokes model with the reactive source/sink terms that would significantly increase the computational time. 
+A thorough literature review would be essential to consider the density of karst water due to the addition of total inorganic carbon and calcium due to 
+calcite dissolution.
 
 
 \endinput

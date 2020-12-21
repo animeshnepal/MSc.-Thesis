@@ -116,9 +116,11 @@ consistent with the mathematical calculation, we set the grid grading scenarios 
 \section{\DuMuX Simulation results}
 
 \subsection{Time series plot: Open system}\label{ssec:timeSeriesOpen}
-For an open system in \DuMuX, the model domain of size [5mm $\times$ 15mm] was divided into ten segments along the x-axis and twenty segments along the y-axis.
+For an open system in \DuMuX, the model domain of size [5mm $\times$ 15mm] was divided into ten segments along the x-axis and twenty segments along the y-axis. 
+\cref{fig:OpenedSystem} shows the model domain and boundary conditions set in \DuMuX for an open system scenario. 
 A cell at the center of the reactive wall was selected to visualize the variation of a few variables (pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, 
-$\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$) in time. The calculation of source/sink terms in \DuMuX was invoked only at the reactive wall and for the rest of 
+$\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$) in time.  
+The calculation of source/sink terms in \DuMuX was invoked only at the reactive wall and for the rest of 
 the domain, the governing equations without the source/sink term were solved. \\
 Therefore, we chose a cell at the reactive wall to better understand the dissolution
 and its dependency with the other variables. It could have been any cell at the wall, the values could also have been averaged over the cells at the wall, but we 
@@ -410,7 +412,10 @@ for the resolution of a boundary layer near the wall. \\
 
 \cref{fig:diffGrid} confirms with the mathematical calculation we had for our model that there are only minor differences 
 in calculating the rate of calcite dissolution and concentration of primary variables when varying grid grading near the wall. 
-The plots overall are similar to each other. 
+The plots are a little out of sync at the beginning of the simulation. A higher grid grading would mean a smaller domain size near 
+the reactive wall. Therefore, a smaller domain would have a faster depletion of carbonic acid and a faster rise in pH as shown in \cref{gridpH} but 
+as soon as the depleted potential gets replenished with additional transported \ce{CO2} pH along with the rate of dissolution and concentration of 
+$\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$ and $\mathrm{m^{CO_3^{2-}}}$ adapts to identical values. 
 
 \subsection{Contour plots: Open System} \label{ssec:contour}
 For an open system in \DuMuX, steady-state contour plots for a model domain of size [5mm $\times$ 15mm] are presented and explained in this subsection.
@@ -637,14 +642,16 @@ the boundaries are closed to the external environment. As the dissolution procee
 of TIC present in the water, carbonic acid gets depleted and slowly but surely the rate of calcite dissolution comes to naught (\cref{fig:withoutpHrdiss}). \\
 
 Carbonic acid near the vicinity of the wall is used up for calcite dissolution. Carbonic acid farther away from the wall reaches the wall by 
-diffusion, the only transport mechanism in a closed system. Because of the diffusion it takes substantial time for 
-the rate of calcite dissolution to cease, as shown in (\cref{fig:withoutpHrdiss}), which also impacts the concentration of TIC and carbonate as shown in 
-\cref{fig:withoutpHmTIC,fig:withoutpHmCO3}.
+diffusion, the only transport mechanism in a closed system. Because of the diffusion, it takes substantial time for 
+the rate of calcite dissolution to cease as shown in (\cref{fig:withoutpHrdiss}). Consequently, the change in concentration of TIC and carbonate 
+is gradually decreasing and it stabilizes when the dissolution eventually ceases as shown in \cref{fig:withoutpHmTIC,fig:withoutpHmCO3}.
 
 
 \subsubsection*{Different Grid grading parameter} \label{ssec:diffGridnoflow}
-We fixed the initial pH in the karst water to 6.0 and the initial concentration of \ce{CO2}  was set to 2.5e-7 [mol/mol]. We decreased the 
-spacing of the grids near the wall on the x-axis. We ran the simulation for grid-grading values 1.1 and 1.2. 
+The grid grading parameter was varied for this scenario. We assumed three different grid grading values, 
+1.0 (without grid grading), 1.1 and 1.2, for simulation runs. We set the initial pH of water to 6 and 
+the initial concentration of TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], 
+an assumed value. \\
 
 \begin{figure}[!h]
         \centering
@@ -695,11 +702,14 @@ spacing of the grids near the wall on the x-axis. We ran the simulation for grid
     \label{fig:comparisionWithoutDiffgrid}
 \end{figure}
 
-The sub-figures \subref{fig:Noflowgrid1.1} and \subref{fig:Noflowgrid1.2} in the figure \ref{ssec:diffGridnoflow} did not show any differences. 
-The reason is the same as explained in subsection \ref{ssec:diffGrid}.
+\cref{fig:comparisionWithoutDiffgrid} confirms with the mathematical calculation we had for our model that there are only minor differences 
+in calculating the rate of calcite dissolution and concentration of primary variables when varying grid grading near the wall, 
+the same conclusion we had in \cref{ssec:diffGrid}. 
 
-\section{\MATLAB Simulation results}
-\MATLAB Simulation results for a closed system. 
+
+\section{\MATLAB Simulation results: Closed system}
+The scenario we had in \DuMuX for a closed system, where diffusion would mix all the components in water throughout the domain, 
+had multiple cells, but in \MATLAB we only have one cell which causes the components in the water to mix instantly. \\
 
 \begin{figure}[!h]
         \centering
@@ -752,15 +762,28 @@ The reason is the same as explained in subsection \ref{ssec:diffGrid}.
      \label{fig:MATLABcomparisionDiffInitialpH}
 \end{figure}
 
+\MATLAB results (\cref{fig:MATLABcomparisionDiffInitialpH}) look very similar to the \DuMuX results (\cref{fig:comparisionWithoutDiffInitialpH}) 
+for a closed system with varying initial pH as described in \cref{ssec:ssec:diffinitialpHnoflow}. Instant mixing of components throughout the domain 
+in the \MATLAB model results in a faster approach to steady-state. In \DuMuX it was diffusion that mixed the components throughout the domain. \\
 
-\section{Comparison \DuMuX and \MATLAB} \label{sec:dvm}
-A comparision between \MATLAB and \DuMuX is presented in this section. 
+The higher the initial pH, the lower is the initial rate of calcite dissolution, since the basic solution slows down the calcite dissociation 
+as shown in \cref{fig:withoutvelpH,fig:withoutvelrdiss}.
+
+\section{Comparison: \DuMuX and \MATLAB} \label{sec:dvm}
+Identical initial and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were set in both \MATLAB and \DuMuX 
+to carry out the comparison. The initial pH of karst water and the reactive area/batch volume were varied to compare the results. 
+For a 2D domain, a reactive area is defined as the length of the reactive wall and a batch volume is the area of the cell where dissolution occurs. 
+We assumed four different initial pH (6, 7, 8, and 9), and three different reactive area/batch 
+volume (5mm/5\ce{mm^2}, 15mm/75\ce{mm^2}, and 30mm/300\ce{mm^2}) for simulation runs. We set the initial concentration of TIC 
+throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], 
+an assumed value. \cref{fig:ClosedSystem} shows the model domain and boundary conditions set in \MATLAB and \DuMuX for this scenario. \\
+
 \begin{table}[ht]
 \small\addtolength{\tabcolsep}{-12pt}
 \centering
 \caption{\DuMuX and \MATLAB comparison table that lists steady-state time, pH, molality of calcium (mCa), 
 molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 
-15mm$\times$5mm with varying initial pH, reactive area and batch volume}
+[15mm$\times$5mm] with varying initial pH, reactive area/batch volume}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \thead{Initial \\pH} & \thead{Reactive \\area} & \thead{Batch \\Volume} & \multicolumn{5}{c|}{\thead{Steady-state \MATLAB}} & 
@@ -792,6 +815,8 @@ molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a
 \label{tab:DumuxVsMatlab}
 \end{table}
 
+\cref{tab:DumuxVsMatlab} shows \MATLAB results agree closely with \DuMuX results at the steady-state. A slight disagreement in the steady-state time is 
+because of the difference in the time step size between the two models. \\
 
 \begin{figure}[!h]
         \centering
@@ -843,5 +868,9 @@ molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a
     in time for initial pH 6.0 in a closed system of 2D volume [15mm $\times$ 5mm]} 
     \label{fig:comparisionDumuxMatlab_pH6.0}
 \end{figure}
+
+Time series plot for initial pH 6 (\cref{fig:comparisionDumuxMatlab_pH6.0}) also shows \MATLAB results agree closely with \DuMuX results. 
+Time series plot for initial pH 7, 8 and 9 are presented in \cref{app:appendixB}.
+
 
 \endinput
