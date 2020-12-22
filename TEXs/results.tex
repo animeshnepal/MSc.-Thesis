@@ -706,7 +706,7 @@ had multiple cells, but in \MATLAB the domain only had one cell which causes the
 
 \MATLAB results (\Cref{fig:MATLABcomparisionDiffInitialpH}) look very similar to the \DuMuX results (\Cref{fig:comparisionWithoutDiffInitialpH}) 
 for a closed system with varying initial pH as described in \Cref{ssec:diffinitialpHnoflow}. Instant mixing of components throughout the domain 
-in the \MATLAB model results in a faster approach to steady-state. In \DuMuX it was diffusion that mixed the components throughout the domain. \\
+in the \MATLAB model results in a faster approach to steady-state. In \DuMuX it was the diffusion that mixed the components throughout the domain. \\
 
 The higher the initial pH, the lower is the initial rate of calcite dissolution, since the basic solution slows down the calcite dissociation 
 as shown in \Cref{fig:withoutvelpH,fig:withoutvelrdiss}.
@@ -721,18 +721,20 @@ throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}],
 an assumed value. \Cref{fig:ClosedSystem} shows the model domain and boundary conditions set in \MATLAB and \DuMuX for this scenario. \\
 
 \begin{table}[ht]
-\small\addtolength{\tabcolsep}{-12pt}
+\small\addtolength{\tabcolsep}{-10pt}
 \centering
 \caption [\DuMuX and \MATLAB comparison table.] {\textbf{\DuMuX and \MATLAB comparison table.} \small The table lists steady-state time, pH, molality of calcium (mCa), 
 molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 
 [15mm$\times$5mm] with varying initial pH and reactive area/batch volume.}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \thead{Initial \\pH} & \thead{Reactive \\area} & \thead{Batch \\Volume} & \multicolumn{5}{c|}{\thead{Steady-state \MATLAB}} & 
     \multicolumn{5}{c|}{\thead{Steady-state \DuMuX}} \\
     \cline{4-13}
-    & & & \thead{time} & \thead{pH} & \thead{mCa}      & \thead{mTIC}     & \thead{mCO3}     & \thead{time} & \thead{pH} & \thead{mCa}      
-    & \thead{mTIC}     & \thead{mCO3}\\
+    & & & \thead{\small time} & \thead{\small pH} & \thead{\small mCa}      & \thead{\small mTIC}     & \thead{\small mCO3}     
+    & \thead{\small time} & \thead{\small pH} & \thead{\small mCa}      
+    & \thead{\small mTIC}     & \thead{\small mCO3}\\
     & mm & \ce{mm^2} &  [s]  & [-] & [mol/kg] & [mol/kg] & [mol/kg] & [s] & [-]   & [mol/kg] & [mol/kg] & [mol/kg]\\
     \hline
     % initial pH   Reactive area Batch Volume time pH mCa mTIC mCO3 time pH mCa mTIC mCO3
@@ -752,7 +754,7 @@ molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a
     9 & 15 & 75  & 3001 & 9.91 & 1.02e-4 & 1.16e-4 & 3.21e-5 & 1463 & 9.90 & 1.02e-4 & 1.16e-4 & 3.21e-5 \\
       & 30 & 300 & 6101 & 9.91 & 1.02e-4 & 1.16e-4 & 3.21e-5 & 2924 & 9.90 & 1.02e-4 & 1.16e-4 & 3.21e-5 \\
     \hline
-\end{tabular}
+\end{tabular}}
 % \end{adjustbox}
 \label{tab:DumuxVsMatlab}
 \end{table}

@@ -1,5 +1,5 @@
-% \documentclass[a4paper,12pt,twoside]{scrreprt}
-\documentclass[a4paper,12pt,tikz]{scrreprt}
+\documentclass[a4paper,12pt,twoside]{scrreprt}
+% \documentclass[a4paper,12pt,tikz]{scrreprt}
 
 
 % Für deutsche Überschriften, usw. dieses Paket aktivieren
@@ -81,6 +81,7 @@
 \usepackage{subcaption}
 
 %% OPTIONAL PACKAGES
+\usepackage{fancyvrb} % allows the definition of the fontsize argument inside Verbatim
 \usepackage[labelfont=bf]{caption}
 \captionsetup{labelfont=bf}
 \usepackage{chngcntr}
@@ -176,49 +177,65 @@
 
 
 %% REQUIRED PAGES
-\include{TEXs/statement} % UNCOMMENT
+\include{TEXs/statement}
 \cleardoublepage % blank page for twoside print
-\include{TEXs/acknowledgements} % UNCOMMENT
+\include{TEXs/acknowledgements} 
 \cleardoublepage % blank page for twoside print
 
 
 %% TABLE OF CONTENTS AND LISTS
-\tableofcontents
-\newpage
-% \pagenumbering{Roman}
+\tableofcontents \newpage
+\cleardoublepage
+
 \addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures \newpage
+\cleardoublepage
+
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftables \newpage
+\cleardoublepage
+
 \addcontentsline{toc}{chapter}{Nomenclature}
-\include{TEXs/nomenclature} \newpage
+\include{TEXs/nomenclature}
+\cleardoublepage
+
 \addcontentsline{toc}{chapter}{Abstract}
-\include{TEXs/abstractenglish} \newpage % UNCOMMENT
-\cleardoublepage % blank page for twoside print
-\addcontentsline{toc}{chapter}{Task Description} % UNCOMMENT
-\include{TEXs/taskdescription} \newpage % UNCOMMENT
-\cleardoublepage % blank page for twoside print
+\include{TEXs/abstractenglish} 
+\cleardoublepage
+
+\addcontentsline{toc}{chapter}{Task Description} 
+\include{TEXs/taskdescription} 
+\cleardoublepage 
 
 \pagenumbering{arabic}  % normal numbering
 % \setcounter{tocdepth}{1} % only chapters and subsections
 
 % MAIN PART
-\include{TEXs/introduction} % UNCOMMENT
-\include{TEXs/literaturereview}% UNCOMMENT
-\include{TEXs/conceptualmodel} % UNCOMMENT
-\include{TEXs/numericalmodel} % UNCOMMENT
-\include{TEXs/results} % UNCOMMENT
-\include{TEXs/conclusions} % UNCOMMENT
+\include{TEXs/introduction} 
+\cleardoublepage 
+\include{TEXs/literaturereview}
+\cleardoublepage 
+\include{TEXs/conceptualmodel} 
+\cleardoublepage 
+\include{TEXs/numericalmodel} 
+\cleardoublepage 
+\include{TEXs/results} 
+\cleardoublepage 
+\include{TEXs/conclusions} 
+\cleardoublepage 
 
 %% BIBLIOGRAPHY
 \pdfbookmark[0]{Bibliography}{Bibliography}
 \bibliographystyle{plainnat}
-\bibliography{LITERATURE/references} % UNCOMMENT
+\bibliography{LITERATURE/references} 
+\cleardoublepage 
 
-% UNCOMMENT
+
 \begin{appendix}
 \include{TEXs/appendixflowchart}
+\cleardoublepage 
 \include{TEXs/appendixplots}
+\cleardoublepage 
 \end{appendix}
 
 \end{document}
