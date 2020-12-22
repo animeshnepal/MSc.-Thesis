@@ -3,12 +3,12 @@
 \section{Background and motivation}
 Nerochytic Speleogenesis (NERO)(Greek: nerochytis = sink), explained by \citet{Scherzer2017}, 
 helps further in understanding the Karst process, where he states the density-driven \ce{CO2} dissolution 
-from cave air enriches the Karst water with additional carbonic acid which expedites the karstification. 
+from cave air enriches the karst water with additional carbonic acid which expedites the karstification. 
 It is hypothesized that there exists a concentration gradient of \ce{CO2} from vadose zone to phreatic zone 
 which enriches the calcium-carbonate dissolution potential of the karstic water. 
 With the seasonal fluctuations of \ce{CO2} concentrations, the rate of dissolution of \ce{CaCO3} is affected. 
 Higher concentrations of \ce{CO2} during spring and summer means a higher rate of dissolution of \ce{CaCO3} and lower rates 
-during fall and winter, when the concentration of \ce{CO2} is at the lowest, as shown in \cref{tab:CO2fluctuations}.
+during fall and winter, when the concentration of \ce{CO2} is at the lowest, as shown in \Cref{tab:CO2fluctuations}.
 
 \paragraph*{Density induced fingering}\mbox{}\\ \\
 When the concentration of \ce{CO2} increases above the karst water, such as in summer, the concentration gradient of \ce{CO2} 
@@ -17,7 +17,7 @@ which causes the density of water to increase \cite{garcia2001density}, this res
 the top of the water and after some onset time protruding fingers of \ce{CO2} are triggered. The more \ce{CO2} is added into the water, 
 the more \ce{CaCO3} is dissolved. With the increase in density of water, the \ce{CO2}-enriched water 
 is transported to depths, hence enhancing further dissolution of \ce{CaCO3} (the relevant chemical kinetics are 
-discussed in \cref{chapter:numericalmodel}, section \cref{sec:reactivesource}). The process is reversed during the winter, 
+discussed in \Cref{chapter:numericalmodel}, section \Cref{sec:reactivesource}). The process is reversed during the winter, 
 when the \ce{CO2} concentration in cave air is lower than in cave water, as a result, \ce{CO2} from the water diffuses 
 out to the atmosphere resulting in precipitation of \ce{CaCO3}.\\ 
 
@@ -27,30 +27,31 @@ stops and so does the dissolution of \ce{CaCO3}.
 
 \newpage
 \paragraph*{\ce{CO2} movement}\mbox{}\\ \\
-The protruding fingers of \ce{CO2} could be subjected to the background/base flow, which will have different outcomes depending on 
-the velocity of the flow, which then regulates the diffusion of \ce{CO2} from the atmosphere into the karst water. Relatively small 
-background flow means there exist protruding fingers of \ce{CO2} and if the flow is too strong, these fingers are suppressed, or 
-consumed (they are transported such that a fresh batch of karst water fills its spot and the gradient is preserved) such 
-that the relevance of Nerochytic Speleogenesis is out of context. \\
+The protruding fingers of \ce{CO2} could be subjected to the background/base flow which would suppress these fingers if the velocity is too strong. 
+Relatively small to no background flow means there exist protruding fingers of \ce{CO2}. A strong flow would transport the fingers out 
+of the domain such that a fresh batch of karst water fills its spot and the relevance of Nerochytic Speleogenesis is out of context. \\
 
 This thesis focuses on explaining Nerochytic Speleogenesis; hence we assume the density-induced fingering of \ce{CO2} either does not encounter 
 background-flow or encounter relatively low background-flow with the transport of \ce{CO2} into the karst water such that it does not suppress 
-the fingers and the chemical reaction at the wall produces \ce{CO2} and calcium.
+the fingers and the chemical reaction at the wall produce TIC and calcium.
 
 \section {Research questions}
 Starting with explaining the chemical kinetics involved in Nerochytic Speleogenesis, the thesis introduces a numerical model 
 implemented in \DuMuX and \MATLAB , and explains the outcome of simulations for different scenarios to answer some of the questions 
 related to \ce{CO2}-driven speleogenesis.\\
 
-\paragraph*{How much reaction is realistic?} What would be the realistic rate of dissolution of calcite to have an impact 
+\paragraph*{How much reaction is realistic?} \mbox{}\\ 
+What would be the realistic rate of dissolution of calcite to have an impact 
 on the geological systems? In an attempt to answer this question, we ran simulations for varying scenarios and environmental constraints in \DuMuX and
 also compared the results with \MATLAB. 
 
-\paragraph*{What is the time scale for the rate of calcite dissolution?} On an immediate note after its plausibility check, 
+\paragraph*{What is the time scale for the rate of calcite dissolution?} \mbox{}\\ 
+On an immediate note after its plausibility check, 
 we seek an answer for the time scale of its occurrence. We expect this to be widely varying depending on the physical (boundary conditions, flow-velocity, 
 domain size, etc.) and chemical constraints (initial pH of karst water, initial concentration of total inorganic carbon, etc.).
 
-\paragraph*{What are the limiting factors?} What are the limiting factors that would affect the pH of karst water, 
+\paragraph*{What are the limiting factors?} \mbox{}\\ 
+What are the limiting factors that would affect the pH of karst water, 
 calcium concentration, \ce{CO2} concentration, and its gradient, and the rate of dissolution which will impact the process differently 
-with respect to steady-state. 
+with respect to steady-state.
 \endinput

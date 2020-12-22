@@ -20,7 +20,7 @@ calcium, and total inorganic carbon. we considered batch volume approach having 
 the same model size as in \DuMuX , which would make the dissolved products instantly mix throughout the domain as 
 the dissolution proceeds. In \MATLAB we solved for a closed system without outflow or inflow of calcium, \ce{CO2} and water. 
 We set an initial concentration of total inorganic carbon throughout the domain and started the simulation with an initial pH. 
-We varied the initial pH, as mentioned in \cref{tab:scenarios}, to understand its dependency on the rate of dissolution and 
+We varied the initial pH, as mentioned in \Cref{tab:scenarios}, to understand its dependency on the rate of dissolution and 
 steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC). The results that we got from \MATLAB were 
 also used to validate the results from \DuMuX, as we set an identical initial and boundary conditions and a domain with just 
 one cell of size [5mm$\times$15mm] in \DuMuX to mimic the batch volume approach adopted in \MATLAB. We expect the results 
@@ -29,7 +29,7 @@ to be identical from the \MATLAB and \DuMuX models with these setups. \\
 \paragraph*{\DuMuX} In \DuMuX, continuity equation \ref{eq:contiEq} was solved together with the source and sink terms accounting for 
 TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed system; 
 flow-velocity, if it's an open system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an open system; and grid grading 
-parameter (\cref{chapter:results}) -- were set up in \DuMuX as illustrated in \cref{tab:scenarios}. 
+parameter (\Cref{chapter:results}) -- were set up in \DuMuX as illustrated in \Cref{tab:scenarios}. 
 \begin{enumerate}
     \item Closed System: To make a plausible comparison with the \MATLAB results, the top and bottom boundary 
     conditions were set to Neumann no-flow for the fluxes across the boundary. The batch volume approach having only 
@@ -46,21 +46,21 @@ parameter (\cref{chapter:results}) -- were set up in \DuMuX as illustrated in \c
 
 \section{Implementation in \MATLAB}
 Varying initial pH of the solution and reactive-area/batch-volume, the rate of dissolution and steady-state time and 
-concentrations of hydrogen, carbonate, bicarbonate, calcium and TIC were calculated. \cref{eq:rDiss,eq:omega} were solved 
+concentrations of hydrogen, carbonate, bicarbonate, calcium and TIC were calculated. \Cref{eq:rDiss,eq:omega} were solved 
 to calculate the rate of calcite dissolution (\ce{r_{diss}}). Rate of calcite dissolution when multiplied with the reactive-area 
 and the time-step would give the amount of produced TIC and calcium. With the increase in calcium concentration in the 
 solution, total inorganic carbon would also increase by the same amount (\ce{m^{TIC}} = $\mathrm{m_{initial}^{TIC}}$ + \ce{m^{\ce{Ca^{2+}}}}). 
 Charge balance equation \ref{eq:chargebalfinal} was solved for concentration of hydrogen ($\mathrm{m^{H^{+}}}$) with the updated concentrations 
 of calcium and total inorganic carbon. The charge balance equation \ref{eq:chargebalfinal} is a non-linear equation in $\mathrm{m^{H^+}}$. 
-We used \MATLAB function "vpasolve", a non-linear solver, to solve \cref{eq:chargebalfinal} for $\mathrm{m^{H^+}}$. With the new 
+We used \MATLAB function \say{vpasolve}, a non-linear solver, to solve \Cref{eq:chargebalfinal} for $\mathrm{m^{H^+}}$. With the new 
 concentration of hydrogen, rate of dissolution was calculated again for the next time-step and the cycle is repeated until it 
-reaches the end of simulation. The flowchart presented in \cref{fig:flowchartMATLAB} shows the work flow. 
+reaches the end of simulation. The flowchart presented in \Cref{fig:flowchartMATLAB} shows the work flow. 
 
 
 \begin{figure}
 \newpage
 \centering
-\caption{Flowchart for workflow in \MATLAB}
+\caption [Flowchart for the workflow in \MATLAB] {\textbf{Flowchart for the workflow in \MATLAB}}
 \begin{tikzpicture}[node distance=2cm]
 
 \node (func1) [startstop] {Start};
@@ -144,7 +144,7 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \node (conn2) [connector, right of=conn1, xshift=5cm] {B};
 \node (conn3) [connector, right of=conn1, xshift=3cm] {C};
 
-\node (func10) [process, below of=conn1, yshift=-0.0cm] {$\mathrm{r_{diss}}$ = $\mathrm{k_{diss,1} * m^{H^+} + k_{diss,2} * (1 - Omega)}$.};
+\node (func10) [process, below of=conn1, yshift=-0.0cm] {$\mathrm{r_{diss}}$ = $\mathrm{(k_{diss,1} * m^{H^+} + k_{diss,2}) * (1 - Omega)}$.};
 
 \node (func11) [process, below of=func10, yshift=-0.0cm] {save \ce{r_{diss}} to a vector};
 
@@ -196,7 +196,7 @@ and closed systems, and boundary conditions were different for these two setups.
 
 \paragraph*{Open system} \mbox{} \\
 
-As shown in \cref{fig:OpenedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y directions 
+As shown in \Cref{fig:OpenedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y directions 
 and concentration of TIC and calcium. For the left boundary, we assumed no-slip condition as we set Dirichlet condition for 
 velocities and Neumann condition for TIC and calcium fluxes. Similarly, for the bottom boundary Dirichlet condition was set 
 for pressure and Outflow conditions for TIC and calcium fluxes formed due to the dissolution of calcite. we set Symmetric property 
@@ -205,13 +205,13 @@ at the right boundary instead of assigning identical left boundary conditions th
 \begin{figure}
     \centering
     \includegraphics[width=0.75\textwidth]{PICTURES/opened_system.jpg}
-    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in an open system}
+    \caption [Model domain and boundary conditions for \ce{CaCO3} dissolution in an open system] {\textbf{Model domain and boundary conditions for \ce{CaCO3} dissolution in an open system}}
     \label{fig:OpenedSystem}       % Give a unique label
 \end{figure}
 
 
 \paragraph*{Closed system} \mbox{} \\
-As shown in \cref{fig:ClosedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y direction and 
+As shown in \Cref{fig:ClosedSystem}, we set Dirichlet condition at the top boundary for velocities in x and y direction and 
 Neumann no-flow for TIC and calcium fluxes. For the left boundary, we assumed no-slip condition -- similar 
 to the open system -- as we set Dirichlet condition for velocities and Neumann condition for TIC and calcium fluxes. On the 
 bottom boundary, we set Dirichlet condition for pressure and Neumann no-flow for TIC and calcium fluxes. 
@@ -221,7 +221,7 @@ these two setups was the top and bottom boundary conditions.
 \begin{figure}
     \centering
     \includegraphics[width=0.75\textwidth]{PICTURES/closed_system.jpg}
-    \caption{Model domain and boundary conditions for \ce{CaCO3} dissolution in a closed system}
+    \caption [Model domain and boundary conditions for \ce{CaCO3} dissolution in a closed system] {\textbf{Model domain and boundary conditions for \ce{CaCO3} dissolution in a closed system}}
     \label{fig:ClosedSystem}       % Give a unique label
 \end{figure}
  
@@ -244,14 +244,14 @@ The charge balance equation was solved for $\mathrm{m^{H^+}}$ using Brent's algo
 for finding root of a scalar function. 
 
 
-Flowchart in \cref{fig:flowchartReactionSource} shows the reaction source function's implementation and flowcharts in appendix \ref{app:appendixA} 
+Flowchart in \Cref{fig:flowchartReactionSource} shows the reaction source function's implementation and flowcharts in appendix \ref{app:appendixA} 
 shows further implementations in \DuMuX.
 
 
 \begin{figure}
 \newpage
 \centering
-\caption{Flowchart for reactionSource function in \DuMuX}
+\caption [Flowchart for reactionSource function in \DuMuX] {\textbf{Flowchart for reactionSource function in \DuMuX}}
 \begin{tikzpicture}[node distance=2cm]
 
 \node (func1) [predefinedprocess] {\code{reactionSource} function};
@@ -269,7 +269,7 @@ shows further implementations in \DuMuX.
 
 \node (dec1) [decision, below of=pro5, yshift=-1cm] {If Omega $<$ 1.0};
 
-\node (pro6) [process, right of=dec1, xshift=5cm] {$\mathrm{r_{diss}}$ = $\mathrm{k_{diss,1} * m^{H^+} + k_{diss,2} * (1 - Omega)}$.};
+\node (pro6) [process, right of=dec1, xshift=5cm] {$\mathrm{r_{diss}}$ = $\mathrm{(k_{diss,1} * m^{H^+} + k_{diss,2}) * (1 - Omega)}$.};
 
 \node (conn1) [connector, below of=dec1, yshift=-1.5cm] {A};
 \node (conn2) [connector, right of=conn1, xshift=5cm] {B};

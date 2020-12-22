@@ -42,7 +42,7 @@ The term comes from the chemical reaction on the surface of the wall. It is defi
 \end{itemize}
 The density of water increases slightly with the dissolution of \ce{CO2} \cite{garcia2001density} and calcite 
 \cite{zhao2015solubility}. Although the pressure we are interested in is fairly low (1 atm) compared to the pressures 
-in \cref{fig:DensityH2OCO2}, we can imply that the density of \ce{H2O-CO2} system will increase as more \ce{CO2} is added into the karst water. \\
+in \Cref{fig:DensityH2OCO2}, we can imply that the density of \ce{H2O-CO2} system will increase as more \ce{CO2} is added into the karst water. \\
 For the modeling purpose, we set the density of \ce{H2O-CO2} system with \ce{CaCO3} to be the density of water as we did not consider 
 the density change due to the addition of TIC and calcium into the aqueous solution due to dissolution of calcite, making it less sophisticated and comparable 
 with the \MATLAB results. We are interested in developing a 2D model of size 5mm $\times$ 15mm that implements calcite dissolution as a source/sink term, 
@@ -54,13 +54,12 @@ so the employed limitations will have negligible influence, if any, in altering 
 \includegraphics[width=0.6\textwidth]{PICTURES/H2O-CO2_Density.png}
 %for tikz figures use:
 %\input{your_file.tex}
-\caption{Density variation of aqueous solution of \ce{CO2} \cite{garcia2001density}}
+\caption [Density variation of aqueous solution of \ce{CO2} \cite{garcia2001density}] {\textbf{Density variation of aqueous solution of \ce{CO2} \cite{garcia2001density}}}
 \label{fig:DensityH2OCO2}       % Give a unique label
 \end{figure}
 
 \section{Navier-Stokes equation}
 The Navier-Stokes equations, which describe motion for Newtonian fluids, are formulated as: 
-(A complete derivation can be found on \citet{white1979fluid}.)
 
 \begin{equation}\label{eq:NSeq} % Give a unique label
  \frac{\partial (\rho \textbf{v})}{\partial t}
@@ -75,6 +74,7 @@ where:
 \item \textbf{g}, gravity vector [m/\ce{s^2}]
 \end{itemize}
 
+A complete derivation can be found on \citet{white1979fluid}. 
 We assume incompressibility of the fluid. Hence, Navier-Stokes equation results in:
 \begin{equation}\label{eq:NSeqincompress} % Give a unique label
  \frac{\partial ( \textbf{v})}{\partial t}
@@ -99,7 +99,7 @@ The initial conditions of the primary variables must be specified throughout the
 Boundary conditions must also be specified around the computational domain, \textit{S}\textsubscript{B}, throughout 
 the simulation time. Based on the nature of the boundary value, boundary conditions are categorized as follows: 
 \begin{itemize}
-    \item \textbf{Dirichlet} boundary condition \quad The value of the dependent variables on the portion of the 
+    \item \textbf{Dirichlet} boundary condition \\ The value of the dependent variables on the portion of the 
     boundary,$\textit{S}^{\textrm{D}}_{\textrm{B}}$ is known.
     
     \begin{equation}\label{eq:dirichletCondition} % Give a unique label
@@ -108,22 +108,22 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
     
     On solid walls, Dirichlet condition for velocities is imposed (no-slip condition).
     
-    \item \textbf{Neumann} boundary condition \quad The gradient of the dependent variables on the portion of the 
+    \item \textbf{Neumann} boundary condition \\ The gradient of the dependent variables on the portion of the 
     boundary, $\textit{S}^{\textrm{N}}_{\textrm{B}}$, is known.
     
     \begin{equation}\label{eq:neumannCondition} % Give a unique label
         \textrm{grad } \phi (\textbf{r}_B,t) = f(t), \quad \textbf{r}_B \in \textit{S}^{\textrm{N}}_{\textrm{B}}.
     \end{equation}
     
-    \item \textbf{Outflow} boundary condition \quad Outflow boundary conditions are assigned where the flow is almost 
+    \item \textbf{Outflow} boundary condition \\ Outflow boundary conditions are assigned where the flow is almost 
     unidirectional and the surface stresses/pressure are known \cite{versteeg2007introduction}.
     \begin{equation}\label{eq:outflow}
-        \mathrm{grad}(\phi)*\mathrm{n} = 0, \quad \ce{p} = \ce{p_{ext}},
+        \mathrm{grad}(\phi) \cdot \mathbf{n} = 0, \quad \ce{p} = \ce{p_{ext}},
     \end{equation}
-    where, $\phi$ is a variable (e.g. mass fraction of \ce{CO2}: X\textsuperscript{$\wedge$}\ce{CO2}), n is a unit vector 
+    where, $\phi$ is a variable (e.g. mass fraction of \ce{CO2}: $X\textsuperscript{$\wedge$}\ce{CO2})$, n is a unit vector 
     normal to the boundary and \ce{p_{ext}} is the external pressure/pressure at the boundary.\\
     
-    \item \textbf{Symmetric} property \quad It is useful to take advantage of symmetries in the flow field when the model 
+    \item \textbf{Symmetric} property \\ It is useful to take advantage of symmetries in the flow field when the model 
     is symmetric with respect to its orientation and boundary conditions. 
     We can impose the following symmetric properties along the center of the domain and only solve half of it.
     \begin{equation}\label{eq:symmetric}
@@ -132,12 +132,12 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
     where $v_t$, $v_n$ are the tangential and normal components of the velocity.
     
 \end{itemize}
-The implementation of boundary conditions is presented in \cref{chapter:numericalmodel}.
+The implementation of boundary conditions is presented in \Cref{chapter:numericalmodel}.
 
 \section{Reactive source and sink terms}\label{sec:reactivesource} The source and sink terms account for total inorganic carbon 
 (\ce{CO2}, \ce{H2CO3}, \ce{CO3^{2-}}, and \ce{HCO3^{-}}) and calcium. 
 There could be several other cave minerals, but the scope of this thesis is limited to calcite. \\
-We assumed abundant calcite in our model -- and for an open system, \cref{chapter:numericalmodel}, 
+We assumed abundant calcite in our model -- and for an open system, \Cref{chapter:numericalmodel}, 
 the base-flow is further carrying the dissolved calcite out of the domain -- so that the aqueous phase is always under-saturated with 
 calcium in both open (with a base-flow) and closed (without a base-flow) systems. Therefore, we neglect the precipitation rate. 
 The rate of calcite dissolution determines the source terms calcium ($\ce{q^{Ca}}$), and total inorganic carbon (\ce{q^{TIC}}).
@@ -190,8 +190,8 @@ and carbonate [\ce{mol_{\ce{CO3^{2-}}}}/\ce{kg_{\ce{H2O}}}] respectively. \\
 \paragraph*{Dissociation reaction and change in pH}\mbox{}\\ \\
 Dissolution of calcite produces \ce{Ca^{2+}}, \ce{CO_3^{2-}}, \ce{HCO_3^{-}}, \ce{H^+}, and \ce{OH^-} in the solution. 
 The rate of dissolution of calcite depends on molality of hydrogen ion (\ce{m^{H+}})/pH, calcium (\ce{m^{\ce{Ca^{2+}}}}) and 
-carbonate (\ce{m^{\ce{CO3^{2-}}}}) see \cref{eq:rDiss,eq:omega}, but carbonate depends on total inorganic carbon (TIC) and 
-molality of hydrogen ion, \cref{fig:dissKinetics}. At the beginning, when there is no calcium in the solution, the rate of dissolution is at the highest. 
+carbonate (\ce{m^{\ce{CO3^{2-}}}}) see \Cref{eq:rDiss,eq:omega}, but carbonate depends on total inorganic carbon (TIC) and 
+molality of hydrogen ion, \Cref{fig:dissKinetics}. At the beginning, when there is no calcium in the solution, the rate of dissolution is at the highest. 
 Carbonic-acid is the fuel for calcite dissolution, and it's being used up during dissolution. 
 If the used-up carbonic-acid is not replenished, calcite dissolution comes to naught after carbonic-acid ceases to exist in the solution. 
 Such is the case with closed systems where the initial dissolution potential is never replenished. In an open system, though, replenishment of 
@@ -203,7 +203,7 @@ discussed in  the subsequent chapters. \\
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{PICTURES/dissolutionKinetics.png}
-\caption{The distribution of carbonate species as a fraction of total dissolved carbonate vs pH \cite{butler1991carbon}}
+\caption [The distribution of carbonate species as a fraction of total dissolved carbonate vs pH \cite{butler1991carbon}]{\textbf{The distribution of carbonate species as a fraction of total dissolved carbonate vs pH \cite{butler1991carbon}}}
 \label{fig:dissKinetics}
 \end{figure}
 
@@ -224,15 +224,15 @@ of calcite can be expanded as:
 \end{equation}
 
 where,
-\[
+\begin{equation}
 \ce{m^{CO_3^{2-}}} = \frac{\ce{m^{TIC}}}{\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot 
 \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,2}}}},
-\]
+\end{equation}
 and,
-\[
+\begin{equation}
 \ce{m^{HCO_3^-}} = \frac{\ce{m^{TIC}}}{\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,1}}}+1+\frac{\ce{k_{diss,2}}}
 {\ce{m^{\ce{H^{+}}}}}},
-\]
+\end{equation}
 
 Solving Eq. \ref{eq:chargebal} we get
 
@@ -264,7 +264,7 @@ $\ce{x}_\alpha^\kappa$ is mole fraction of the component $\kappa$ in phase $\alp
 $\ce{n}_\alpha^\kappa$ defines number of moles of component $\kappa$ in phase $\alpha$.
 Similarly, mass fraction, $\ce{X}_\alpha^\kappa$, is defined as mass fraction of component $\kappa$ in phase $\alpha$, 
 $\ce{X}_\alpha^\kappa$ = $\textrm{mass}_\alpha^\kappa/\textrm{mass}_\alpha^\textrm{total}$.
-We used mass/mole-fraction while solving continuity equation \cref{eq:contiEq} for each component i.e., \ce{H2O, CO2, calcium}.
+We used mass/mole-fraction while solving continuity equation \Cref{eq:contiEq} for each component i.e., \ce{H2O, CO2, calcium}.
 
 \paragraph*{Molality} The molality, $\ce{m}^\kappa$, is defined as the ratio of number of moles of component $\kappa$ in 
 aqueous phase to the mass of pure water in aqueous phase.
@@ -274,7 +274,7 @@ aqueous phase to the mass of pure water in aqueous phase.
 
 Molalities are used in the chemical calculations because density effects at higher solute concentrations prohibit the use 
 of concentrations, which depend on the volume. Likewise, the mole fractions of an inert component might change significantly 
-during reactions, see \cref{eq:moleFrac} \cite{hommel2016modeling}. The mass of solvent on the other hand is more or less 
+during reactions, see \Cref{eq:moleFrac} \cite{hommel2016modeling}. The mass of solvent on the other hand is more or less 
 constant and consequently, $m^\kappa$ also has minor fluctuations, so we used molality while solving charge balance equation 
 \ref{eq:chargebalfinal} to model calcite dissolution.
 

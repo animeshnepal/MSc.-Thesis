@@ -62,11 +62,10 @@ $\mathrm{r_{diss}}$, and Omega by calling their respective getter function};
 \path [line] (func4) -- (pro6);
 \path [line] (pro6) -- (pro7);
 \path [line] (pro7) -- (dec2);
-\path [line] (dec2) -- (pro9);
+\path [line] (dec2) -- node[anchor=east] {yes} (pro9);
 \path [line] (pro9) -- (end);
 \path [line] (dec2) -| node[xshift=-0.5cm, yshift=0.3cm]{no} (conn3);
 \end{tikzpicture}
-
 
 \section{Flowchart for Initial and Boundary conditions in \DuMuX}
 \begin{tikzpicture}[node distance=2cm]

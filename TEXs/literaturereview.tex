@@ -30,26 +30,26 @@ with continuity equation \ref{eq:contiEq} in an attempt to solve for the fluxes 
 The chemical reaction on the surface of the limestone: \\
 \ce{CaCO3 + H2O + CO2 -> CaCO3 + H2CO3 -> Ca^{2+} + 2HCO3^{-}}\\
 This is a global reaction at the calcite surface on a \ce{H2O-CO2} system and it comprises of three different reactions.
-\begin{flalign*}
-    & \ce{CaCO3 + H^+ <=> Ca^{2+} + HCO3^-}; & \\
-    & \ce{CaCO3 + H2CO3 <=> Ca^{2+} + 2HCO3^-}; & \\
-    & \ce{CaCO3 + H2CO3 <=> Ca^{2+} + CO3^{2-} + H2O .} &
-\end{flalign*}
+\begin{flalign} \label{eq:CalciteDiss}
+     \ce{CaCO3 + H^+ <=> Ca^{2+} + HCO3^-};  \\
+     \ce{CaCO3 + H2CO3 <=> Ca^{2+} + 2HCO3^-};  \\
+     \ce{CaCO3 + H2CO3 <=> Ca^{2+} + CO3^{2-} + H2O .} 
+\end{flalign}
 
 Further, \ce{CO2} reacts with water to form carbonic acid.
-\begin{flalign*}
-    & \ce{H2O + CO2 <=> H2CO3}, &
-\end{flalign*}
+\begin{flalign} \label{eq:CarbonicAcidForm}
+     \ce{H2O + CO2 <=> H2CO3}, 
+\end{flalign}
 
 \ce{H2CO3} dissociates into \ce{H^+} and \ce{HCO3^-}:
-\begin{flalign*}
-    & \ce{H2CO3 <=> H^+ + HCO3^-}, &
-\end{flalign*}
+\begin{flalign} \label{eq:CarbonicAcidDiss}
+     \ce{H2CO3 <=> H^+ + HCO3^-}, 
+\end{flalign}
 
 and \ce{HCO3^-} dissociates into:
-\begin{flalign*}
-    & \ce{HCO3^- <=> H^+ + CO3^{2-}}. &
-\end{flalign*}
+\begin{flalign} \label{eq:BicarbonateDiss}
+     \ce{HCO3^- <=> H^+ + CO3^{2-}}. 
+\end{flalign}
 
 The net rate of dissolution (\ce{r_{diss}}) is given by an equation \cite{Plummer1978}:
 
@@ -63,21 +63,21 @@ By using these rate constants and the fluxes, rate of dissolution can be calcula
 \citet{Plummer1978} defines these rate constants as: (where T in K and $k_x$ in cm/sec)
 
 \begin{flalign}\label{eq:k1}
-\log k_1 &= 0.198 - 444/T &
+\log k_1 = 0.198 - 444/T 
 \end{flalign}
 
 \begin{flalign}\label{eq:k2}
-\log k_2 &= 2.84-2177/T &
+\log k_2 = 2.84-2177/T 
 \end{flalign} 
 
 At temperature less than $25^\circ$C:
 \begin{flalign}\label{eq:k3under25} % Give a unique label
-\log k_3 &= -5.86 -317/T &
+\log k_3 = -5.86 -317/T 
 \end{flalign} 
 
 At temperature more than $25^\circ$C:
 \begin{flalign}\label{eq:k3over25} % Give a unique label
-\log k_3 &= -1.10 - 1737/T &
+\log k_3 = -1.10 - 1737/T 
 \end{flalign} 
 
 \begin{equation}\label{eq:k4} % Give a unique label
@@ -93,11 +93,13 @@ Mixing Corrosion, explained by \citet{bogli1980physical}, in combination with th
 and non-linear dissolution kinetics generating extended karst conduits. \citet{gabrovvsek2000role} combines both 
 these approaches to study evolution of karst aquifers. \citet{Dreybrodt1996} estimates the dissolution rates for 
 a system of \ce{H2O-CO2-CaCO3}.
-\[
-F(c) = k_n(1-c/c_{eq})^n
-\]
-where $k_n$ is a constant [$mol/cm^2s$], $c$ is the actual concentration of dissolved calcium, and $c_{eq}$ is its 
-equilibrium concentration [$mol/cm^3$].\\
+
+\begin{equation}
+    F(c) = k_n(1-c/c_{eq})^n
+\end{equation}
+
+where $k_n$ is a constant [$\mathrm{mol/cm^2s}$], $c$ is the actual concentration of dissolved calcium, and $c_{eq}$ is its 
+equilibrium concentration [$\mathrm{mol/cm^3}$].\\
 For linear dissolution rate $n = 1$, development of karst channel takes geologically unrealistic times as the law 
 breaks down as the penetrating water goes into a deep rock; with an increase in distance, the dissolution rate drops 
 exponentially \cite{Dreybrodt1996}. Hence, the law only accounts for entrance widening. 
@@ -134,7 +136,7 @@ the carbonic-acid containing water, but they do not mention how it was dissolved
 A relevant case study with respect to ours carried out by \citet{atkinson1977carbon} emphasizes the importance of a 
 system being closed and opened to the atmosphere in karstic developments. In an open system, gaseous \ce{CO2} is dissolved into the water 
 forming carbonic-acid which leads to replenishment of dissolution potential until the steady-state 
-is reached, whereas in the closed system, dissolved \ce{CO2} in karst water provokes the dissolution until all the carbonic-acid is depleted, 
+is reached, whereas in the closed system, dissolved \ce{CO2} in karst water provokes the dissolution until all the carbonic acid is depleted, 
 hence system comes to internal equilibrium -- unlike in an open system, replenishment does not occur in a closed system. 
 Seasonal fluctuations and mean value of \ce{CO2} concentrations in different soils are presented in table \ref{tab:CO2fluctuations}, 
 which could play a role while modeling a geological system. \\
@@ -142,7 +144,7 @@ which could play a role while modeling a geological system. \\
 \begin{table}[ht]
 \small\addtolength{\tabcolsep}{-5pt}
 \centering
-\caption{Published results of carbon dioxide concentration in soil air \cite{white2018karst}}
+\caption [Published results of carbon dioxide concentration in soil air \cite{white2018karst}] {\textbf{Published results of carbon dioxide concentration in soil air \cite{white2018karst}}}
 \begin{tabular}{lccccc}
     \hline
     Soil/vegetation & \multicolumn{4}{c}{Percent carbon dioxide} & Source\\
