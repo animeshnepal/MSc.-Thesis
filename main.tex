@@ -83,7 +83,8 @@
 %% OPTIONAL PACKAGES
 \usepackage{fancyvrb} % allows the definition of the fontsize argument inside Verbatim
 \usepackage[labelfont=bf]{caption}
-\captionsetup{labelfont=bf}
+% \captionsetup{labelfont=bf}
+\captionsetup{format=plain, labelfont=bf}
 \usepackage{chngcntr}
 \counterwithout{figure}{chapter}
 \usepackage{array}
@@ -103,13 +104,8 @@
 \usepackage{subcaption} % multiple figures in one row
 \usepackage{rotating} % rotating of figures
 \usepackage{todonotes} % for colorful todo notes
-% \usepackage[nottoc]{tocbibind} % for list of figures and tables
 \usepackage{dirtytalk} % package for quote
-% \usepackage[style=authoryear]{biblatex}
-% \usepackage[square]{natbib}
 \usepackage[numbers]{natbib}
-% \bibliographystyle{abbrv}
-% \setcitestyle{authoryear,open={(},close={)}}
 \usepackage[colorlinks=true,linkcolor=black,bookmarks=true,bookmarksopen=true,bookmarksopenlevel=2]{hyperref} % enable links
 \hypersetup{
 %  pdfpagemode=None,
@@ -129,7 +125,7 @@
 \textheight 22.5cm
 \textwidth 15.5cm
 \oddsidemargin 0.5cm
-\evensidemargin 0.5cm
+\evensidemargin -0.1cm
 \parindent 0cm
 \topmargin 0cm
 
@@ -177,6 +173,9 @@
 
 
 %% REQUIRED PAGES
+\begingroup
+\pagestyle{plain}
+
 \include{TEXs/statement}
 \cleardoublepage % blank page for twoside print
 \include{TEXs/acknowledgements} 
@@ -184,6 +183,7 @@
 
 
 %% TABLE OF CONTENTS AND LISTS
+
 \tableofcontents \newpage
 \cleardoublepage
 
@@ -195,6 +195,7 @@
 \listoftables \newpage
 \cleardoublepage
 
+
 \addcontentsline{toc}{chapter}{Nomenclature}
 \include{TEXs/nomenclature} \newpage
 \cleardoublepage
@@ -205,7 +206,10 @@
 
 \addcontentsline{toc}{chapter}{Task Description} 
 \include{TEXs/taskdescription} \newpage
-\cleardoublepage 
+\cleardoublepage
+
+\endgroup
+
 
 \pagenumbering{arabic}  % normal numbering
 % \setcounter{tocdepth}{1} % only chapters and subsections

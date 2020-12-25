@@ -5,26 +5,27 @@ A few scenarios were set, as shown in \Cref{tab:scenarios}, in \DuMuX to address
 research questions presented in \Cref{chapter:introduction}. Results we got 
 from \MATLAB were also used to validate the results we got from \DuMuX for the closed system 
 as shown in \Cref{tab:scenarios}. For the validation purpose, identical initial 
-and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were 
+and boundary conditions and a domain with just one cell of size [5 mm$\times$15 mm] were 
 set in both \MATLAB and \DuMuX. \\
 
 \begin{table}[h!]
     \centering
-    \small\addtolength{\tabcolsep}{-6pt}
-    \caption [Scenarios in \DuMuX] {\textbf{Scenarios in \DuMuX}}
-    \label{tab:scenarios}
+    % \small\addtolength{\tabcolsep}{-6pt}
+    \resizebox{\textwidth}{!}{%
     \begin{tabular}{l|l} % <-- Changed to S here.
       \thead{Open System} & \thead{Closed System}\\
       \hline
       -- Different flow velocity/velocity of \ce{CO2}-fingers & \\
-      (1mm/min, 0.5mm/min, 5mm/min) & \\
+      (\unitfrac[1]{mm}{min}, \unitfrac[0.5]{mm}{min}, \unitfrac[5]{mm}{min}) & \\
       -- Different grid grading(1.0, 1.1, 1.2) & -- Different initial pH (6,7,8,9)\\
       & (comparison with \MATLAB\\ 
       & results, see \Cref{sec:dvm})\\
       -- Different initial pH (6,7,8,9) & \\
       -- Different boundary \ce{CO2} concentrations & \\
       \hline
-    \end{tabular}
+    \end{tabular}}
+    \caption [Scenarios in \DuMuX] {\textbf{Scenarios in \DuMuX}}
+    \label{tab:scenarios}
 %   \end{center}
 \end{table}
 
@@ -37,7 +38,10 @@ Although, the prominent value of pH in karst water is 6, we chose 7, 8 and 9 for
 \MATLAB results and understanding its dependency on the rate of dissolution and steady-state concentrations 
 (hydrogen, carbonate, bicarbonate, calcium, and TIC). \\
 
-\paragraph*{Grid grading}\label{para:definitionGridGrading} \mbox{} Grid grading parameters when set in the input file would refine the grid 
+\newpage
+\paragraph*{Grid grading}\label{para:definitionGridGrading} \mbox{} \\ 
+
+Grid grading parameters when set in the input file would refine the grid 
 spacing targeting a certain portion of the domain and axis, but keeping the number of grids constant. 
 The parameters are of special importance when there is a need to highly refine the grids to resolve a part 
 of a bigger domain to closely estimate the variables of interest -- without these parameters, the total number 
@@ -68,8 +72,8 @@ the rest of the domain. \Cref{fig:gridGrading} compares the effect of grid gradi
         \label{fig:gg1.2}       % Give a unique label
     \end{subfigure}
         \hfill
-     \caption [Effects of grid grading on a domain of size [5mm $\times$ 15mm].] {\textbf{Effects of grid 
-     grading on a domain of size [5mm $\times$ 15mm].} \small The number of grid on the x-axis is 
+     \caption [Effects of grid grading on a domain of size  \lbrack 5 mm $\times$ 15 mm \rbrack.] {\textbf{Effects of grid 
+     grading on a domain of size \lbrack 5 mm $\times$ 15 mm \rbrack.} \small The number of grid on the x-axis is 
      10 and the y-axis is 20. \Cref{fig:nogg} shows grid spacing when there is no grid-grading/grid grading is set to 1.0, 
      \Cref{fig:gg1.1} shows grid spacing when the grid grading is set to 1.1, and \Cref{fig:gg1.2} shows grid spacing when the grid grading is set to 1.2.}
      \label{fig:gridGrading}
@@ -103,13 +107,13 @@ Reynolds number for open-channel flow \cite{french1985open}:
     \end{aligned}
 \end{equation}
 
-For the velocities 1mm/min, 0.5mm/min and 5mm/min, maximum wall length($x$) of 15mm, and kinematic viscosity($\nu$) of 
+For the velocities \unitfrac[1]{mm}{min}, \unitfrac[0.5]{mm}{min} and \unitfrac[5]{mm}{min}, maximum wall length($x$) of 15 mm, and kinematic viscosity($\nu$) of 
 water at 10$^\circ$C 1.3063e-6 [$\mathrm{m^2/s}$] \cite{wagner2008iapws} boundary layer thickness was calculated using \Cref{eq:BL}. 
-Boundary layer thickness at the end of the wall for flow-velocity 1mm/min was calculated approximately equal to 170mm; 
-for flow-velocity 5mm/min, it was 75mm; and for flow-velocity 0.5mm/min, it was 240mm. As discussed in the chapter 
+Boundary layer thickness at the end of the wall for flow-velocity \unitfrac[1]{mm}{min} was calculated approximately equal to 170 mm; 
+for flow-velocity \unitfrac[5]{mm}{min}, it was 75 mm; and for flow-velocity \unitfrac[0.5]{mm}{min}, it was 240 mm. As discussed in the chapter 
 \ref{chapter:numericalmodel}, subsection \ref{ssec:impdum}, we chose small domain as the primary goal of this thesis was to 
 implement chemical kinetics of calcite dissolution and its coupling with the freeflow Navier-Stokes model. 
-The width of the domain on the x-axis is just 5mm compared to the calculated boundary layer thickness, we were essentially 
+The width of the domain on the x-axis is just 5 mm compared to the calculated boundary layer thickness, we were essentially 
 inside the viscous region. Hence, we can expect nothing to very small differences in calculating the rate of calcite dissolution and concentration 
 of primary variables when varying grid grading near the wall. To verify the model in \DuMuX is 
 consistent with the mathematical calculation, we set the grid grading scenarios near the reactive wall as shown in \Cref{fig:BL}. \\
@@ -117,7 +121,7 @@ consistent with the mathematical calculation, we set the grid grading scenarios 
 \section{\DuMuX Simulation results}
 
 \subsection{Time series plot: Open system}\label{ssec:timeSeriesOpen}
-For an open system in \DuMuX, the model domain of size [5mm $\times$ 15mm] was divided into ten segments along the x-axis and twenty segments along the y-axis. 
+For an open system in \DuMuX, the model domain of size [5 mm $\times$ 15 mm] was divided into ten segments along the x-axis and twenty segments along the y-axis. 
 \Cref{fig:OpenedSystem} shows the model domain and boundary conditions set in \DuMuX for an open system scenario. 
 A cell at the center of the reactive wall was selected to visualize the variation of a few variables (pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, 
 $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$) in time.  
@@ -130,7 +134,8 @@ understanding the dependency rather than calculating a precise value for these v
 $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$).
 
 \subsubsection*{Different flow velocities}\label{ssec:diffFlowVel}
-The flow-velocity/velocity of \ce{CO2} fingers was varied for this scenario. We assumed three different flow-velocities, 1mm/min, 0.5mm/min and 5mm/min, 
+The flow-velocity/velocity of \ce{CO2} fingers was varied for this scenario. We assumed three different flow-velocities, \unitfrac[1]{mm}{min}, 
+\unitfrac[0.5]{mm}{min} and \unitfrac[5]{mm}{min}, 
 for simulation runs. We set the initial pH of the karst water to 6 but did not include a grid grading parameter in the input file. 
 We set the initial concentration of TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], an assumed value, and the 
 boundary condition at the top of the domain to 9.9956e-4 [mol/mol], a measured value at 8$^{\circ}$C and 1.0 atm pressure for a cave \cite{Class2020}. \\
@@ -212,7 +217,7 @@ forming carbonic acid and bicarbonate. Therefore, the steady-state concentration
 \subsubsection*{Different initial pH} \label{ssec:diffpH}
 
 The initial pH of karst water was varied for this scenario. We assumed four different initial pH, 6, 7, 8, and 9, 
-for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to 1mm/min but did not include grid grading 
+for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to \unitfrac[1]{mm}{min} but did not include grid grading 
 parameter in the input file. We set the initial concentration of TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], 
 an assumed value, and the boundary condition at the top of the domain to 9.9956e-4 [mol/mol], a measured value at 8$^{\circ}$C 
 and 1.0 atm pressure for a cave \cite{Class2020}. \\
@@ -279,7 +284,7 @@ to calculate carbonate and bicarbonate concentrations.
 
 \subsubsection*{Different boundary \ce{CO2} concentrations} \label{ssec:diffInitialBC}
 The \ce{CO2} concentration at the top boundary was varied for this scenario. We assumed three different \ce{CO2} concentrations, 
-1.5993e-6, 9.9956e-4, and 9.9956e-2 [mol/mol], for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to 1mm/min 
+1.5993e-6, 9.9956e-4, and 9.9956e-2 [mol/mol], for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to \unitfrac[1]{mm}{min} 
 and initial pH to 6 but did not include grid grading parameter in the input file. We set the initial concentration of 
 TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], which was an assumed value. \\
 
@@ -349,7 +354,7 @@ On the other hand dissociation reactions of carbonic acid shift more to the righ
 \subsubsection*{Different Grid grading parameter} \label{ssec:diffGrid}
 
 The grid grading parameter was varied for this scenario. We assumed three different grid grading values, 
-1.0 (without grid grading), 1.1 and 1.2, for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to 1mm/min 
+1.0 (without grid grading), 1.1 and 1.2, for simulation runs. We set the flow-velocity/velocity of \ce{CO2} fingers to \unitfrac[1]{mm}{min} 
 and initial pH to 6. We set the initial concentration of TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], 
 an assumed value, and the boundary condition at the top of the domain to 9.9956e-4 [mol/mol], a measured value at 8$^{\circ}$C 
 and 1.0 atm pressure for a cave \cite{Class2020}. \\
@@ -416,14 +421,14 @@ as soon as the depleted potential gets replenished by the incoming \ce{CO2} tran
 $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$ and $\mathrm{m^{CO_3^{2-}}}$ adapts to identical values. 
 
 \subsection{Contour plots: Open System} \label{ssec:contour}
-For an open system in \DuMuX, steady-state contour plots for a model domain of size [5mm $\times$ 15mm] are presented and explained in this subsection.
+For an open system in \DuMuX, steady-state contour plots for a model domain of size [5 mm $\times$ 15 mm] are presented and explained in this subsection.
 The model domain has, as in \ref{ssec:timeSeriesOpen}, ten segments along the x-axis and twenty segments along the y-axis. We saw in \ref{ssec:diffFlowVel}
 the rate of calcite dissolution and concentrations of primary variables depend strongly on flow-velocity and the boundary/initial \ce{CO2} concentration. 
 The flow-velocity/velocity of \ce{CO2} fingers was varied for this scenario. \\
 We set the initial pH of the karst water to 6 and set the grid grading to 1.1 in the input file. 
 We set the initial concentration of TIC throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], an assumed value, and the 
 boundary condition at the top of the domain to 9.9956e-4 [mol/mol], a measured value at 8$^{\circ}$C and 1.0 atm pressure for a cave \cite{Class2020}. \\
-We assumed three different flow-velocities, 1mm/min, 0.5mm/min and 5mm/min, for simulation runs to understand the steady-state spatial distribution of 
+We assumed three different flow-velocities, \unitfrac[1]{mm}{min}, \unitfrac[0.5]{mm}{min} and \unitfrac[5]{mm}{min}, for simulation runs to understand the steady-state spatial distribution of 
 pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$ and $\mathrm{m^{CO_3^{2-}}}$. 
 All the plots in this subsection were obtained from Paraview \cite{ahrens2005paraview}.
 
@@ -435,21 +440,21 @@ All the plots in this subsection were obtained from Paraview \cite{ahrens2005par
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel1mm_pH.eps}
-        \caption{\small Flow Velocity = 1mm/min}
+        \caption{\small Flow Velocity = \unitfrac[1]{mm}{min}}
         \label{fig:pHSteady-state}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 420 20, clip, width=0.9\textwidth]{PICTURES/contour_vel5mm_pH.eps}
-        \caption{\small Flow Velocity = 5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[5]{mm}{min}}
         \label{fig:pHSteady-state5mm}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=\textwidth]{PICTURES/contour_vel0.5mm_pH.eps}
-        \caption{\small Flow Velocity = 0.5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[0.5]{mm}{min}}
         \label{fig:pHSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
     \caption [\DuMuX Contour plots: Numerical results that show the spatial distribution of pH at the steady-state in an open system] {\textbf{\DuMuX Contour plots: Numerical results that show the spatial distribution of pH at the steady-state in an open system}}
@@ -477,21 +482,21 @@ just carbonic acid, as shown in \Cref{fig:pHSteady-state5mm}.
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel1mm_mCO3.eps}
-        \caption{\small Flow Velocity = 1mm/min}
+        \caption{\small Flow Velocity = \unitfrac[1]{mm}{min}}
         \label{fig:CO3Steady-state}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel5mm_mCO3.eps}
-        \caption{\small Flow Velocity = 5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[5]{mm}{min}}
         \label{fig:CO3Steady-state5mm}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel0.5mm_mCO3.eps}
-        \caption{\small Flow Velocity = 0.5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[0.5]{mm}{min}}
         \label{fig:CO3Steady-state0.5mm}       % Give a unique label
     \end{subfigure}%
     \caption [\DuMuX Contour plots: Numerical results that show the spatial distribution of molality of carbonate at the steady-state in an open system] {\textbf{\DuMuX Contour plots: Numerical results that show the spatial distribution of molality of carbonate at the steady-state in an open system}}
@@ -510,21 +515,21 @@ also dictates calcite dissolution, and diffusion of the products formed during d
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=480 10 450 10, clip, width=0.9\textwidth]{PICTURES/contour_vel1mm_mTIC.eps}
-        \caption{\small Flow Velocity = 1mm/min}
+        \caption{\small Flow Velocity = \unitfrac[1]{mm}{min}}
         \label{fig:TICSteady-state}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel5mm_mTIC.eps}
-        \caption{\small Flow Velocity = 5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[5]{mm}{min}}
         \label{fig:TICSteady-state5mm}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel0.5mm_mTIC.eps}
-        \caption{\small Flow Velocity = 0.5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[0.5]{mm}{min}}
         \label{fig:TICSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
     \caption [\DuMuX Contour plots: Numerical results that show the spatial distribution of molality of total 
@@ -547,21 +552,21 @@ The spatial distribution of total inorganic carbon in steady-state does not depe
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=480 10 450 10, clip, width=0.9\textwidth]{PICTURES/contour_vel1mm_mCa.eps}
-        \caption{\small Flow Velocity = 1mm/min}
+        \caption{\small Flow Velocity = \unitfrac[1]{mm}{min}}
         \label{fig:CaSteady-state}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel5mm_mCa.eps}
-        \caption{\small Flow Velocity = 5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[5]{mm}{min}}
         \label{fig:CaSteady-state5mm}       % Give a unique label
     \end{subfigure}%
     \hfill
     \begin{subfigure}{.5\linewidth}
         \centering
         \includegraphics[trim=500 20 450 20, clip, width=0.9\textwidth]{PICTURES/contour_vel0.5mm_mCa.eps}
-        \caption{\small Flow Velocity = 0.5mm/min}
+        \caption{\small Flow Velocity = \unitfrac[0.5]{mm}{min}}
         \label{fig:CaSteady-state0.5mm}       % Give a unique label
     \end{subfigure}%
     \caption [\DuMuX Contour plots: Numerical results that show the spatial distribution of molality of calcium at the steady-state in an open system] {\textbf{\DuMuX Contour plots: Numerical results that show the spatial distribution of molality of calcium at the steady-state in an open system}}
@@ -574,7 +579,7 @@ The explanation to the spatial distribution is exactly the same as described in 
 
 
 \subsection{Time series plot: Closed system} \label{ssec:timeSeriesClosed}
-For a closed system in \DuMuX a model domain of size [5mm $\times$ 15mm] was divided into ten segments along the x-axis and twenty segments along the y-axis.
+For a closed system in \DuMuX a model domain of size [5 mm $\times$ 15 mm] was divided into ten segments along the x-axis and twenty segments along the y-axis.
 A cell at the center of the reactive wall was selected to visualize the variation of a few variables (pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, 
 $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r_{diss}}$) in time, similar to the setup described in \Cref{ssec:timeSeriesOpen}.
 
@@ -712,20 +717,17 @@ The higher the initial pH, the lower is the initial rate of calcite dissolution,
 as shown in \Cref{fig:withoutvelpH,fig:withoutvelrdiss}.
 
 \section{Comparison: \DuMuX and \MATLAB} \label{sec:dvm}
-Identical initial and boundary conditions and a domain with just one cell of size [5mm$\times$15mm] were set in both \MATLAB and \DuMuX 
+Identical initial and boundary conditions and a domain with just one cell of size [5 mm$\times$15 mm] were set in both \MATLAB and \DuMuX 
 to carry out the comparison. The initial pH of karst water and the reactive area/batch volume were varied to compare the results. 
 For a 2D domain, a reactive area is defined as the length of the reactive wall and a batch volume is the area of the cell where dissolution occurs. 
 We assumed four different initial pH (6, 7, 8, and 9), and three different reactive area/batch 
-volume (5mm/5\ce{mm^2}, 15mm/75\ce{mm^2}, and 30mm/300\ce{mm^2}) for simulation runs. We set the initial concentration of TIC 
+volume (5 mm/5 \ce{mm^2}, 15 mm/75 \ce{mm^2}, and 30 mm/300 \ce{mm^2}) for simulation runs. We set the initial concentration of TIC 
 throughout the domain to 2.5e-7 [mol\_\ce{TIC}/mol\_\ce{H2O}], 
 an assumed value. \Cref{fig:ClosedSystem} shows the model domain and boundary conditions set in \MATLAB and \DuMuX for this scenario. \\
 
 \begin{table}[ht]
 \small\addtolength{\tabcolsep}{-10pt}
 \centering
-\caption [\DuMuX and \MATLAB comparison table.] {\textbf{\DuMuX and \MATLAB comparison table.} \small The table lists steady-state time, pH, molality of calcium (mCa), 
-molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 
-[15mm$\times$5mm] with varying initial pH and reactive area/batch volume.}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
@@ -756,6 +758,9 @@ molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a
     \hline
 \end{tabular}}
 % \end{adjustbox}
+\caption [\DuMuX and \MATLAB comparison table.] {\textbf{\DuMuX and \MATLAB comparison table.} \small The table lists steady-state time, pH, molality of calcium (mCa), 
+molality of total inorganic carbon (mTIC) and molality of carbonate (mCO3) for a closed system of size 
+[15 mm$\times$5 mm] with varying initial pH and reactive area/batch volume.}
 \label{tab:DumuxVsMatlab}
 \end{table}
 

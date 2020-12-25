@@ -3,41 +3,44 @@
 
 The numerical model for CO\textsubscript{2} density-driven dissolution in water was developed by 
 \citet{Class2020}. As part of the thesis, we added source and sink terms in the continuity equation 
-to the  model implemented by \citet{Class2020} for modeling dissolution of calcite. We implemented a 
+to the  model implemented by \citet{Class2020} for modeling dissolution of calcite. We implemented 
 reactive source/sink terms in the model, and for this, we sought help from \citet{hommel2016modeling} dissertation. 
 A fluid system was created to suit one phase (liquid), three components (\ce{H2O}, TIC, and calcium). 
 Fluid systems in \DuMuX explain the thermodynamic properties of quantities (in our model, the quantities are 
-\ce{H2O, TIC} and calcium) and the relationship with each another. A two-dimensional model domain [5mm $\times$ 15mm] 
+\ce{H2O, TIC} and calcium) and the relationship with each another. A two-dimensional model domain [5 mm $\times$ 15 mm] 
 was setup in \DuMuX to run the simulation.
 
 \section{Solving the reactive model}
 Two tools were used to model the calcite dissolution: \MATLAB and \DuMuX. \MATLAB allowed easy testing of the 
 calcite dissolution model we envisaged without the overhead of \DuMuX.
 
-\paragraph*{\MATLAB} was used to model calcite dissolution. We solved charge balance equation (\ref{eq:chargebalfinal}) 
+\subsection{\MATLAB} \label{ssec:matlabIntro}
+\MATLAB was used to model calcite dissolution. We solved charge balance equation (\ref{eq:chargebalfinal}) 
 to calculate the rate of calcite dissolution; and the steady-state concentration of hydrogen (pH), carbonate and bicarbonate, 
-calcium, and total inorganic carbon. we considered batch volume approach having only one cell of size [5mm$\times$15mm], 
+calcium, and total inorganic carbon. we considered batch volume approach having only one cell of size [5 mm$\times$15 mm], 
 the same model size as in \DuMuX , which would make the dissolved products instantly mix throughout the domain as 
 the dissolution proceeds. In \MATLAB we solved for a closed system without outflow or inflow of calcium, \ce{CO2} and water. 
 We set an initial concentration of total inorganic carbon throughout the domain and started the simulation with an initial pH. 
 We varied the initial pH, as mentioned in \Cref{tab:scenarios}, to understand its dependency on the rate of dissolution and 
 steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC). The results that we got from \MATLAB were 
 also used to validate the results from \DuMuX, as we set an identical initial and boundary conditions and a domain with just 
-one cell of size [5mm$\times$15mm] in \DuMuX to mimic the batch volume approach adopted in \MATLAB. We expect the results 
+one cell of size [5 mm$\times$15 mm] in \DuMuX to mimic the batch volume approach adopted in \MATLAB. We expect the results 
 to be identical from the \MATLAB and \DuMuX models with these setups. \\
 
-\paragraph*{\DuMuX} In \DuMuX, continuity equation \ref{eq:contiEq} was solved together with the source and sink terms accounting for 
+\subsection{\DuMuX} \label{ssec:DumuxIntro}
+In \DuMuX, continuity equation \ref{eq:contiEq} was solved together with the source and sink terms accounting for 
 TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed system; 
 flow-velocity, if it's an open system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an open system; and grid grading 
 parameter (\Cref{chapter:results}) -- were set up in \DuMuX as illustrated in \Cref{tab:scenarios}. 
 \begin{enumerate}
-    \item Closed System: To make a plausible comparison with the \MATLAB results, the top and bottom boundary 
+    \item \textbf{Closed System:} To make a plausible comparison with the \MATLAB results, the top and bottom boundary 
     conditions were set to Neumann no-flow for the fluxes across the boundary. The batch volume approach having only 
-    one cell of size [5mm$\times$15mm] was adopted similar to the model setup in \MATLAB. Initial pH, and reactive-area/batch-volume 
+    one cell of size [5 mm$\times$15 mm] was adopted similar to the model setup in \MATLAB. Initial pH, and reactive-area/batch-volume 
     were varied to understand its dependency on the rate of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC).\\
     Grid grading parameter was also varied, a different setup which was not considered in comparing the results with 
     \MATLAB (\MATLAB only has one cell), but the system was still closed having 10 grids on the x-axis and 20 grids on the y-axis. 
-    \item Open system: Neumann no-flow boundary conditions were lifted, the number of grids is 10 on the x-axis and 20 on the y-axis, 
+
+    \item \textbf{Open system:} Neumann no-flow boundary conditions were lifted, the number of grids is 10 on the x-axis and 20 on the y-axis, 
     and  protruding \ce{CO2} fingers into the karst water were set to model cave scenario. Initial pH, flow-velocity/velocity of fingers, \ce{CO2} 
     concentration above the epiphreatic karst water table and grid grading parameter were varied to understand its dependency on the rate 
     of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC).
@@ -56,13 +59,10 @@ We used \MATLAB function \say{vpasolve}, a non-linear solver, to solve \Cref{eq:
 concentration of hydrogen, rate of dissolution was calculated again for the next time-step and the cycle is repeated until it 
 reaches the end of simulation. The flowchart presented in \Cref{fig:flowchartMATLAB} shows the work flow. 
 
-
-\begin{figure}
-\newpage
-\centering
-\caption [Flowchart for the workflow in \MATLAB] {\textbf{Flowchart for the workflow in \MATLAB}}
+\begin{center}
+% \newpage
+% \centering
 \begin{tikzpicture}[node distance=2cm]
-
 \node (func1) [startstop] {Start};
 
 \node (func2) [process, below of=func1, yshift=-0.7cm] {Define all the constants including initial pH of the system and 
@@ -80,7 +80,6 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \node (conn1) [connector, below of=func4, yshift=-1.5cm] {A};
 
 
-
 % lines
 \path [line] (func1) -- (func2);
 \path [line] (func2) -- (func3);
@@ -88,13 +87,13 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \path [line] (func4) -- (conn1);
 
 \end{tikzpicture}
-\label{fig:flowchartMATLAB}
-\end{figure}
+\end{center}
 
-
+\begin{figure}
 \newpage
+\centering
 \begin{tikzpicture}[node distance=2cm]
-
+\centering
 \node (conn1) [connector] {A};
 
 \node (func5) [process, below of=conn1] {save pH, $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ to their respective vectors};
@@ -133,10 +132,11 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \path [line] (conn5) |- (func5);
 
 \end{tikzpicture}
+\end{figure}
 
-
-
+\begin{figure}
 \newpage
+\centering
 \begin{tikzpicture}[node distance=2cm]
 
 \node (conn1) [connector] {A};
@@ -170,13 +170,17 @@ $\mathrm{m^{Ca^{2+}}} = \mathrm{m^{Ca^{2+}}} + \frac{\Delta\mathrm{m^{Ca^{2+}}}}
 \path [line] (dec1) -| node[anchor=north]{no}(conn2);
 
 \end{tikzpicture}
+\caption [Flowchart for the workflow in \MATLAB] {\textbf{Flowchart for the workflow in \MATLAB}}
+\label{fig:flowchartMATLAB}
+\end{figure}
 
+\newpage
 \section{Implementation in \DuMuX}\label{ssec:impdum}
 The numerical simulator \DuMuX helps us to solve complex differential equations as we encounter in free/porous medium flow. 
 We use the \textit{freeflow Navier-Stokes model} in \DuMuX and employ \textit{h2oco2calcium} fluid system. 
 The fluid-system had one phase (liquid phase) and three components (\ce{H2O, TIC, calcium}). We only considered the density 
 of water in calculating the density of the fluid. We also switched-off the gravity and we assumed a constant hydro-static pressure 
-throughout the domain of size [5mm $\times$ 15mm]. Given the size of the domain, assuming a constant hydro-static pressure was 
+throughout the domain of size [5 mm $\times$ 15 mm]. Given the size of the domain, assuming a constant hydro-static pressure was 
 a reasonable assumption, as this made the model less sophisticated to implement the reactive source and sink terms, which was our 
 primary goal. Nevertheless, for modeling bigger geological systems, gravity cannot be switched off as there 
 will be a significant rise in the pressure as the depth increases.\\
@@ -186,10 +190,10 @@ the time step size depending on the convergence of the solution and is limited b
 For further information on discretization, numerical methods and it's implementation, refer to \cite{Koch2020} or the handbook 
 of \DuMuX \cite{Kochetal2020Dumux}.
 
-\subsection*{Primary variables} Pressure and concentration  of TIC, calcium and \ce{H2O}, three scalar variables, in 
+\subsection{Primary variables} Pressure and concentration  of TIC, calcium and \ce{H2O}, three scalar variables, in 
 terms of mole fraction, as well as, the velocity vector were selected as primary unknowns. 
 
-\subsection*{Boundary conditions} 
+\subsection{Boundary conditions} 
 The velocity vector ($\mathbf{v}$), pressure (p) and the concentrations of TIC and calcium are set to Dirichlet values; 
 and \ce{H2O}, TIC and calcium fluxes are set to Neumann values in the NS-model. We had two setups in \DuMuX i.e., open 
 and closed systems, and boundary conditions were different for these two setups.
@@ -226,7 +230,7 @@ these two setups was the top and bottom boundary conditions.
 \end{figure}
  
 
-\subsection*{Source/Sink term} A function, \code{reactionSource()}, was implemented which calculates the added concentration of 
+\subsection{Source/Sink term} A function, \code{reactionSource()}, was implemented which calculates the added concentration of 
 TIC and calcium into the solution because of the dissolution of calcite. On the one hand addition of \ce{CO2} in karst water in an open system 
 reduces the pH, on the other hand addition of carbonic acid replenishes the dissolution potential of the karst water used up  
 during the dissolution of calcite, thereby sustaining dissolution of calcite forming carbonates and bicarbonates which increases the pH. 
@@ -235,7 +239,7 @@ and adjusted to new acidity and consequence alkalinity. Unlike in an open system
 replenished; hence, the rate of dissolution would come to naught at the steady-state. 
 
 
-\subsection*{Solving reaction equation} A function, \code{setValues()}, calls \code{calculateValues\_()} function that solves the charge 
+\subsection{Solving reaction equation} A function, \code{setValues()}, calls \code{calculateValues\_()} function that solves the charge 
 balance equation (\ref{eq:chargebalfinal}) for a given time step throughout the domain and saves the calculated values to a vector. 
 The saved values were then retrieved and used for visualization in Paraview \cite{ahrens2005paraview}. The function \code{reactionSource()} needs molality of 
 hydrogen ($\mathrm{m^{H^+}}$), which is already calculated and stored in a vector, to calculate the added concentration of TIC 
@@ -247,13 +251,11 @@ for finding root of a scalar function.
 Flowchart in \Cref{fig:flowchartReactionSource} shows the reaction source function's implementation and flowcharts in appendix \ref{app:appendixA} 
 shows further implementations in \DuMuX.
 
-
 \begin{figure}
 \newpage
 \centering
-\caption [Flowchart for reactionSource function in \DuMuX] {\textbf{Flowchart for reactionSource function in \DuMuX}}
 \begin{tikzpicture}[node distance=2cm]
-
+\centering
 \node (func1) [predefinedprocess] {\code{reactionSource} function};
 
 \node (pro1) [process, below of=func1, yshift=-0.0cm] {Extract pH stored in its vector and calculate \[\mathrm{m^{H^+} = 10^{-pH}}\]};
@@ -267,12 +269,13 @@ shows further implementations in \DuMuX.
 
 \node (pro5) [process, below of=pro4, yshift=-0.3cm] {Initialize \ce{r_{diss}} = 0};
 
-\node (dec1) [decision, below of=pro5, yshift=-1cm] {If Omega $<$ 1.0};
+\node (dec1) [decision, below of=pro5, yshift=-1cm] {Omega $<$ 1.0};
 
 \node (pro6) [process, right of=dec1, xshift=5cm] {$\mathrm{r_{diss}}$ = $\mathrm{(k_{diss,1} * m^{H^+} + k_{diss,2}) * (1 - Omega)}$.};
 
-\node (conn1) [connector, below of=dec1, yshift=-1.5cm] {A};
-\node (conn2) [connector, right of=conn1, xshift=5cm] {B};
+\node (pro7) [process, below of=dec1, yshift=-2.0cm] {Calculate the source terms for TIC and calcium.
+\[\ce{q^{TIC}} \code{ += } \ce{r_{diss}},\] \[\ce{q^{\ce{Ca}}} \code{ += } \ce{r_{diss}}.\]};
+
 
 % lines
 \path [line] (func1) -- (pro1);
@@ -281,28 +284,13 @@ shows further implementations in \DuMuX.
 \path [line] (pro3) -- (pro4);
 \path [line] (pro4) -- (pro5);
 \path [line] (pro5) -- (dec1);
-\path [line] (dec1) -- node[anchor=east]{no}(conn1);
-\path [line] (pro6) -- (conn2);
+\path [line] (dec1) -- node[anchor=east]{no}(pro7);
+\path [line] (pro6) |- (pro7);
 \path [line] (dec1) -- node[anchor=south]{yes}(pro6);
 \end{tikzpicture}
+\caption [Flowchart for reactionSource function in \DuMuX] {\textbf{Flowchart for reactionSource function in \DuMuX}}
 \label{fig:flowchartReactionSource}
 \end{figure}
-
-\newpage
-\begin{tikzpicture}[node distance=2cm]
-\node (conn1) [connector] {A};
-
-\node (conn2) [connector, right of=conn1, xshift=5cm] {B};
-
-\node (pro2) [process, below of=conn1, yshift=-1.0cm] {Calculate the source terms for TIC and calcium.
-\[\ce{q^{TIC}} \code{ += } \ce{r_{diss}},\] \[\ce{q^{\ce{Ca}}} \code{ += } \ce{r_{diss}}.\]};
- 
-% lines
-\path [line] (conn1) -- (pro2);
-\path [line] (conn2) |- (pro2);
-
-\end{tikzpicture}
-
 
 
 \endinput

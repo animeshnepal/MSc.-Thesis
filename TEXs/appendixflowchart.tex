@@ -2,7 +2,7 @@
 \thispagestyle{empty}
 
 
-\section{Flowchart that shows the main program flow in \DuMuX}
+\section{Flowchart for the main program flow in \DuMuX}
 \centering
 \begin{tikzpicture}[node distance=1.7cm]
 
@@ -165,7 +165,7 @@ fluxes by calling \code{reactionSource} function};
     
     \node[block, below of=pro5, yshift=0cm] (pro6){Initialize \ce{r_{diss}} = 0};
     
-    \node[decision, below of=pro6, yshift=-1cm] (dec1) {If Omega $<$ 1.0};
+    \node[decision, below of=pro6, yshift=-1cm] (dec1) {Omega $<$ 1.0};
     
     \node[block, left of=dec1, xshift=-7cm] (pro7) {$\mathrm{r_{diss}}$ = $\mathrm{k_{diss,1} * m^{H^+} + k_{diss,2} * (1 - Omega)}$.};
     

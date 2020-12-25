@@ -45,7 +45,7 @@ The density of water increases slightly with the dissolution of \ce{CO2} \cite{g
 in \Cref{fig:DensityH2OCO2}, we can imply that the density of \ce{H2O-CO2} system will increase as more \ce{CO2} is added into the karst water. \\
 For the modeling purpose, we set the density of \ce{H2O-CO2} system with \ce{CaCO3} to be the density of water as we did not consider 
 the density change due to the addition of TIC and calcium into the aqueous solution due to dissolution of calcite, making it less sophisticated and comparable 
-with the \MATLAB results. We are interested in developing a 2D model of size 5mm $\times$ 15mm that implements calcite dissolution as a source/sink term, 
+with the \MATLAB results. We are interested in developing a 2D model of size 5 mm $\times$ 15 mm that implements calcite dissolution as a source/sink term, 
 so the employed limitations will have negligible influence, if any, in altering the rate of dissolution and steady-state concentrations. \\
 
 \begin{figure}
@@ -120,7 +120,7 @@ the simulation time. Based on the nature of the boundary value, boundary conditi
     \begin{equation}\label{eq:outflow}
         \mathrm{grad}(\phi) \cdot \mathbf{n} = 0, \quad \ce{p} = \ce{p_{ext}},
     \end{equation}
-    where, $\phi$ is a variable (e.g. mass fraction of \ce{CO2}: $X\textsuperscript{$\wedge$}\ce{CO2})$, n is a unit vector 
+    where, $\phi$ is a variable (e.g. mass fraction of \ce{CO2}: $X\textsuperscript{$\wedge$}\ce{CO2})$, $\mathbf{n}$ is a unit vector 
     normal to the boundary and \ce{p_{ext}} is the external pressure/pressure at the boundary.\\
     
     \item \textbf{Symmetric} property \\ It is useful to take advantage of symmetries in the flow field when the model 
@@ -254,7 +254,8 @@ due to the buffering capacity of water. It is calculated once at the beginning a
 \section{Compositional quantities and definitions}
 This section defines a few terms used in the model formulation and implementation. 
 
-\paragraph*{Mass fraction \& Mole fraction} Mass or mole fractions define the amount of components in a given phase. 
+\paragraph*{Mass fraction \& Mole fraction} \mbox{}\\ \\
+Mass or mole fractions define the amount of components in a given phase. 
 $\ce{x}_\alpha^\kappa$ is mole fraction of the component $\kappa$ in phase $\alpha$ and is defined as:
 
 \begin{equation}\label{eq:moleFrac}
@@ -266,7 +267,8 @@ Similarly, mass fraction, $\ce{X}_\alpha^\kappa$, is defined as mass fraction of
 $\ce{X}_\alpha^\kappa$ = $\textrm{mass}_\alpha^\kappa/\textrm{mass}_\alpha^\textrm{total}$.
 We used mass/mole-fraction while solving continuity equation \Cref{eq:contiEq} for each component i.e., \ce{H2O, CO2, calcium}.
 
-\paragraph*{Molality} The molality, $\ce{m}^\kappa$, is defined as the ratio of number of moles of component $\kappa$ in 
+\paragraph*{Molality} \mbox{}\\ \\
+The molality, $\ce{m}^\kappa$, is defined as the ratio of number of moles of component $\kappa$ in 
 aqueous phase to the mass of pure water in aqueous phase.
 \begin{equation}\label{eq:molality}
     \ce{m}^\kappa = \frac{{\ce{n}_{\textrm{aq}}}^\kappa}{\textrm{mass}_{\textrm{H}_\textrm{2}\textrm{O}}},
