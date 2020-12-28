@@ -37,7 +37,7 @@ where:
 \item D, binary diffusion coefficient [\ce{m^2}/s]
 
 \item Q, source/sink term, which accounts for TIC and calcium [kg/m\textsuperscript{3}s]\\
-The term comes from the chemical reaction on the surface of the wall. It is defined and described in section \ref{sec:reactivesource}.
+The term comes from the chemical reaction on the surface of the wall. It is defined and described in \Cref{sec:reactivesource}.
 
 \end{itemize}
 The density of water increases slightly with the dissolution of \ce{CO2} \cite{garcia2001density} and calcite 
@@ -234,7 +234,7 @@ and,
 {\ce{m^{\ce{H^{+}}}}}},
 \end{equation}
 
-Solving Eq. \ref{eq:chargebal} we get
+Solving \Cref{eq:chargebal} we get
 
 \begin{equation} \label{eq:chargebalfinal}
 2\ce{m^{Ca^{2+}}} - \frac{2\ce{m^{TIC}}}{\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot 
@@ -278,7 +278,7 @@ Molalities are used in the chemical calculations because density effects at high
 of concentrations, which depend on the volume. Likewise, the mole fractions of an inert component might change significantly 
 during reactions, see \Cref{eq:moleFrac} \cite{hommel2016modeling}. The mass of solvent on the other hand is more or less 
 constant and consequently, $m^\kappa$ also has minor fluctuations, so we used molality while solving charge balance equation 
-\ref{eq:chargebalfinal} to model calcite dissolution.
+(\Cref{eq:chargebalfinal}) to model calcite dissolution.
 
 % \paragraph*{Henry's Law} Henry's Law is used to calculate amount of dissolved gas in a liquid based on the partial pressure of the gas above the liquid by assuming equilibrium between fluid phases. \\
 % The implemented model uses Henry's law to calculate the amount of CO\textsubscript{2} dissolved in water based on the partial pressure of the CO\textsubscript{2} above it. According to Henry's law, mole fraction of CO\textsubscript{2}, $x^{\textrm{CO}_\textrm{2}}$ is:

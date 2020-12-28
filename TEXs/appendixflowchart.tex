@@ -43,7 +43,7 @@ $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, $\mathrm{r
 \node (conn2)[connector] {A};
 
 \node (func4) [predefinedprocess, below of=conn2, yshift=-1.0cm] {Solve the governing equations; call \code{reactionSource} 
-function to add source/sink terms (only for the cells at the boundary)};
+function to add source/sink terms (only for the cells at the left boundary)};
 
 \node (conn3)[connector, right of=conn2, xshift=5cm] {B};
 
@@ -137,7 +137,7 @@ fluxes by calling \code{reactionSource} function};
 \end{tikzpicture}
 
 \clearpage
-\section{Flowchart for setValues \& calculateValues\_ functions in \DuMuX}
+\section{Flowchart for setValues() \& calculateValues\_() functions in \DuMuX}
 % \caption {Flow chart for \code{setValues} and \code{calculateValues\_} functions}
 \begin{tikzpicture}[node distance = 2cm, auto]
     % Place nodes
@@ -145,18 +145,18 @@ fluxes by calling \code{reactionSource} function};
     
     \node [block, below of=init, yshift=-0.5cm] (identify) {Loop over all control volumes};
     
-    \node [cloud, below of=identify, yshift=-1.2cm] (evaluate) {call \code{calculateValues\_} function that calculates 
+    \node [cloud, below of=identify, yshift=-1.2cm] (evaluate) {call \code{calculateValues\_()} function that calculates 
     pH, $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$, $\mathrm{m^{CO_3^{2-}}}$, 
     $\mathrm{r_{diss}}$, and Omega , store in a vector and return it};
     
-    \node [cloud, right of=evaluate, xshift=6cm, yshift = 5.8cm] (expert) {\code{calculateValues\_()} function};
+    \node [cloud, right of=evaluate, xshift=6cm, yshift = 5.8cm] (expert) {\code{calculateValues\_} function};
     \node [block, below of=expert] (pro1) {Extract pH stored in its vector and calculate \[\mathrm{m^{H^+} = 10^{-pH}}\]};
     
     \node [block, below of=pro1, yshift=-0.8cm](pro2) {Get the values $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ 
     from \code{volVars} and convert it to molality};
     
     \node[block, below of=pro2, yshift=-1cm] (pro3) {call \code{brentAlgorithm\_} function to solve charge balance 
-    equation (\ref{eq:chargebalfinal}) for $\mathrm{m^{H^+}}$};
+    equation (\Cref{eq:chargebalfinal}) for $\mathrm{m^{H^+}}$};
     
     \node[block, below of=pro3, yshift=-0.5cm] (pro4) {Calculate $\mathrm{m^{CO_3^{2-}}}$ = $\frac{\ce{m^{TIC}}}
     {\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,2}}}}$};

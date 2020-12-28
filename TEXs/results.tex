@@ -110,8 +110,8 @@ Reynolds number for open-channel flow \cite{french1985open}:
 For the velocities \unitfrac[1]{mm}{min}, \unitfrac[0.5]{mm}{min} and \unitfrac[5]{mm}{min}, maximum wall length($x$) of 15 mm, and kinematic viscosity($\nu$) of 
 water at 10$^\circ$C 1.3063e-6 [$\mathrm{m^2/s}$] \cite{wagner2008iapws} boundary layer thickness was calculated using \Cref{eq:BL}. 
 Boundary layer thickness at the end of the wall for flow-velocity \unitfrac[1]{mm}{min} was calculated approximately equal to 170 mm; 
-for flow-velocity \unitfrac[5]{mm}{min}, it was 75 mm; and for flow-velocity \unitfrac[0.5]{mm}{min}, it was 240 mm. As discussed in the chapter 
-\ref{chapter:numericalmodel}, subsection \ref{ssec:impdum}, we chose small domain as the primary goal of this thesis was to 
+for flow-velocity \unitfrac[5]{mm}{min}, it was 75 mm; and for flow-velocity \unitfrac[0.5]{mm}{min}, it was 240 mm. As discussed in 
+\Cref{chapter:numericalmodel}, \Cref{ssec:impdum}, we chose small domain as the primary goal of this thesis was to 
 implement chemical kinetics of calcite dissolution and its coupling with the freeflow Navier-Stokes model. 
 The width of the domain on the x-axis is just 5 mm compared to the calculated boundary layer thickness, we were essentially 
 inside the viscous region. Hence, we can expect nothing to very small differences in calculating the rate of calcite dissolution and concentration 
@@ -422,7 +422,7 @@ $\mathrm{m^{Ca^{2+}}}$, $\mathrm{m^{TIC}}$ and $\mathrm{m^{CO_3^{2-}}}$ adapts t
 
 \subsection{Contour plots: Open System} \label{ssec:contour}
 For an open system in \DuMuX, steady-state contour plots for a model domain of size [5 mm $\times$ 15 mm] are presented and explained in this subsection.
-The model domain has, as in \ref{ssec:timeSeriesOpen}, ten segments along the x-axis and twenty segments along the y-axis. We saw in \ref{ssec:diffFlowVel}
+The model domain has, as in \Cref{ssec:timeSeriesOpen}, ten segments along the x-axis and twenty segments along the y-axis. We saw in \Cref{ssec:diffFlowVel}
 the rate of calcite dissolution and concentrations of primary variables depend strongly on flow-velocity and the boundary/initial \ce{CO2} concentration. 
 The flow-velocity/velocity of \ce{CO2} fingers was varied for this scenario. \\
 We set the initial pH of the karst water to 6 and set the grid grading to 1.1 in the input file. 
@@ -639,7 +639,7 @@ for simulation runs. We did not include the grid grading parameter in the input 
     \label{fig:comparisionWithoutDiffInitialpH}
 \end{figure}
 
-As we know from \ref{ssec:timeSeriesOpen}, the rate of calcite dissolution and concentration of primary variables 
+As we know from \Cref{ssec:timeSeriesOpen}, the rate of calcite dissolution and concentration of primary variables 
 does not closely depend on the initial pH. Since we had different initial pH of the karst water, the pH and rate of 
 dissolution plots (\Cref{fig:withoutpHpH,fig:withoutpHrdiss}) look out of sync at the beginning, just 
 like \Cref{fig:pHpH,fig:pHrdiss} but quickly adapts to identical values. 

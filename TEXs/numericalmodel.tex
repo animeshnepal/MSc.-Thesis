@@ -15,7 +15,7 @@ Two tools were used to model the calcite dissolution: \MATLAB and \DuMuX. \MATLA
 calcite dissolution model we envisaged without the overhead of \DuMuX.
 
 \subsection{\MATLAB} \label{ssec:matlabIntro}
-\MATLAB was used to model calcite dissolution. We solved charge balance equation (\ref{eq:chargebalfinal}) 
+\MATLAB was used to model calcite dissolution. We solved charge balance equation (\Cref{eq:chargebalfinal}) 
 to calculate the rate of calcite dissolution; and the steady-state concentration of hydrogen (pH), carbonate and bicarbonate, 
 calcium, and total inorganic carbon. we considered batch volume approach having only one cell of size [5 mm$\times$15 mm], 
 the same model size as in \DuMuX , which would make the dissolved products instantly mix throughout the domain as 
@@ -28,7 +28,7 @@ one cell of size [5 mm$\times$15 mm] in \DuMuX to mimic the batch volume approac
 to be identical from the \MATLAB and \DuMuX models with these setups. \\
 
 \subsection{\DuMuX} \label{ssec:DumuxIntro}
-In \DuMuX, continuity equation \ref{eq:contiEq} was solved together with the source and sink terms accounting for 
+In \DuMuX, the continuity equation (\Cref{eq:contiEq}) was solved together with the source and sink terms accounting for 
 TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed system; 
 flow-velocity, if it's an open system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an open system; and grid grading 
 parameter (\Cref{chapter:results}) -- were set up in \DuMuX as illustrated in \Cref{tab:scenarios}. 
@@ -53,8 +53,8 @@ concentrations of hydrogen, carbonate, bicarbonate, calcium and TIC were calcula
 to calculate the rate of calcite dissolution (\ce{r_{diss}}). Rate of calcite dissolution when multiplied with the reactive-area 
 and the time-step would give the amount of produced TIC and calcium. With the increase in calcium concentration in the 
 solution, total inorganic carbon would also increase by the same amount (\ce{m^{TIC}} = $\mathrm{m_{initial}^{TIC}}$ + \ce{m^{\ce{Ca^{2+}}}}). 
-Charge balance equation \ref{eq:chargebalfinal} was solved for concentration of hydrogen ($\mathrm{m^{H^{+}}}$) with the updated concentrations 
-of calcium and total inorganic carbon. The charge balance equation \ref{eq:chargebalfinal} is a non-linear equation in $\mathrm{m^{H^+}}$. 
+Charge balance equation (\Cref{eq:chargebalfinal}) was solved for concentration of hydrogen ($\mathrm{m^{H^{+}}}$) with the updated concentrations 
+of calcium and total inorganic carbon. The charge balance equation is a non-linear equation in $\mathrm{m^{H^+}}$. 
 We used \MATLAB function \say{vpasolve}, a non-linear solver, to solve \Cref{eq:chargebalfinal} for $\mathrm{m^{H^+}}$. With the new 
 concentration of hydrogen, rate of dissolution was calculated again for the next time-step and the cycle is repeated until it 
 reaches the end of simulation. The flowchart presented in \Cref{fig:flowchartMATLAB} shows the work flow. 
@@ -98,7 +98,7 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 
 \node (func5) [process, below of=conn1] {save pH, $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ to their respective vectors};
 
-\node (func6) [process, below of=func5, yshift=-2.0cm] {Solve charge balance equation \ref{eq:chargebalfinal} for \ce{m^{\ce{H^+}}}\[\begin{aligned}[t]
+\node (func6) [process, below of=func5, yshift=-2.0cm] {Solve charge balance equation (\Cref{eq:chargebalfinal}) for \ce{m^{\ce{H^+}}}\[\begin{aligned}[t]
 &2\ce{m^{Ca^{2+}}} - \frac{2\ce{m^{TIC}}}{\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}
 {\ce{k_{diss,2}}}}\\
 &- \frac{\ce{m^{TIC}}}{\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,1}}}+1+\frac{\ce{k_{diss,2}}}{\ce{m^{\ce{H^{+}}}}}} + \ce{m^{\ce{H^{+}}}} - 
@@ -240,7 +240,7 @@ replenished; hence, the rate of dissolution would come to naught at the steady-s
 
 
 \subsection{Solving reaction equation} A function, \code{setValues()}, calls \code{calculateValues\_()} function that solves the charge 
-balance equation (\ref{eq:chargebalfinal}) for a given time step throughout the domain and saves the calculated values to a vector. 
+balance equation (\Cref{eq:chargebalfinal}) for a given time step throughout the domain and saves the calculated values to a vector. 
 The saved values were then retrieved and used for visualization in Paraview \cite{ahrens2005paraview}. The function \code{reactionSource()} needs molality of 
 hydrogen ($\mathrm{m^{H^+}}$), which is already calculated and stored in a vector, to calculate the added concentration of TIC 
 and calcium into the solution due to dissolution of calcite. \\
@@ -248,7 +248,7 @@ The charge balance equation was solved for $\mathrm{m^{H^+}}$ using Brent's algo
 for finding root of a scalar function. 
 
 
-Flowchart in \Cref{fig:flowchartReactionSource} shows the reaction source function's implementation and flowcharts in appendix \ref{app:appendixA} 
+Flowchart in \Cref{fig:flowchartReactionSource} shows the reaction source function's implementation and flowcharts in \Cref{app:appendixA} 
 shows further implementations in \DuMuX.
 
 \begin{figure}
