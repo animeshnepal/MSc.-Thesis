@@ -19,7 +19,7 @@ calcite dissolution model we envisaged without the overhead of \DuMuX.
 to calculate the rate of calcite dissolution; and the steady-state concentration of hydrogen (pH), carbonate and bicarbonate, 
 calcium, and total inorganic carbon. we considered batch volume approach having only one cell of size [5 mm$\times$15 mm], 
 the same model size as in \DuMuX , which would make the dissolved products instantly mix throughout the domain as 
-the dissolution proceeds. In \MATLAB we solved for a closed system without outflow or inflow of calcium, \ce{CO2} and water. 
+the dissolution proceeds. In \MATLAB we solved for a closed system without outflow or inflow of calcium, TIC and water. 
 We set an initial concentration of total inorganic carbon throughout the domain and started the simulation with an initial pH. 
 We varied the initial pH, as mentioned in \Cref{tab:scenarios}, to understand its dependency on the rate of dissolution and 
 steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC). The results that we got from \MATLAB were 
@@ -31,14 +31,14 @@ to be identical from the \MATLAB and \DuMuX models with these setups. \\
 In \DuMuX, the continuity equation (\Cref{eq:contiEq}) was solved together with the source and sink terms accounting for 
 TIC and calcium. A few batch scenarios with varying parameters -- such as Initial pH; reactive-area/batch volume, if it's a closed system; 
 flow-velocity, if it's an open system; \ce{CO2} concentration above the epiphreatic karst water table, if it's an open system; and grid grading 
-parameter (\Cref{chapter:results}) -- were set up in \DuMuX as illustrated in \Cref{tab:scenarios}. 
+parameter for an open system (\Cref{chapter:results}) -- were set up in \DuMuX as illustrated in \Cref{tab:scenarios}. 
 \begin{enumerate}
-    \item \textbf{Closed System:} To make a plausible comparison with the \MATLAB results, the top and bottom boundary 
-    conditions were set to Neumann no-flow for the fluxes across the boundary. The batch volume approach having only 
-    one cell of size [5 mm$\times$15 mm] was adopted similar to the model setup in \MATLAB. Initial pH, and reactive-area/batch-volume 
-    were varied to understand its dependency on the rate of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC).\\
-    Grid grading parameter was also varied, a different setup which was not considered in comparing the results with 
-    \MATLAB (\MATLAB only has one cell), but the system was still closed having 10 grids on the x-axis and 20 grids on the y-axis. 
+    \item \textbf{Closed System:} The top and bottom boundary 
+    conditions were set to Neumann no-flow for the fluxes across the boundary. The model domain of size [5 mm$\times$15 mm] had 
+    10 divisions on the x-axis and 20 divisions on the y-axis. Initial pH, and reactive-area/batch-volume 
+    were varied to understand its dependency on the rate of dissolution and steady-state concentrations (hydrogen, carbonate, bicarbonate, calcium, and TIC). \\
+    For a plausible comparison with the \MATLAB results, spatial discretization was readjusted having just one cell of size [5 mm$\times$15 mm], 
+    similar to the model setup in \MATLAB.
 
     \item \textbf{Open system:} Neumann no-flow boundary conditions were lifted, the number of grids is 10 on the x-axis and 20 on the y-axis, 
     and  protruding \ce{CO2} fingers into the karst water were set to model cave scenario. Initial pH, flow-velocity/velocity of fingers, \ce{CO2} 
@@ -179,7 +179,7 @@ $\mathrm{m^{Ca^{2+}}} = \mathrm{m^{Ca^{2+}}} + \frac{\Delta\mathrm{m^{Ca^{2+}}}}
 The numerical simulator \DuMuX helps us to solve complex differential equations as we encounter in free/porous medium flow. 
 We use the \textit{freeflow Navier-Stokes model} in \DuMuX and employ \textit{h2oco2calcium} fluid system. 
 The fluid-system had one phase (liquid phase) and three components (\ce{H2O, TIC, calcium}). We only considered the density 
-of water in calculating the density of the fluid. We also switched-off the gravity and we assumed a constant hydro-static pressure 
+of water in calculating the density of the fluid. We also switched-off the gravity and assumed a constant hydro-static pressure 
 throughout the domain of size [5 mm $\times$ 15 mm]. Given the size of the domain, assuming a constant hydro-static pressure was 
 a reasonable assumption, as this made the model less sophisticated to implement the reactive source and sink terms, which was our 
 primary goal. Nevertheless, for modeling bigger geological systems, gravity cannot be switched off as there 
@@ -196,7 +196,8 @@ terms of mole fraction, as well as, the velocity vector were selected as primary
 \subsection{Boundary conditions} 
 The velocity vector ($\mathbf{v}$), pressure (p) and the concentrations of TIC and calcium are set to Dirichlet values; 
 and \ce{H2O}, TIC and calcium fluxes are set to Neumann values in the NS-model. We had two setups in \DuMuX i.e., open 
-and closed systems, and boundary conditions were different for these two setups.
+and closed systems, and boundary conditions were different for these two setups. Flowchart in \Cref{sec:flowChartBC} shows boundary 
+condition implementation in \DuMuX. 
 
 \paragraph*{Open system} \mbox{} \\
 
@@ -233,10 +234,10 @@ these two setups was the top and bottom boundary conditions.
 \subsection{Source/Sink term} A function, \code{reactionSource()}, was implemented which calculates the added concentration of 
 TIC and calcium into the solution because of the dissolution of calcite. On the one hand addition of \ce{CO2} in karst water in an open system 
 reduces the pH, on the other hand addition of carbonic acid replenishes the dissolution potential of the karst water used up  
-during the dissolution of calcite, thereby sustaining dissolution of calcite forming carbonates and bicarbonates which increases the pH. 
+during the dissolution of calcite, thereby sustaining dissolution of calcite and forming carbonates and bicarbonates which increases the pH. 
 Therefore, steady-state is expected to be dependent on the flow-velocity with which \ce{CO2} is being carried into the karst water 
 and adjusted to new acidity and consequence alkalinity. Unlike in an open system, carbonic acid in a closed system does not get 
-replenished; hence, the rate of dissolution would come to naught at the steady-state. 
+replenished; hence, the rate of dissolution would eventually come to naught at the steady-state. 
 
 
 \subsection{Solving reaction equation} A function, \code{setValues()}, calls \code{calculateValues\_()} function that solves the charge 
