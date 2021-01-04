@@ -77,14 +77,19 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 &+ \frac{\ce{m^{TIC}}}{\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,1}}} + 1 + \frac{\ce{k_{diss,2}}}{\ce{m^{\ce{H^{+}}}}}} - \ce{m^{\ce{H^{+}}}} + 
 \frac{\ce{K_w}}{\ce{m^{\ce{H^{+}}}}}.\end{aligned}\]};
 
-\node (conn1) [connector, below of=func4, yshift=-1.5cm] {A};
+\node (func5) [process, below of=func4, yshift=-2.0cm] {save pH, $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ to their respective vectors};
 
+\node (conn1) [connector, below of=func5, yshift=-1.0cm] {A};
+
+\node (conn2) [connector, right of=conn1, xshift=5cm] {B};
 
 % lines
 \path [line] (func1) -- (func2);
 \path [line] (func2) -- (func3);
 \path [line] (func3) -- (func4);
-\path [line] (func4) -- (conn1);
+\path [line] (func4) -- (func5);
+\path [line] (func5) -- (conn1);
+\path [line] (conn2) |- (func5);
 
 \end{tikzpicture}
 \end{center}
@@ -96,9 +101,9 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \centering
 \node (conn1) [connector] {A};
 
-\node (func5) [process, below of=conn1] {save pH, $\mathrm{m^{Ca^{2+}}}$ and $\mathrm{m^{TIC}}$ to their respective vectors};
+\node (conn2) [connector, right of=conn1, xshift=5cm] {B};
 
-\node (func6) [process, below of=func5, yshift=-2.0cm] {Solve charge balance equation (\Cref{eq:chargebalfinal}) for \ce{m^{\ce{H^+}}}\[\begin{aligned}[t]
+\node (func6) [process, below of=conn1, yshift=-2.0cm] {Solve charge balance equation (\Cref{eq:chargebalfinal}) for \ce{m^{\ce{H^+}}}\[\begin{aligned}[t]
 &2\ce{m^{Ca^{2+}}} - \frac{2\ce{m^{TIC}}}{\frac{\left(\ce{m^{\ce{H^{+}}}}\right)^2}{\ce{k_{diss,1}} \cdot \ce{k_{diss,2}}}+1+\frac{\ce{m^{\ce{H^{+}}}}}
 {\ce{k_{diss,2}}}}\\
 &- \frac{\ce{m^{TIC}}}{\frac{\ce{m^{\ce{H^{+}}}}}{\ce{k_{diss,1}}}+1+\frac{\ce{k_{diss,2}}}{\ce{m^{\ce{H^{+}}}}}} + \ce{m^{\ce{H^{+}}}} - 
@@ -121,15 +126,14 @@ Initialize $\mathrm{m^{Ca^{2+}}}$ = 0 (no dissolution at the start of the simula
 \node (conn5) [connector, right of=conn3, xshift=5cm] {B};
 
 % lines
-\path [line] (conn1) -- (func5);
-\path [line] (func5) -- (func6);
+\path [line] (conn1) -- (func6);
 \path [line] (func6) -- (func7);
 \path [line] (func7) -- (func8);
 \path [line] (func8) -- (func9);
 \path [line] (func9) -- (dec2);
 \path [line] (dec2) -- node[anchor=east]{yes}(conn3);
 \path [line] (dec2) -| node[anchor=south]{no}(conn4);
-\path [line] (conn5) |- (func5);
+\path [line] (conn5) -- (conn2);
 
 \end{tikzpicture}
 \end{figure}
